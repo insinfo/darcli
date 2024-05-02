@@ -1,0 +1,40 @@
+<!-- Content area -->
+<div class="content d-flex justify-content-center align-items-center">
+
+    <div class="login-form">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Andamento dos Processos</h5>
+            </div>
+            <!-- <div class="card-body">
+                </div> -->
+            <div class="card-body border-top">
+                <form (ngSubmit)="onSubmit()">
+                    <div class="mb-3">
+                        <label class="form-label">Processo:</label>
+                        <input [(ngModel)]="codigoProcesso" type="text" class="form-control" placeholder="Nº do processo">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Exercício:</label>
+                        <select [(ngModel)]="anoExcercicio" class="form-select">
+                            <!--[selected]="ano.selected == true"-->
+                            <option *ngFor="let ano of anos" [value]="ano.value" >{{ano.label}}</option>
+                        </select>
+                    </div>
+                    <div class="text-end mb-3">
+                        <button type="submit" class="btn btn-primary">
+                            Consultar <!-- <i class="ph-paper-plane-tilt ms-2"></i> -->
+                        </button>
+                        <!-- <button (click)="clear()" type="button" class="btn">
+                            Clear
+                          </button> -->
+                    </div>
+                    <div class="text-center mb-3">
+                        <span class="text-muted">As informações sobre processos são providas pelo Protocolo Geral</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>

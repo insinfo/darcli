@@ -1,0 +1,41 @@
+<div class="page-header" *ngIf="insideModal == false">
+    <div class="page-header-content d-lg-flex">
+        <div class="d-flex">
+            <h4 class="page-title mb-0">
+                Consultar - <span class="fw-normal">Divisões CNAE</span>
+            </h4>
+            <a href="#page_header"
+                class="btn btn-light align-self-center collapsed d-lg-none border-transparent rounded-pill p-0 ms-auto"
+                [attr.data-bs-toggle]="'collapse'">
+                <i class="ph-caret-down collapsible-indicator ph-sm m-1"></i>
+            </a>
+        </div>
+
+        <div class="collapse d-lg-block my-lg-auto ms-lg-auto" id="page_header">
+            <div class="d-flex flex-wrap align-items-center mb-3 mb-lg-0 ms-lg-3 gap-2 ">
+                <a href="#/divisoes-cnae/new" class="btn btn-primary cursor-pointer ">
+                    <i class="ph-file-plus me-2"></i>
+                    Cadastrar
+                </a>
+                <button #btnExcluir (click)="excluir()" type="button" class="btn btn-outline-primary">
+                    <i class="ph-trash me-2"></i>
+                    Excluir
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div #container class="content  pt-0" [class.content]="insideModal == false">
+    <div class="card" [class.card]="insideModal == false">
+        <!-- <div class="pt-3 pe-3 ps-3">
+            <form>
+                <div class="row ">                    
+                </div>
+            </form>
+        </div> -->
+        <datatable-component #datatable [dataTableFilter]="filtro" [data]="items" [settings]="dtSettings"
+            [searchInFields]="sInFields" (dataRequest)="onDtRequestData($event)" (onRowClick)="onSelectItem($event)"
+            [showCheckboxToSelectRow]="insideModal == false"></datatable-component>
+    </div>
+</div>

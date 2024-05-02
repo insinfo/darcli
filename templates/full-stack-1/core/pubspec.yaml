@@ -1,0 +1,17 @@
+name: new_sali_core
+
+environment: 
+  sdk: '>=2.12.0 <3.0.0'
+
+dependencies: 
+  intl: any
+  collection: any
+  http: any   
+  #pdf: ^3.10.2
+  pdf_fork: 3.10.5
+    #path: ../../dart_pdf_fork/pdf
+  #barcode: any #^2.2.3  
+  html: any
+  
+dev_dependencies: 
+

@@ -1,0 +1,150 @@
+<div *ngIf="isLogged" class="navbar navbar-expand-xl navbar-static shadow">
+    <div class="container-fluid">
+        <div class="navbar-brand flex-1">
+            <a href="index.html" class="d-inline-flex align-items-center">
+                <img src="assets/images/logo_icon.svg" alt="">
+                <!--d-none-->
+                <img src="assets/images/logo_text_dark.svg" class=" d-sm-inline-block h-16px invert-dark ms-3" alt="">
+            </a>
+
+            <!-- <div class="d-none d-md-block ms-2 align-items-center text-muted">Banco de Empregos</div> -->
+        </div>
+
+        <div
+            class="d-flex w-100 w-xl-auto overflow-auto overflow-xl-visible scrollbar-hidden border-top border-top-xl-0 order-1 order-xl-0 pt-2 pt-xl-0 mt-2 mt-xl-0">
+            <ul class="nav gap-1 justify-content-center flex-nowrap flex-xl-wrap mx-auto">
+                <li class="nav-item">
+                    <a [routerLink]="RoutePaths.home.toUrl()" [routerLinkActive]="'active'"
+                        class="navbar-nav-link rounded cursor-pointer ">
+                        <i class="ph-house me-2"></i>
+                        Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a [routerLink]="RoutePaths.listaEmpregador.toUrl()" [routerLinkActive]="'active'"
+                        class="navbar-nav-link rounded cursor-pointer ">
+                        <i class="ph-buildings me-2"></i>
+                        Empregador
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a [routerLink]="RoutePaths.listaEmpregadorWeb.toUrl()" [routerLinkActive]="'active'"
+                        class="navbar-nav-link rounded cursor-pointer ">
+                        <i class="ph-buildings me-2"></i>
+                        Empregador WEB
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a [routerLink]="RoutePaths.listaVaga.toUrl()" [routerLinkActive]="'active'"
+                        class="navbar-nav-link rounded cursor-pointer ">
+                        <i class="ph ph-briefcase me-2"></i>
+                        Vaga
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a [routerLink]="RoutePaths.listaCandidato.toUrl()" [routerLinkActive]="'active'"
+                        class="navbar-nav-link rounded cursor-pointer ">
+                        <i class="ph-user me-2"></i>
+                        Candidato
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a [routerLink]="RoutePaths.listaCandidatoWeb.toUrl()" [routerLinkActive]="'active'"
+                        class="navbar-nav-link rounded cursor-pointer ">
+                        <i class="ph-user me-2"></i>
+                        Candidato Web
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a [routerLink]="RoutePaths.listaEncaminhamento.toUrl()" [routerLinkActive]="'active'"
+                        class="navbar-nav-link rounded cursor-pointer ">
+                        <i class="ph-arrows-split me-2"></i>
+                        Encaminhamento
+                    </a>
+                </li>
+                <!-- <li class="nav-item" >
+                    <a [routerLink]="RoutePaths.relatorio.toUrl()" [routerLinkActive]="'active'"
+                        class="navbar-nav-link rounded cursor-pointer ">
+                        <i class="ph-chart-line me-2"></i>
+                        Relatórios
+                    </a>
+                </li> -->
+                <li class="nav-item nav-item-dropdown-xl dropdown">
+                    <a class="navbar-nav-link dropdown-toggle rounded cursor-pointer "
+                        [attr.data-bs-toggle]="'dropdown'" aria-expanded="false">
+                        <i class="ph-rows me-2"></i>
+                        Mais
+                    </a>
+                    <div class="dropdown-menu">
+                        <!-- <div class="dropdown-submenu dropdown-submenu-start">
+                            <a #subMenuAmbulantes (click)="toggleSubMenu(subMenuAmbulantes, $event)" class="dropdown-item dropdown-toggle cursor-pointer ">
+                                <i class="ph ph-users-three me-2"></i>
+                                Ambulantes
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="#/ambulantes" class="dropdown-item rounded">Consultar Ambulante</a>
+                                <a href="#/ambulantes/new" class="dropdown-item rounded">Cadastrar Ambulante</a>
+                            </div>
+                        </div> -->
+
+                        <a [routerLink]="RoutePaths.relatorio.toUrl()" [routerLinkActive]="'active'"
+                            class="dropdown-item rounded">Relatórios</a>
+                        <a [routerLink]="RoutePaths.listaCargo.toUrl()" [routerLinkActive]="'active'"
+                            class="dropdown-item rounded">Cargos</a>
+                        <a href="#/cursos" class="dropdown-item rounded">Cursos</a>
+                        <a href="#/conhecimentos-extra" class="dropdown-item rounded">Conhecimentos Extra</a>
+                        <a href="#/tipos-conhecimento" class="dropdown-item rounded">Tipos Conhecimento</a>
+                        <a href="#/escolaridades" class="dropdown-item rounded">Escolaridades</a>
+                        <a href="#/divisoes-cnae" class="dropdown-item rounded">Divisões CNAE</a>
+                        <a href="#/tipos-deficiencia" class="dropdown-item rounded">Tipo deficiência</a>
+                        <a [routerLink]="RoutePaths.listaAuditoria.toUrl()" class="dropdown-item rounded">Auditoria</a>
+                        <a [routerLink]="RoutePaths.estatistica.toUrl()" class="dropdown-item rounded">Estatísticas</a>
+
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <ul class="nav gap-1 flex-xl-1 justify-content-end order-0 order-xl-1">
+
+            <!-- <li class="nav-item nav-item-dropdown-xl dropdown">
+                <a href="#" class="navbar-nav-link align-items-center rounded-pill p-1"
+                    [attr.data-bs-toggle]="'dropdown'">
+                    <div class="status-indicator-container">
+                        <img src="assets/images/no_user.jpg" class="w-32px h-32px rounded-pill" alt="">
+                        <span class="status-indicator bg-success"></span>
+                    </div>
+                    <span class="d-none d-md-inline-block mx-md-2">Isaque</span>
+                </a>
+
+                <div class="dropdown-menu dropdown-menu-end">
+                    <a class="dropdown-item">
+                        <i class="ph-sign-out me-2"></i>
+                        Sair
+                    </a>
+                </div>
+            </li> -->
+        </ul>
+    </div>
+</div>
+
+<div *ngIf="isLogged" class="page-content">
+    <!-- /main sidebar -->
+    <!-- Main content -->
+    <div class="content-wrapper">
+        <!-- Inner content -->
+        <div class="content-inner">
+            <router-outlet [routes]="Routes.allPrivate"></router-outlet>
+        </div>
+    </div>
+</div>
+
+<notification-outlet [service]="notificationComponentService"></notification-outlet>
+
+<div class="not-logged" *ngIf="!isLogged">
+    <div class="alert text-violet-800 alpha-violet border-0 alert-dismissible">
+        <span class="font-weight-semibold" [innerHtml]="message"></span>
+        <a href="/" class="alert-link">Atualizar</a>
+    </div>
+</div>

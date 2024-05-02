@@ -1,0 +1,8 @@
+<home-page *ngIf="isLogged"></home-page>
+<div class="not-logged" *ngIf="!isLogged">
+    <!-- <h1 [innerHtml]="message"></h1>  -->
+    <div class="alert text-violet-800 alpha-violet border-0 alert-dismissible">
+        <span class="font-weight-semibold" [innerHtml]="message"></span>
+        <a href="/" class="alert-link">Atualizar</a>
+    </div>
+</div>

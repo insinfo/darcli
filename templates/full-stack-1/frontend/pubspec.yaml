@@ -1,0 +1,34 @@
+name: new_sali_frontend
+
+environment:   
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:   
+  # ngdart: 7.1.1 
+  # ngforms: any #^4.1.1
+  # ngrouter: any #^3.1.1   
+  ngdart:     
+    git:
+      ref: master
+      url: https://github.com/insinfo/angular_8.git
+    # path:
+    #   ../../angular_8
+  
+  http: any  
+  js: any  
+  chartjs2: any    
+  new_sali_core:
+    path: ../core
+  dart_excel:
+   git:
+    url: https://github.com/insinfo/dart_excel.git
+    ref: main    #branch name  
+        
+  
+dev_dependencies:    
+  sass_builder: any 
+  build_runner: ^2.4.7 
+  build_web_compilers: any   
+  test: any 
+  #puppeteer: 2.23.0
+  

@@ -1,0 +1,14 @@
+footer{
+    background: #252525;
+    //background: #2969bd;//#1351b4;
+    color: #fff;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+}
+
+@media all and (max-width: 767px) {
+    .text-center-xs {
+        text-align: center;
+    }
+}

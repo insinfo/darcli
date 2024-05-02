@@ -1,0 +1,186 @@
+/*custom-modal { 
+    display: none;
+
+    .custom-modal-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: #000;
+        z-index: 900;
+        //z-index: 1071;
+        opacity: .5;
+    }
+
+    .custom-modal {
+       
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+     
+        z-index: 1200;
+      
+
+        // enables scrolling for tall modals 
+        overflow: auto;
+        //pointer-events: none;
+
+        .custom-modal-dialog-round {
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        .custom-modal-dialog-shadow {
+            box-shadow: 0 11px 15px -7px rgb(0 0 0 / 20%),
+                0 24px 38px 3px rgb(0 0 0 / 14%),
+                0 9px 46px 8px rgb(0 0 0 / 12%);
+        }
+
+        .custom-modal-dialog {
+            background: #fff;
+            margin: 1.75rem auto;
+           
+            border: 0;
+          
+
+            .custom-modal-header-round {
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+            }
+
+            .custom-modal-header {
+
+                display: flex;
+                align-items: flex-start;
+                justify-content: space-between;
+                padding: 1rem 1rem;
+             
+                border-bottom: 1px solid #e9ecef;
+         
+
+                .close {
+                    padding: 1.25rem;
+                    margin: -1.25rem -1.25rem -1.25rem auto;
+                    background-color: transparent;
+                    border: 0;
+                    appearance: none;
+                    float: right;
+                    font-size: 1.25003rem;
+                    font-weight: 400;
+                    line-height: 1;
+                    text-shadow: none;
+                    //opacity: 1;
+                }
+
+                .custom-modal-title {
+                    margin-bottom: 0;
+                    //font-size: 1.5rem;                    
+                    //line-height: 1.5;
+                    font-weight: 400;
+                    line-height: 1.5385;
+                    font-size: .9375rem;
+
+                }
+
+
+            }
+        }
+    }
+
+    // .modal-default {
+    //     max-width: 500px;
+    // }
+
+    // .modal-sm {
+    //     max-width: 300px;
+    // }
+
+    // .modal-lg {
+    //     max-width: 800px;
+    // }
+
+    // .modal-xl {
+    //     max-width: 1140px;
+    // }
+
+    .custom-modal-header-default {
+        background-color: #ffffff;
+
+        .custom-modal-title,
+        .close {
+            color: #000;
+        }
+    }
+
+    .custom-modal-header-primary {
+        background-color: #2196f3;
+
+        .custom-modal-title,
+        .close {
+            color: white;
+        }
+    }
+
+    .custom-modal-header-success {
+        background-color: #4caf50;
+
+        .custom-modal-title,
+        .close {
+            color: white;
+        }
+    }
+
+    .custom-modal-header-danger {
+        background-color: #f44336;
+
+        .custom-modal-title,
+        .close {
+            color: white;
+        }
+    }
+
+    .custom-modal-header-danger {
+        background-color: #ff7043;
+
+        .custom-modal-title,
+        .close {
+            color: white;
+        }
+    }
+
+    .custom-modal-header-info {
+        background-color: #00bcd4;
+
+        .custom-modal-title,
+        .close {
+            color: white;
+        }
+    }
+
+}
+
+body.custom-modal-open {
+    // body overflow is hidden to hide main scrollbar when modal window is open 
+    overflow: hidden;
+}*/
+
+.modal{    
+    z-index: 1200;
+}
+
+.position-relative{
+    position: relative;
+}
+
+.modal-content {
+    
+    //--box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.125);
+    box-shadow: 0px 6px 29px rgba(0, 0, 0, 0.5);
+    border: none;
+}

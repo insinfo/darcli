@@ -1,0 +1,27 @@
+
+<div class="custom-modal">
+    <!--(mouseup)="mouseEvent($event)" (click)="mouseEvent($event)"
+    
+    -->
+    <div  (mousedown)="stopPropagation($event)"  class="custom-modal-dialog " [class.modal-sm]="size == 'small'"
+        [class.modal-lg]="size == 'large'" [class.modal-xl]="size == 'xtra-large'"   [class.modal-default]="size == 'modal-default'"
+        [class.custom-modal-dialog-round]="enableRoundedCorners == true" [class.custom-modal-dialog-shadow]="enableShadow">
+        
+        <div *ngIf="enableHeader" class="custom-modal-header"
+            [class.custom-modal-header-primary]="headerColor == 'primary'"
+            [class.custom-modal-header-success]="headerColor == 'success'"
+            [class.custom-modal-header-info]="headerColor == 'info'"
+            [class.custom-modal-header-dange]="headerColor == 'dange'"
+            [class.custom-modal-header-default]="headerColor == null"
+            [class.custom-modal-header-round]="enableRoundedCorners == true">
+            <h5 class="custom-modal-title">{{titleText}}</h5>
+            <button (click)="close()" type="button" class="close" [attr.data-dismiss]="'modal'" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="custom-modal-body">
+            <ng-content></ng-content>
+        </div>
+    </div>
+</div>
+<!--<div *ngIf="enableBackdrop ==true" class="custom-modal-background"></div>-->

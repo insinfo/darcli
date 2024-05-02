@@ -1,0 +1,89 @@
+<div class="page-header">
+    <div class="page-header-content container d-lg-flex">
+        <div class="d-flex">
+            <h4 class="page-title mb-0">
+                Bem-vindo ao Banco de Empregos <span class="fw-normal">- {{authService.authPayload.nome}}</span>
+            </h4>
+
+            <a href="#page_header"
+                class="btn btn-light align-self-center collapsed d-lg-none border-transparent rounded-pill p-0 ms-auto"
+                [attr.data-bs-toggle]="'collapse'">
+                <i class="ph-caret-down collapsible-indicator ph-sm m-1"></i>
+            </a>
+        </div>
+
+        <!-- <div *ngIf="authService.authPayload.isCandidato" class="collapse d-lg-block my-lg-auto ms-lg-auto"
+            id="page_header">
+            <div class="hstack gap-3 mb-3 mb-lg-0">
+                <a (click)="irParaCadastroCandidato()" class="btn btn-primary">
+                    <i class="ph-user-circle-plus me-2"></i>
+                    Se Cadastrar
+                </a>
+            </div>
+        </div> -->
+        <!-- <div *ngIf="authService.authPayload.isEmpregador" class="collapse d-lg-block my-lg-auto ms-lg-auto"
+            id="page_header">
+
+            <div class="hstack gap-3 mb-3 mb-lg-0">
+                <a (click)="irParaCadastroEmpregador()" class="btn btn-primary">
+                    <i class="ph-user-circle-plus me-2"></i>
+                    Solicitar Mão de Obra
+                </a>
+            </div>
+        </div> -->
+    </div>
+</div>
+<div class="container mt-0 pt-0">
+    <div class="card">
+        <div class="card-body">
+            <div  *ngIf="authService.authPayload.isCandidato" class="d-flex flex-column align-items-start ">
+                <div *ngIf="authService.authPayload.candidatoStatus == CandidatoStatus.vencido"
+                    class="alert alert-danger alert-dismissible fade show">
+                    <!-- <span class="fw-semibold">Oh snap!</span> -->
+                    <h5 class="pb-0">Já faz mais de um ano que você se cadastrou ou atualizou seu cadastro, compareça ao banco de
+                        empregos para atualizar seus dados para que você possa se candidatar às vagas disponíveis.</h5>
+                </div>
+                <div  *ngIf="authService.authPayload.jaCadastrado == false">
+                    <h4>Faça seu pré-cadastro para agilizar seu atendimento no
+                        Banco
+                        de Empregos</h4>
+                    <div class="mb-3" *ngIf="authService.authPayload.isCandidato">
+                        <a (click)="irParaCadastroCandidato()" class="btn btn-primary">
+                            <i class="ph-user-circle-plus me-2"></i>
+                            Cadastrar
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex flex-column align-items-start ">
+                <div *ngIf="authService.authPayload.isEmpregador" class="mb-3">
+                    <a (click)="irParaCadastroEmpregador()" class="btn btn-primary">
+                        <i class="ph-user-circle-plus me-2"></i>
+                        Solicitar Mão de Obra
+                    </a>
+                </div>
+
+                <h6>DOCUMENTOS INDISPENSÁVEIS PARA O CADASTRO</h6>
+                <p class="mb-3">
+                    √ CPF <br>
+                    √ Identidade (RG) <br>
+                    √ Currículo<br>
+                    √ Certificados de Cursos <br>
+                    √ Comprovante de Residência (atual)<br>
+                    √ Carteira de Trabalho - CTPS (podendo ser a digital)<br>
+                </p>
+                <h5 class="mb-2">O Banco de Empregos funciona em dois lugares:</h5>
+                <h6 class="mb-0">SECRETARIA DE DESENVOLVIMENTO ECONÔMICO E TURISMO</h6>
+                <p class="mb-3">
+                    Praça Prefeito Cláudio Ribeiro s/n - Extensão do Bosque
+                    Horário: das 8 às 17 horas, de segunda a sexta-feira. Telefone: (22) 2771-6413
+                </p>
+                <h6 class="mb-0">CENTRO DE CIDADANIA</h6>
+                <p class="mb-3">
+                    Rua das Casuarinas, 595 - Âncora
+                    Horário: das 8 às 17 horas, de segunda a sexta-feira. Telefone: (22) 2771-6413
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

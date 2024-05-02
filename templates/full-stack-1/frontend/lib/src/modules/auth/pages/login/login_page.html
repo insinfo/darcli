@@ -1,0 +1,82 @@
+
+<div class="page-content">
+
+ 
+ 
+    <!-- /main sidebar -->
+  
+    <!-- Main content -->
+    <div class="content-wrapper">
+  
+      <!-- Inner content -->
+      <div class="content-inner">
+
+        <div class="content d-flex justify-content-center align-items-center">
+
+            <!-- Login form -->
+            <form class="login-form" (ngSubmit)="doLogin()">
+                <div class="card mb-0">
+                    <div class="card-body">
+                        <div class="text-center mb-3">
+                            <div class="d-inline-flex align-items-center justify-content-center mb-4 mt-2">
+                                <img src="assets/images/logo_icon.png" class="h-82px" alt="">
+                            </div>
+                            <h5 class="mb-0">
+                                Faça login na sua conta</h5>
+                            <span class="d-block text-muted">Insira suas credenciais abaixo</span>
+                        </div>
+        
+                        <div class="mb-3">
+                            <label class="form-label">Usuário</label>
+                            <div class="form-control-feedback form-control-feedback-start">
+                                <input [(ngModel)]="loginPayload.username" id="username" type="text" class="form-control"
+                                    >
+                                <div class="form-control-feedback-icon">
+                                    <i class="ph-user-circle text-muted"></i>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class="mb-3">
+                            <label class="form-label">Senha</label>
+                            <div class="form-control-feedback form-control-feedback-start">
+                                <input [(ngModel)]="loginPayload.password" id="password" type="password" class="form-control" >
+                                <div class="form-control-feedback-icon">
+                                    <i class="ph-lock text-muted"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div class="mb-3">
+                            <label class="form-label">Exercício</label>
+                            <div class="form-control-feedback form-control-feedback-start">
+                                <input [(ngModel)]="loginPayload.anoExercicioAsInt" type="number" class="form-control" readonly >
+                                <div class="form-control-feedback-icon">
+                                    <i class="ph-calendar-x text-muted"></i>
+                                </div>
+                            </div>
+                        </div> -->
+        
+                        <div class="mb-3">
+                            <button type="submit" id="submit" class="btn btn-primary w-100">Entrar</button>
+                        </div>
+        
+                        <!-- <div class="text-center">
+                            <a >Esqueceu a senha?</a>
+                        </div> -->
+                    </div>
+                </div>
+            </form>
+            <!-- /login form -->
+        
+        </div>
+        
+      </div>
+      <!-- /inner content -->
+   
+    </div>
+    <!-- /main content -->
+  
+  </div>
+
+

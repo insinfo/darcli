@@ -1,0 +1,17 @@
+**/.dart_tool/
+**/.packages
+**/pubspec.lock
+**/build/
+**/doc/
+#**/.env
+**/prod.exe
+**/*.exe
+**/bin/newsali
+**/bin/newsali_public
+**/.cache/
+**/.certificates/
+**/.local-chromium/
+**/storage/
+**/node_modules/
+**/docker/grafana/data/
+**/docker/prometheus/data/

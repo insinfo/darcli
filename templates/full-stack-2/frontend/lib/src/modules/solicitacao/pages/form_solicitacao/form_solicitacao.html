@@ -1,0 +1,231 @@
+<div #page>
+    <div class="card">
+        <div class="card-body">
+            <!--(ngSubmit)="save()"-->
+            <form (ngSubmit)="null">
+                <h1 class="text-header d-flex justify-content-between">Solicitante 
+                    <div>
+                        <button (click)="imprime()" type="button" class="btn btn-light btn-sm">
+                            <i class="icon-printer mr-2"></i>Imprimir
+                        </button>
+                        <button (click)="download()" type="button" class="btn btn-light btn-sm">
+                            <i class="icon-file-download mr-2"></i>Baixar
+                        </button>   
+                    </div>                 
+                </h1>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label-custom">Nome:</label>
+                            <span class="form-control">{{solicitante.nome}} </span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-label-custom">CPF/CNPJ:</label>
+                            <span class="form-control">{{solicitante.cpfCnpj}} </span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-label-custom">E-mail:</label>
+                            <span class="form-control">{{solicitante.email}} </span>
+                        </div>
+                    </div>
+                </div>
+                <h1 class="text-header">Informação da Solicitação</h1>
+                <div class="row mt-3">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-label-custom">Numero Protocolo:</label>
+                            <span class="form-control">{{solicitacao.protocoloText}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-label-custom">Situação:</label>
+                            <span class="form-control">{{solicitacao.situacaoText}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-label-custom">Tipo Solicitação:</label>
+                            <span class="form-control">{{solicitacao.tipoSolicitacao?.nome}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-label-custom">Forma Retorno:</label>
+                            <span class="form-control">{{solicitacao.formaRetornoText}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-label-custom">Data da Solicitação:</label>
+                            <span class="form-control">{{solicitacao.dataSolicitacaoTextBr}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-label-custom">Previsão Retorno:</label>
+                            <span class="form-control">{{solicitacao.dataPrevisaoRespostaTextBr}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-label-custom">Solicitação Recebida em:</label>
+                            <span class="form-control">{{solicitacao.dataRecebimentoSolicitacaoTextBr}}</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="form-label-custom">Solicitação:</label>
+                            <textarea class="form-control" style="min-height: 150px;" readonly>{{solicitacao.textoSolicitacao}}
+                            </textarea>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div *ngIf="solicitacao.foiProrrogado"
+                    style="background-color: rgb(245 225 247);border-radius: 10px; padding-left: 15px;padding-right: 15px;padding-top: 15px;margin-bottom: 15px;">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <label class="form-label-custom">Foi Prorrogado:</label>
+                                <span class="form-control">{{solicitacao.foiProrrogadoText}}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-11">
+                            <div class="form-group">
+                                <label class="form-label-custom">Motivo Porrogação:</label>
+                                <textarea class="form-control" readonly>{{solicitacao.motivoProrrogacao }}
+                            </textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h1 class="text-header">Resposta</h1>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-label-custom">Data Resposta:</label>
+                            <span class="form-control">{{solicitacao.dataRespostaTextBr}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-label-custom">Respondido por:</label>
+                            <span class="form-control">{{solicitacao.usuarioResposta?.nome}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="form-label-custom">Resposta:</label>
+                            <textarea [(ngModel)]="solicitacao.resposta" class="form-control" style="min-height: 150px;"
+                                readonly>
+                            </textarea>
+                        </div>
+                    </div>
+                </div>
+                <h1 class="text-header">Anexos da Resposta</h1>
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="lista-anexos">
+                            <li *ngFor="let anexo of solicitacao.anexos">
+                                <a [href]="anexo.isNew ? 'javascript:void(0)' : anexo.link" target="_blank">
+                                    <i class="icon-file-text2 mr-1"></i> {{anexo.nome}}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-row justify-content-end gap-20">
+                    <button  [disabled]=" solicitacao.situacao == 'N' || solicitacao.situacao == 'R'"
+                      (click)="modalResposta.open()" type="button" class="btn btn-icon btn-primary">
+                        <i class="icon-checkmark3 mr-2"></i> Responder
+                    </button>
+                    <!-- exibe botão se situação nao for finalizada ([N]egado ou [R]espondido)-->
+                    <button
+                        [disabled]="solicitacao.motivoProrrogacao != null || solicitacao.situacao == 'N' || solicitacao.situacao == 'R'"
+                        (click)="modalProrrogar.open()" type="button" class="btn btn-icon btn-primary">
+                        <i class="icon-blocked mr-2"></i> Prorrogar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<custom-modal #modalProrrogar title-text="Prorrogar Resposta a Solicitação" size="large" headerColor="primary">
+    <form class="card-body" (ngSubmit)="null">
+        <div class="row ">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="form-label-custom">Motivo:</label>
+                    <textarea [(ngModel)]="solicitacao.motivoProrrogacao" class="form-control"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex flex-row justify-content-end gap-20">
+            <button (click)="modalProrrogar.close()" type="button" class="btn btn-icon btn-danger">
+                <i class="icon-warning22 mr-2"></i> Cancelar
+            </button>
+            <button (click)="prorrogar()" type="button" class="btn btn-icon btn-success">
+                <i class="icon-checkmark3 mr-2"></i> Prorrogar
+            </button>
+        </div>
+    </form>
+</custom-modal>
+
+<custom-modal #modalResposta title-text="Resposta a Solicitação" size="large" headerColor="primary">
+    <form class="card-body" (ngSubmit)="null">
+        <div class="row ">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="form-label-custom">Resposta:</label>
+                    <textarea [(ngModel)]="solicitacao.resposta" class="form-control"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="form-label-custom">Anexo 1:</label>
+                    <input #inputFile (change)="handleFileChange(inputFile)" type="file" class="form-control" multiple>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="lista-anexos">
+                    <li *ngFor="let anexo of solicitacao.anexos">
+                        <a > <i class="icon-file-text2 mr-1"></i>{{anexo.nome}}</a>
+                        <a (click)="removeAnexo(anexo)">
+                            <i class="icon-cross3 ml-1 cursor-pointer"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="d-flex flex-row justify-content-end gap-20">
+            <button (click)="modalResposta.close()" type="button" class="btn btn-icon btn-danger">
+                <i class="icon-warning22 mr-2"></i> Cancelar
+            </button>
+            <button (click)="responder()" type="button" class="btn btn-icon btn-success">
+                <i class="icon-checkmark3 mr-2"></i> Responder
+            </button>
+        </div>
+    </form>
+</custom-modal>

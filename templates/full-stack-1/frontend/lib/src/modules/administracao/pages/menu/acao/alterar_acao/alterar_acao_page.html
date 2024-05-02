@@ -1,0 +1,78 @@
+<!-- Page header -->
+<div class="page-header page-header-light shadow">
+    <div class="page-header-content d-lg-flex">
+        <div class="d-flex">
+            <h4 class="page-title mb-0">
+                Administração - <span class="fw-normal">Alterar Ação</span>
+            </h4>
+        </div>
+    </div>
+    <div class="page-header-content d-lg-flex border-top">
+        <div class="d-flex">
+            <div class="breadcrumb py-2">
+                <a href="#/restrito" class="breadcrumb-item"><i class="ph-house"></i></a>
+                <a class="breadcrumb-item">Gestão Administrativa</a>
+                <a class="breadcrumb-item">Administração</a>
+                <a class="breadcrumb-item">Ação</a>
+                <span class="breadcrumb-item active">Alterar Ação</span>
+            </div>
+        </div>
+        <div class="collapse d-lg-block ms-lg-auto">
+            <div class="d-lg-flex mb-2 mb-lg-0">
+                <acao-favorita-comp></acao-favorita-comp>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /page header -->
+
+<div #container class="content">
+    <div class="card">
+        <div class="pt-3 pe-3 ps-3">
+            <form>
+                <div class="row ">
+                    <div class="col-md-4" title="Filtrar por Modulo">
+                        <label class="form-label">Modulo:</label>
+                        <select [(ngModel)]="moduloFiltroSel" class="form-select">
+                            <option *ngFor="let modulo of modulos" [ngValue]="modulo">{{modulo.nomModulo}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-4" title="Filtrar por Funcionalidade">
+                        <label class="form-label">Funcionalidade:</label>
+                        <select [(ngModel)]="funcionalidadeFiltroSel" class="form-select">
+                            <option *ngFor="let funcionalid of funcionalidadesForFiltro" [ngValue]="funcionalid">
+                                {{funcionalid.nomFuncionalidade}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <datatable-component #datatable [dataTableFilter]="filtrosAcao" [data]="acoes" [settings]="dtSettings"
+            [searchInFields]="sInFields" (dataRequest)="onDtRequestData($event)" (onRowClick)="onSelectItem($event)"
+            [showCheckboxToSelectRow]="false"></datatable-component>
+    </div>
+
+</div>
+
+
+<custom-modal #modalAlterar [start-open]="false" title-text="Alterar" size="xtra-large"
+    headerColor="primary" [enableModalBodyClass]="true" [verticalCenter]="true" [enableBackdrop]="true">
+    <form (ngSubmit)="salvar()" novalidate>
+        <div class="row">
+            <div class="col-md-6 form-group mb-2">
+                <label class="form-label">Nome:*</label>
+                <input [(ngModel)]="acaoSelected.nomAcao" type="text" class="form-control" required>
+            </div>
+        </div>
+        <div class="text-end">
+            <button class="btn btn-primary btn-labeled btn-labeled-start" type="submit">
+                <span class="btn-labeled-icon bg-black bg-opacity-20">
+                    <i class="ph ph-floppy-disk"></i>
+                </span>
+                Salvar
+            </button>
+        </div>
+    </form>
+</custom-modal>

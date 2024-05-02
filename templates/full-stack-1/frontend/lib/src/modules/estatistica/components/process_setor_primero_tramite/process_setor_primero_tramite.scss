@@ -1,0 +1,12 @@
+:host {
+  position: relative;
+ // --card-bg: var(--white);
+  background: var(--body-bg);
+  display: block;
+  //border-radius: var(--card-border-radius);
+}
+
+//  html[data-color-theme=dark] :host {
+//   color-scheme: dark;
+//   --card-bg: #2c2d33;
+// }

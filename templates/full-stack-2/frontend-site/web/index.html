@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>e-SIC - Sistema Eletrônico de Informações ao Cidadão </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- limitless -->
+  <!-- Global stylesheets-->
+  <link href="https://jubarte.riodasostras.rj.gov.br/cdn/Assets/fonts/roboto/roboto.min.css" rel="stylesheet"
+    type="text/css">
+  <link href="https://jubarte.riodasostras.rj.gov.br/cdn/Vendor/limitless/2.0.1/bs4/css/icons/icomoon/styles.min.css"
+    rel="stylesheet" type="text/css">
+  <link href="https://jubarte.riodasostras.rj.gov.br/cdn/Vendor/limitless/2.0.1/bs4/css/bootstrap.min.css"
+    rel="stylesheet" type="text/css">
+  <link href="https://jubarte.riodasostras.rj.gov.br/cdn/Vendor/limitless/2.0.1/bs4/css/bootstrap_limitless.min.css"
+    rel="stylesheet" type="text/css">
+  <link href="https://jubarte.riodasostras.rj.gov.br/cdn/Vendor/limitless/2.0.1/bs4/css/layout.min.css" rel="stylesheet"
+    type="text/css">
+  <link href="https://jubarte.riodasostras.rj.gov.br/cdn/Vendor/limitless/2.0.1/bs4/css/components.min.css"
+    rel="stylesheet" type="text/css">
+  <link href="https://jubarte.riodasostras.rj.gov.br/cdn/Vendor/limitless/2.0.1/bs4/css/colors.min.css" rel="stylesheet"
+    type="text/css">
+  <!--/global stylesheets -->
+  <!-- /limitless -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <script src="js/2.6.0/chart.js"></script>
+
+  <script>
+    var preventDef = function (e) {
+      e.preventDefault();
+    };
+
+    var stopPropag = function (e) {
+      e.stopPropagation();
+    };
+    /// window, document or body
+    function addPreventScrolling(element) {
+      console.log('addPreventScrolling');
+      element.addEventListener("wheel", preventDef, { passive: false });
+    }
+
+    function removePreventScrolling(element) {
+      console.log('removePreventScrolling');
+      element.removeEventListener("wheel", preventDef);
+    }
+
+    function addStopPropagationScrolling(element) {
+      element.addEventListener("wheel", stopPropag, { passive: false });
+    }
+
+    function removeStopPropagationScrolling(element) {
+      element.removeEventListener(stopPropag);
+    }
+
+  </script>
+  <script defer src="main.dart.js"></script>
+</head>
+
+<body >
+ <!--<body style="overflow: hidden">
+  <div style="width: 100vw; top: 0px; left: 0px; height: 100vh;overflow: auto;">
+
+  </div>--> 
+    <my-app class="sidebar-mobile-main">
+      <style>
+        .progress-container.indeterminate {
+          background-color: #c6dafc
+        }
+
+        .progress-container {
+          position: relative;
+          height: 100%;
+          background-color: #e0e0e0;
+          overflow: hidden
+        }
+
+        .progress-container.indeterminate.fallback>.secondary-progress {
+          animation-name: indeterminate-secondary-progress;
+          animation-duration: 2s;
+          animation-iteration-count: infinite;
+          animation-timing-function: linear
+        }
+
+        .progress-container.indeterminate>.secondary-progress {
+          background-color: #4285f4
+        }
+
+        .secondary-progress {
+          background-color: #a1c2fa
+        }
+
+        .active-progress,
+        .secondary-progress {
+          transform-origin: left center;
+          transform: scaleX(0);
+          position: absolute;
+          top: 0;
+          transition: transform 218ms cubic-bezier(.4, 0, .2, 1);
+          right: 0;
+          bottom: 0;
+          left: 0;
+          will-change: transform
+        }
+
+        .progress-container {
+          position: relative;
+          height: 100%;
+          background-color: #e0e0e0;
+          overflow: hidden
+        }
+
+        .progress-container.indeterminate {
+          background-color: #c6dafc
+        }
+
+        .progress-container.indeterminate>.secondary-progress {
+          background-color: #4285f4
+        }
+
+        .active-progress,
+        .secondary-progress {
+          transform-origin: left center;
+          transform: scaleX(0);
+          position: absolute;
+          top: 0;
+          transition: transform 218ms cubic-bezier(.4, 0, .2, 1);
+          right: 0;
+          bottom: 0;
+          left: 0;
+          will-change: transform
+        }
+
+        .active-progress {
+          background-color: #4285f4
+        }
+
+        .secondary-progress {
+          background-color: #a1c2fa
+        }
+
+        .progress-container.indeterminate.fallback>.active-progress {
+          animation-name: indeterminate-active-progress;
+          animation-duration: 2s;
+          animation-iteration-count: infinite;
+          animation-timing-function: linear
+        }
+
+        .progress-container.indeterminate.fallback>.secondary-progress {
+          animation-name: indeterminate-secondary-progress;
+          animation-duration: 2s;
+          animation-iteration-count: infinite;
+          animation-timing-function: linear
+        }
+
+        @keyframes indeterminate-active-progress {
+          0% {
+            transform: translate(0) scaleX(0)
+          }
+
+          25% {
+            transform: translate(0) scaleX(.5)
+          }
+
+          50% {
+            transform: translate(25%) scaleX(.75)
+          }
+
+          75% {
+            transform: translate(100%) scaleX(0)
+          }
+
+          100% {
+            transform: translate(100%) scaleX(0)
+          }
+        }
+
+        @keyframes indeterminate-secondary-progress {
+          0% {
+            transform: translate(0) scaleX(0)
+          }
+
+          60% {
+            transform: translate(0) scaleX(0)
+          }
+
+          80% {
+            transform: translate(0) scaleX(.6)
+          }
+
+          100% {
+            transform: translate(100%) scaleX(.1)
+          }
+        }
+
+        .loadContainer {
+          display: inline-block;
+          width: 100%;
+          height: calc(100vh - 40vh);
+          padding-top: 40vh;
+          text-align: center;
+          vertical-align: middle
+        }
+
+        .loadingC {
+          display: inline-block;
+          vertical-align: middle;
+          width: 30%;
+          height: 4px
+        }
+      </style>
+      <div class="loadContainer">
+        <div class="loadingC">
+          <span>Carregando...</span>
+          <div class="progress-container _ngcontent-xao-51 indeterminate fallback" role="progressbar"
+            aria-label="loading" aria-valuemin="0" aria-valuemax="100">
+            <div class="secondary-progress _ngcontent-xao-51" aria-label="active progress 0 secondary progress 0"
+              style="transform: scaleX(0);"></div>
+            <div class="active-progress _ngcontent-xao-51" style="transform: scaleX(0);"></div>
+          </div>
+        </div>
+      </div>
+    </my-app>
+  
+</body>
+
+</html>

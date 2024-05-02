@@ -1,0 +1,144 @@
+.hide {
+  display: none;
+  //8.33333333% | 16.66666667% | 25% | 33.33333333% | 41.66666667% | 50% | 58.33333333% | 66.66666667% | 75% | 83.33333333% |91.66666667% | 100%
+
+}
+
+// old
+// .ph-caret-down:before {
+//   content: "\f31a"
+// }
+// .ph-caret-up:before {
+//   content: "\f31d"
+// }
+// new 2.0.3
+// .ph-caret-down:before {
+//   content: "\e9fe";
+// }
+// .ph-caret-up:before {
+//   content: "\ea01";
+// }
+
+
+.dataTable thead .sorting:not([class*="sorting_asc"]):not([class*="sorting_desc"])::before {
+  -webkit-transform: translateY(-20%);
+  transform: translateY(-20%);
+}
+
+.dataTable thead .sorting:not(.sorting_desc)::before,
+.dataTable thead .sorting_asc_disabled::before {
+  content: "\e9fe";
+}
+
+.dataTable thead .sorting:not([class*="sorting_asc"]):not([class*="sorting_desc"])::after {
+  -webkit-transform: translateY(-80%);
+  transform: translateY(-80%);
+}
+
+.dataTable thead .sorting:not(.sorting_asc)::after,
+.dataTable thead .sorting_desc_disabled::after {
+  content: "\ea01";
+}
+
+//--------------------------- sorting
+
+
+// .dataTable thead .sorting:not([class*=sorting_asc]):not([class*=sorting_desc]):before {
+//   -webkit-transform: translateY(0%);
+//   transform: translateY(0%)
+// }
+
+// .dataTable thead .sorting:not([class*=sorting_asc]):not([class*=sorting_desc]):after {
+//   -webkit-transform: translateY(0%);
+//   transform: translateY(0%)
+// }
+
+// .sorting {
+//   padding: 0;
+// }
+
+// .sorting {
+//   padding: 10px;
+//   position: relative;
+//   cursor: pointer;
+
+//   &:before,
+//   &:after {
+//     border: 4px solid transparent;
+//     content: "";
+//     display: block;
+//     height: 0;
+//     top: 50%;
+//     right: 10px;
+//     position: absolute;
+//     width: 0;
+
+//   }
+
+//   &:before {
+//     border-bottom-color: #666;
+//     margin-top: -9px;
+//   }
+
+//   &:after {
+//     border-top-color: #666;
+//     margin-top: 1px;
+//   }
+
+//   &:hover {
+//     background-color: rgba(0, 0, 0, 0.076);
+//   }
+// }
+
+// .sorting_asc {
+//   padding: 10px;
+//   position: relative;
+//   cursor: pointer;
+
+//   &:after {
+//     border: 4px solid transparent;
+//     content: "";
+//     display: block;
+//     height: 0;
+//     right: 10px;
+//     top: 50%;
+//     position: absolute;
+//     width: 0;
+//   }
+
+//   &:after {
+//     border-top-color: #666;
+//     margin-top: 1px;
+//   }
+// }
+
+// .sorting_desc {
+//   padding: 10px;
+//   position: relative;
+//   cursor: pointer;
+
+//   &:before {
+//     border: 4px solid transparent;
+//     content: "";
+//     display: block;
+//     right: 10px;
+//     top: 50%;
+//     position: absolute;
+//     width: 0;
+//   }
+
+//   &:before {
+//     border-bottom-color: #666;
+//     margin-top: -9px;
+//   }
+
+// }
+
+.datatable-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table-light td {
+  box-shadow: none !important;
+}

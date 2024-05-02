@@ -1,0 +1,9 @@
+/*:host {
+    This is equivalent of the 'body' selector of a page. 
+}*/
+:host {
+
+   // width: 100vw;
+   // height: 100vh;
+  min-height: 100vh;
+}

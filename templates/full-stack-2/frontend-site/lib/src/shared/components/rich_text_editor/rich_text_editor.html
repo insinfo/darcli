@@ -1,0 +1,127 @@
+<div class="rt-control">
+    <div class="rt-toolbar-wrapper">
+        <div class="rt-toolbar-items">
+            <!-- Text Format -->
+            <button (mousedown)="$event.preventDefault()" (click)="textFormat($event,'bold')" class="rt-toolbar-btn" type="button" tabindex="-1">
+                <span class="e-btn-icon e-bold e-icons "></span>
+            </button>
+            <button  (mousedown)="$event.preventDefault()" (click)="textFormat($event,'italic')" class="rt-toolbar-btn" type="button" tabindex="-1">
+                <span class="e-btn-icon e-italic e-icons"></span>
+            </button>
+            <button (mousedown)="$event.preventDefault()" (click)="textFormat($event,'underline')" class="rt-toolbar-btn" type="button" tabindex="-1">
+                <span class="e-btn-icon e-underline e-icons"></span>
+            </button>
+            <button (mousedown)="$event.preventDefault()" (click)="textFormat($event,'strikeThrough')" class="rt-toolbar-btn" type="button" tabindex="-1">
+                <span class="e-btn-icon e-strikethrough e-icons"></span>
+            </button>
+            <button (mousedown)="$event.preventDefault()" (click)="textFormat($event,'removeFormat')" class="rt-toolbar-btn" type="button" tabindex="-1"
+                title="remova todos os estilos de formatação (como negrito, itálico, sublinhado, cor, sobrescrito, subscrito e mais) do texto atualmente selecionado.">
+                <span class="e-btn-icon e-filter-clear e-icons"></span>
+            </button>
+
+            <select  #selectTitleType (change)="execCommand($event,'formatBlock', selectTitleType.value,true)"
+                class="rt-toolbar-select" tabindex="-1">
+                <option value="H1">H1</option>
+                <option value="H2">H2</option>
+                <option value="H3">H3</option>
+                <option value="H4">H4</option>
+                <option value="H5">H5</option>
+                <option value="H6">H6</option>
+            </select>
+
+            <select  #selectFontFace (change)="changeFontFace(selectFontFace.value)" class="rt-toolbar-select"
+                style="width: 66px;" title="Troca tipo da font" tabindex="-1">
+                <option value="Arial">Arial</option>
+                <option value="Verdana">Verdana</option>
+                <option value="Times New Roman">Times New Roman</option>
+                <option value="Garamond">Garamond</option>
+                <option value="Georgia">Georgia</option>
+                <option value="Courier New">Courier New</option>
+                <option value="cursive">cursive</option>
+            </select>
+
+            <select  #selectFontSize (change)="changeFontSize(selectFontSize.value)" class="rt-toolbar-select"
+                title="Alterar o tamanho da fonte" tabindex="-1">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3" selected>3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+            </select>
+            <div class="input-wrapper" title="Cor do texto">
+                <input (mousedown)="saveCurrentCursorPosition(true)"  #inputFontColor (change)="changeFontColor(inputFontColor.value)" type="color" tabindex="-1">
+                <label for="foreColor">font</label>
+            </div>
+            <div class="input-wrapper" title="Cor do plano de fundo">
+                <input  (mousedown)="saveCurrentCursorPosition(true)"  #inputBackColor (change)="changeBackColor(inputBackColor.value)" type="color" value="#ffffff" tabindex="-1">
+                <label for="backColor">fundo</label>
+            </div>
+
+
+            <button (mousedown)="$event.preventDefault()" (click)="preInsertLink()" class="rt-toolbar-btn" type="button" tabindex="-1"
+                title="Insere link">
+                <span class="e-btn-icon e-link e-icons"></span>
+            </button>
+
+            <button (mousedown)="$event.preventDefault()" (click)="clearAllText($event)" class="rt-toolbar-btn" type="button" tabindex="-1"
+                title="remova todo o conteudo">
+                <span class="e-btn-icon e-erase e-icons"></span>
+            </button>
+
+            <button (mousedown)="$event.preventDefault()" (click)="execCommand($event,'undo',null,true)" class="rt-toolbar-btn"  type="button" title="Desfazer"  tabindex="-1">
+                <span class="e-btn-icon e-undo e-icons"></span>
+            </button>
+            <button (mousedown)="$event.preventDefault()" (click)="execCommand($event,'redo',null,true)" class="rt-toolbar-btn"   type="button" title="Refazer"  tabindex="-1">
+                <span class="e-btn-icon e-redo e-icons"></span>
+            </button>
+
+        </div>
+    </div>
+    <div class="rt-content-wrapper">
+        <div class="rt-content" (input)="handleUserChangingText($event)" [innerHtml]="value" #textEditContainer 
+            contenteditable="true" tabindex="0" style="display: block;" >
+
+        </div>
+        <textarea class="e-rte-srctextarea null" style="display: none;"></textarea>
+    </div>
+</div>
+
+<custom-modal #modalLink  [enableHeader]="false" [enableBackdrop]="false" [enableShadow]="true"
+    [enableRoundedCorners]="false" size="small">
+
+    <div class="p-3">
+        <div class="d-flex flex-row justify-content-between pb-1">
+            <h5>Inserir Link</h5>
+            <button class="btn btn-icon bg-white p-1" type="button" (click)="modalLink.close()">x</button>
+        </div>
+        <div class="">
+            <div class="form-group mb-2">
+                <label>Endereço URL</label>
+                <input [(ngModel)]="linkToInsert.url" type="text" spellcheck="false" placeholder="http://example.com"
+                    class="form-control">
+            </div>
+            <div class="form-group mb-2">
+                <label>Texto de Exibição</label>
+                <input [(ngModel)]="linkToInsert.displayText" type="text" spellcheck="false" class="form-control">
+            </div>
+            <div class="form-group mb-2">
+                <label>Título</label>
+                <input [(ngModel)]="linkToInsert.title" type="text" spellcheck="false" class="form-control">
+            </div>
+            <div class="  mb-2">
+                <label>
+                    <input #checkboxLinkTarget (change)="linkToInsert.target = checkboxLinkTarget.checked == true ? '_blank' : ''" type="checkbox" class="">
+                    <span class="">Abrir link em nova janela</span>
+                </label>
+            </div>
+        </div>
+        <div class="d-flex flex-row justify-content-end">
+            <button (click)="insertLink()" type="button" class="btn btn-sm bg-white mr-1 p-1 pl-2 pr-2 text-purple">Inserir</button>
+            <button type="button" class="btn btn-sm bg-white p-1 pl-2 pr-2"
+                (click)="modalLink.close()">Cancelar</button>
+        </div>
+    </div>
+
+</custom-modal>

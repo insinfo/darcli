@@ -1,0 +1,80 @@
+<div *ngIf="homeLayout == false" class="dropdown ms-lg-3">
+    <a class="d-flex align-items-center text-body dropdown-toggle py-2 cursor-pointer"
+        [attr.data-bs-toggle]="'dropdown'" aria-expanded="false">
+        <i class="ph-bookmark me-2"></i>
+        <span class="flex-1">Ações Favoritas</span>
+    </a>
+
+    <div class="dropdown-menu dropdown-menu-end w-100 w-lg-auto " [attr.data-popper-placement]="'bottom-end'">
+
+        <a *ngIf="currentPageIsFavorito == false" (click)="favoriteCurrentPage()" class="dropdown-item cursor-pointer">
+            <i class="ph ph-star me-2"></i>
+            Favoritar
+        </a>
+        <!-- <div class="dropdown-divider"></div> -->
+        <div class="dropdown-header">Favoritos</div>
+        <a (click)="irParaFavorito(fav)" *ngFor="let fav of favoritos" class="dropdown-item cursor-pointer">
+            {{fav.nomAcao}}
+        </a>
+    </div>
+</div>
+
+<div *ngIf="homeLayout == true" class="card">
+    <div class="card-header d-flex align-items-center">
+        <h5 class="mb-0">Ações Favoritas</h5>
+        <div class="d-inline-flex ms-auto">
+            <button (click)="reload()" title="Atualizar" type="button"
+                class="btn btn-flat-primary  btn-icon btn-sm rounded-pill border-transparent me-2">
+                <i class="ph ph-arrows-clockwise"></i>
+            </button>
+            <div class="dropdown">
+                <a class="btn btn-flat-primary btn-icon btn-sm rounded-pill border-transparent "
+                    [attr.data-bs-toggle]="'dropdown'" aria-expanded="false">
+                    <i class="ph-list"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end " [attr.data-popper-placement]="'bottom-end'">
+                    <a (click)="ordernarByDataDesc()" class="dropdown-item cursor-pointer ">
+                        <i class="ph ph-sort-descending me-2"></i>
+                        Ordernar por data desc
+                    </a>
+                    <a (click)="ordernarByDataAsc()" class="dropdown-item cursor-pointer">
+                        <i class="ph ph-sort-ascending me-2"></i>
+                        Ordernar por data asc
+                    </a>
+                    <a (click)="ordernarByNomeAsc()" class="dropdown-item cursor-pointer">
+                        <i class="ph ph-sort-ascending me-2"></i>
+                        Ordernar por nome asc
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="min-height:316px; max-height: 316px;overflow-y: auto;">
+        <div class="list-group list-group-borderless py-2">
+
+            <div *ngFor="let fav of favoritos" class="list-group-item hstack gap-3">
+                <div title="adicionar esta pagina como favorita"
+                    class="bg-primary bg-opacity-10 text-primary lh-1 rounded-pill p-2">
+                    <i class="ph-bookmark"></i>
+                </div>
+                <div class="flex-fill">
+                    <a (click)="irParaFavorito(fav)" class="cursor-pointer">
+                        <div class="fw-semibold">{{fav.nomAcao}}
+                        </div>
+                    </a>
+                    <!-- <span class="text-muted d-inline-block">{{$pipe.date(fav.dataCadastro, 'dd/MM/yyyy')}}</span> -->
+                </div>
+                <div class="align-self-center ms-3">
+                    <div class="d-inline-flex">
+                        <a (click)="removeFavorito(fav)" class="text-body cursor-pointer">
+                            <i class="ph ph-trash"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <no-data-component *ngIf="favoritos.isEmpty == true" message="Nenhum ação favorita!"> </no-data-component>
+
+    </div>
+</div>

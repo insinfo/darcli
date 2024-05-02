@@ -1,0 +1,13 @@
+:host {
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+@media (min-width: 576px) {
+    .login-form {
+        width: 35rem;
+    }
+}

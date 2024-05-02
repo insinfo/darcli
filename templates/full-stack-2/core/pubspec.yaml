@@ -1,0 +1,15 @@
+name: esic_core
+description: biblioteca compartilhada de codigo entre frontend e backend do Sistema Eletrônico de Informações ao. Cidadão (e-SIC)
+version: 1.0.0
+# homepage: https://www.example.com
+
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+
+dependencies:
+#  path: ^1.8.0
+  intl: any 
+  
+dev_dependencies:
+  pedantic: ^1.10.0
+  test: ^1.16.0

@@ -1,0 +1,257 @@
+<div class="rt-control">
+    <div class="rt-toolbar-wrapper">
+        <div class="rt-toolbar-items">
+            <!-- Text Format -->
+            <button (mousedown)="$event.preventDefault()" (click)="textFormat($event,'bold')" class="rt-toolbar-btn"
+                type="button" tabindex="-1">
+                <!-- <span class="e-btn-icon e-bold e-icons "></span> -->
+                <i class="ph ph-text-b"></i>
+            </button>
+            <button (mousedown)="$event.preventDefault()" (click)="textFormat($event,'italic')" class="rt-toolbar-btn"
+                type="button" tabindex="-1">
+                <!-- <span class="e-btn-icon e-italic e-icons"></span> -->
+                <i class="ph ph-text-italic"></i>
+            </button>
+            <button (mousedown)="$event.preventDefault()" (click)="textFormat($event,'underline')"
+                class="rt-toolbar-btn" type="button" tabindex="-1">
+                <!-- <span class="e-btn-icon e-underline e-icons"></span> -->
+                <i class="ph ph-text-underline"></i>
+            </button>
+            <button (mousedown)="$event.preventDefault()" (click)="textFormat($event,'strikeThrough')"
+                class="rt-toolbar-btn" type="button" tabindex="-1">
+                <!-- <span class="e-btn-icon e-strikethrough e-icons"></span> -->
+                <i class="ph ph-text-strikethrough"></i>
+            </button>
+
+            <!-- text align -->
+            <button (mousedown)="$event.preventDefault()" (click)="textFormat($event,'justifyLeft')"
+                class="rt-toolbar-btn" type="button" tabindex="-1">
+                <i class="ph ph-text-align-left"></i>
+            </button>
+            <button (mousedown)="$event.preventDefault()" (click)="textFormat($event,'justifyCenter')"
+                class="rt-toolbar-btn" type="button" tabindex="-1">
+                <i class="ph ph-text-align-center"></i>
+            </button>
+            <button (mousedown)="$event.preventDefault()" (click)="textFormat($event,'justifyRight')"
+                class="rt-toolbar-btn" type="button" tabindex="-1">
+                <i class="ph ph-text-align-right"></i>
+            </button>
+            <button (mousedown)="$event.preventDefault()" (click)="textFormat($event,'justifyFull')"
+                class="rt-toolbar-btn" type="button" tabindex="-1">
+                <i class="ph ph-text-align-justify"></i>
+            </button>
+
+            <button (mousedown)="$event.preventDefault()" (click)="execCommand($event,'insertOrderedList',null,true)"
+                class="rt-toolbar-btn" type="button" title="Inserir Lista Ordenada" tabindex="-1">
+                <i class="ph ph-list-numbers"></i>
+            </button>
+            <button (mousedown)="$event.preventDefault()" (click)="execCommand($event,'insertUnorderedList',null,true)"
+                class="rt-toolbar-btn" type="button" title="Inserir Lista" tabindex="-1">
+                <i class="ph ph-list-bullets"></i>
+            </button>
+
+            <button (mousedown)="$event.preventDefault()" (click)="textFormat($event,'removeFormat')"
+                class="rt-toolbar-btn" type="button" tabindex="-1"
+                title="remova todos os estilos de formatação (como negrito, itálico, sublinhado, cor, sobrescrito, subscrito e mais) do texto atualmente selecionado.">
+                <!-- <span class="e-btn-icon e-filter-clear e-icons"></span> -->
+                <i class="ph ph-broom"></i>
+            </button>
+            <!--  -->
+            <select #selectTitleType (change)="changeToTag($event,selectTitleType.value)" class="rt-toolbar-select"
+                tabindex="-1">
+                <option value="Div">Div</option>
+                <option value="H1">H1</option>
+                <option value="H2">H2</option>
+                <option value="H3">H3</option>
+                <option value="H4">H4</option>
+                <option value="H5">H5</option>
+                <option value="H6">H6</option>
+                <option value="P">P</option>
+                <option value="PRE">PRE</option>
+                <option value="ADDRESS">ADDRESS</option>
+            </select>
+
+            <select #selectFontFace (change)="changeFontFace(selectFontFace.value)" class="rt-toolbar-select"
+                style="width: 66px;" title="Troca tipo da font" tabindex="-1">
+                <option value="Arial">Arial</option>
+                <option value="Verdana">Verdana</option>
+                <option value="Tahoma">Tahoma</option>
+                <option value="Trebuchet MS">Trebuchet MS</option>
+                <option value="Times New Roman">Times New Roman</option>
+                <option value="Garamond">Garamond</option>
+                <option value="Georgia">Georgia</option>
+                <option value="Courier New">Courier New</option>
+                <option value="cursive">cursive</option>
+                <option value="Brush Script MT">Brush Script MT</option>
+                <option value="Inter">Inter</option>
+            </select>
+
+            <select #selectFontSize (change)="changeFontSize(selectFontSize.value)" class="rt-toolbar-select"
+                title="Alterar o tamanho da fonte" tabindex="-1">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3" selected>3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+            </select>
+
+            <!-- Cor do texto -->
+            <div class="d-flex align-items-center" style="gap: 8px;" title="Muda a cor do texto selecionado.">
+                <div class="d-flex flex-column align-items-center" (mousedown)="$event.preventDefault()"
+                    (click)="applyFontColor()">
+                    <i class="ph ph-text-aa"></i>
+                    <div class="color-swatch" [style.background-color]="fontColor"></div>
+                </div>
+                <div class="dropdown ">
+                    <button (mousedown)="$event.preventDefault()" type="button"
+                        class="btn btn-light btn-sm btn-icon rounded-pill" [attr.data-bs-toggle]="'dropdown'"
+                        aria-expanded="false">
+                        <i class="ph-caret-down ph-sm"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end" [attr.data-popper-placement]="'bottom-end'">
+                        <div class="d-flex px-1" style="gap: 5px;flex-wrap: wrap;">
+                            <div (mousedown)="$event.preventDefault()" (click)="changeFontColor(cor)"
+                                class="color-swatch" *ngFor="let cor of cores" [style.background-color]="cor"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- background color -->
+            <div class="d-flex align-items-center" style="gap: 8px;" title="Muda a cor do plano de fundo do texto selecionado.">
+                <div class="d-flex flex-column align-items-center" (mousedown)="$event.preventDefault()"
+                    (click)="applyBackColor()">
+                    <i class="ph ph-paint-bucket"></i>
+                    <div class="color-swatch" [style.background-color]="backColor"></div>
+                </div>
+                <div class="dropdown ">
+                    <button type="button" class="btn btn-light btn-sm btn-icon rounded-pill"
+                        [attr.data-bs-toggle]="'dropdown'" aria-expanded="false">
+                        <i class="ph-caret-down ph-sm"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end" [attr.data-popper-placement]="'bottom-end'">
+                        <div class="d-flex px-1" style="gap: 5px;flex-wrap: wrap;">
+                            <div (mousedown)="$event.preventDefault()" (click)="changeBackColor(cor)"
+                                class="color-swatch" *ngFor="let cor of cores" [style.background-color]="cor"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <button (mousedown)="$event.preventDefault()" (click)="preInsertLink()" class="rt-toolbar-btn" type="button"
+                tabindex="-1" title="Insere link">
+                <!-- <span class="e-btn-icon e-link e-icons"></span> -->
+                <i class="ph ph-link"></i>
+            </button>
+
+            <button (mousedown)="$event.preventDefault()" (click)="clearAllText($event)" class="rt-toolbar-btn"
+                type="button" tabindex="-1" title="remova todo o conteudo">
+                <!-- <span class="e-btn-icon e-erase e-icons"></span> -->
+                <i class="ph ph-eraser"></i>
+            </button>
+
+            <button (mousedown)="$event.preventDefault()" (click)="execCommand($event,'undo',null,true)"
+                class="rt-toolbar-btn" type="button" title="Desfazer" tabindex="-1">
+                <!-- <span class="e-btn-icon e-undo e-icons"></span> -->
+                <i class="ph ph-arrow-arc-left"></i>
+            </button>
+            <button (mousedown)="$event.preventDefault()" (click)="execCommand($event,'redo',null,true)"
+                class="rt-toolbar-btn" type="button" title="Refazer" tabindex="-1">
+                <!-- <span class="e-btn-icon e-redo e-icons"></span> -->
+                <i class="ph ph-arrow-arc-right"></i>
+            </button>
+
+            <div class="dropdown ">
+                <button type="button" class="btn btn-light btn-sm btn-icon rounded-pill"
+                    [attr.data-bs-toggle]="'dropdown'" aria-expanded="false">
+                    <i class="ph-caret-down ph-sm"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-end" [attr.data-popper-placement]="'bottom-end'">
+                    <a (click)="copiarSemFormatacao()" class="dropdown-item cursor-pointer">
+                        <i class="ph ph-copy me-2"></i>
+                        Copiar sem formatação
+                    </a>
+                    <a (click)="copiarComFormatacao()" class="dropdown-item cursor-pointer">
+                        <i class="ph ph-copy me-2"></i>
+                        Copiar com formatação
+                    </a>
+                    <a (click)="colarSemFormatacao()" class="dropdown-item cursor-pointer">
+                        <i class="ph-clipboard-text me-2"></i>
+                        Colar sem formatação
+                    </a>
+                    <a (click)="colarComFormatacao()" class="dropdown-item cursor-pointer">
+                        <i class="ph-clipboard-text me-2"></i>
+                        Colar com formatação
+                    </a>
+                    <a (click)="limparTodaFormatacao()" class="dropdown-item cursor-pointer">
+                        <i class="ph ph-broom me-2"></i>
+                        Limpar toda formatação
+                    </a>
+                    <a (click)="removeAllLineBreaks()" class="dropdown-item cursor-pointer">
+                        <i class="ph ph-broom me-2"></i>
+                        Remover quebras de linha
+                    </a>
+                    <a (click)="removeInvalidCharacters()" class="dropdown-item cursor-pointer">
+                        <i class="ph ph-broom me-2"></i>
+                        Remover caracteres inválidos
+                    </a>
+                    <!-- <a (click)="removeBackColor()" class="dropdown-item cursor-pointer">
+                        <i class="ph ph-broom me-2"></i>
+                        Remover cor fundo
+                    </a> -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="rt-content-wrapper">
+        <div class="rt-content" (input)="handleUserChangingText($event)" (paste)="handleUserPastText($event)" [innerHtml]="value" #textEditContainer
+            contenteditable="true" tabindex="0" style="display: block;">
+        </div>
+        <textarea class="e-rte-srctextarea null" style="display: none;"></textarea>
+    </div>
+</div>
+
+<custom-modal #modalLink [enableHeader]="false" [enableBackdrop]="false" [enableShadow]="true"
+    [enableRoundedCorners]="false" size="small">
+
+    <div class="p-3">
+        <div class="d-flex flex-row justify-content-between pb-1">
+            <h5>Inserir Link</h5>
+            <button class="btn btn-icon bg-white p-1" type="button" (click)="modalLink.close()">x</button>
+        </div>
+        <div class="">
+            <div class="form-group mb-2">
+                <label>Endereço URL</label>
+                <input [(ngModel)]="linkToInsert.url" type="text" spellcheck="false" placeholder="http://example.com"
+                    class="form-control">
+            </div>
+            <div class="form-group mb-2">
+                <label>Texto de Exibição</label>
+                <input [(ngModel)]="linkToInsert.displayText" type="text" spellcheck="false" class="form-control">
+            </div>
+            <div class="form-group mb-2">
+                <label>Título</label>
+                <input [(ngModel)]="linkToInsert.title" type="text" spellcheck="false" class="form-control">
+            </div>
+            <div class="  mb-2">
+                <label>
+                    <input #checkboxLinkTarget
+                        (change)="linkToInsert.target = checkboxLinkTarget.checked == true ? '_blank' : ''"
+                        type="checkbox" class="">
+                    <span class="">Abrir link em nova janela</span>
+                </label>
+            </div>
+        </div>
+        <div class="d-flex flex-row justify-content-end">
+            <button (click)="insertLink()" type="button"
+                class="btn btn-sm bg-white mr-1 p-1 pl-2 pr-2 text-purple">Inserir</button>
+            <button type="button" class="btn btn-sm bg-white p-1 pl-2 pr-2"
+                (click)="modalLink.close()">Cancelar</button>
+        </div>
+    </div>
+
+</custom-modal>

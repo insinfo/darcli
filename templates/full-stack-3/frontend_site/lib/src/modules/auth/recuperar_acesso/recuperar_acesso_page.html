@@ -1,0 +1,42 @@
+<div class="content d-flex justify-content-center align-items-start">
+
+    <form *ngIf="!isResetPass" class="login-form" (ngSubmit)="enviarNovaSenha()">
+        <div class="card mb-0">
+            <div class="card-body">
+                <div class="text-center mb-3">
+                    <div class="d-inline-flex bg-primary bg-opacity-10 text-primary lh-1 rounded-pill p-3 mb-3 mt-1">
+                        <i class="ph-arrows-counter-clockwise ph-2x"></i>
+                    </div>
+                    <h5 class="mb-0">Formulário de recuperação de conta</h5>
+                </div>
+
+                <div class="mb-3">
+                    <div class="form-group">
+                        <label class="form-label">Informe seu CPF ou CNPJ para enviarmos nova
+                            senha:*</label>
+                        <div class="form-control-feedback form-control-feedback-start">
+                            <input [(ngModel)]="login" id="login" type="text" class="form-control"
+                                placeholder="Seu CPF/CNPJ">
+                            <div class="form-control-feedback-icon">
+                                <i class="ph-user-circle text-muted"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" id="submit" class="btn btn-primary w-100">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div *ngIf="isResetPass" class="container p-3">
+        <div class="d-flex flex-column justify-content-center align-items-center">
+            <h1 class="fit-content-width text-center">Sua senha foi redefinida com sucesso. <br>
+                A nova senha foi enviada para o seu e-mail:<br> {{email}}</h1>
+            <button (click)="irParaInicio()" type="button" class="btn btn-primary mt-2">ir para
+                inicio</button>
+        </div>
+    </div>
+
+</div>

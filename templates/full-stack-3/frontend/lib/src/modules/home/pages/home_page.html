@@ -1,0 +1,117 @@
+<div class="page-header">
+    <div class="page-header-content  d-lg-flex">
+        <div class="d-flex">
+            <h4 class="page-title mb-0">
+                Home - <span class="fw-normal">Bem vindo ao novo SIBEM</span>
+            </h4>
+            <a href="#page_header"
+                class="btn btn-light align-self-center collapsed d-lg-none border-transparent rounded-pill p-0 ms-auto"
+                [attr.data-bs-toggle]="'collapse'">
+                <i class="ph-caret-down collapsible-indicator ph-sm m-1"></i>
+            </a>
+        </div>
+        <div class="collapse d-lg-block my-lg-auto ms-lg-auto" id="page_header">
+            <div class="d-sm-flex align-items-center mb-3 mb-lg-0 ms-lg-3">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content  pt-0">
+
+    <!-- <h5 class="">Bem vindo ao novo SIBEM - Sistema Banco de Emprego</h5> -->
+
+    <div class="row">
+        <div class="col-lg-3 col-xxl-3">
+            <div #cardTotalVagasDisponiveis class="card">
+                <div class="card-header d-flex border-bottom-0 pb-1 mb-0">
+                    <div>
+                        <span class="fw-medium mb-1">Total Vagas Disponiveis</span>
+                        <h2 class="fw-bold mb-0">
+                            <span class="text-success">
+                                {{totalVagasDisponiveis}}
+                            </span>
+                        </h2>
+                    </div>
+                    <div class=" ms-auto">
+                        <a href="#/vagas"
+                            class="btn btn-outline-light btn-icon btn-sm text-body border-transparent rounded-pill">
+                            <i class="ph-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xxl-3">
+            <div #cardTotalEmpregadorParaModerar class="card">
+                <div class="card-header d-flex border-bottom-0 pb-1 mb-0">
+                    <div>
+                        <span class="fw-medium mb-1">Total Empregadores para moderar</span>
+                        <h2 class="fw-bold mb-0">
+                            <span class="text-danger">
+                                {{totalEmpregadorParaModerar}}
+                            </span>
+                        </h2>
+                    </div>
+                    <div class=" ms-auto">
+                        <a href="#/empregadores-web"
+                            class="btn btn-outline-light btn-icon btn-sm text-body border-transparent rounded-pill">
+                            <i class="ph-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xxl-3">
+            <div #cardTotalVagasParaModerar class="card">
+                <div class="card-header d-flex border-bottom-0 pb-1 mb-0">
+                    <div>
+                        <span class="fw-medium mb-1">Total Vagas para moderar</span>
+                        <h2 class="fw-bold mb-0">
+                            <span class="text-danger">
+                                {{totalVagasParaModerar}}
+                            </span>
+                        </h2>
+                    </div>
+                    <div class=" ms-auto">
+                        <a href="#/vagas"
+                            class="btn btn-outline-light btn-icon btn-sm text-body border-transparent rounded-pill">
+                            <i class="ph-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="chart-container">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xxl-3">
+            <div #cardTotalCandidatosParaModerar class="card">
+                <div class="card-header d-flex border-bottom-0 pb-1 mb-0">
+                    <div>
+                        <span class="fw-medium mb-1">Total Candidatos para moderar</span>
+                        <h2 class="fw-bold mb-0">
+                            <span class="text-danger">
+                                {{totalCandidatosParaModerar}}
+                            </span>
+                        </h2>
+                    </div>
+                    <div class=" ms-auto">
+                        <a href="#/candidatos-web"
+                            class="btn btn-outline-light btn-icon btn-sm text-body border-transparent rounded-pill">
+                            <i class="ph-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="chart-container">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6 col-xxl-4">
+            <encaminhamento-status-comp  #encaminhamentoStatusComp></encaminhamento-status-comp>
+        </div>
+    </div>
+</div>

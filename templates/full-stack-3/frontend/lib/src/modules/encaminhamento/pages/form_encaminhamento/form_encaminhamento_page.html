@@ -1,0 +1,112 @@
+<div class="page-header">
+    <div class="page-header-content  d-lg-flex">
+        <div class="d-flex">
+            <div class="page-title ">
+                <div class="d-inline-flex align-items-center">
+                    <i (click)="back()" class="ph-arrow-circle-left me-2 cursor-pointer"></i>
+                    <h5 class="mb-0">Cadastro</h5>
+                </div>
+                <span class="page-subtitle d-inline-block align-text-bottom text-muted">Encaminhamento</span>
+            </div>
+            <!-- <h4 class="page-title mb-0 d-inline-flex align-items-center">
+                <span (click)="back()" class="ph-arrow-circle-left me-2"></span>
+                Cadastro -
+                <span class="fw-normal ms-1">Grupo</span>
+            </h4> -->
+            <a href="#page_header"
+                class="btn btn-light align-self-center collapsed d-lg-none border-transparent rounded-pill p-0 ms-auto"
+                [attr.data-bs-toggle]="'collapse'">
+                <i class="ph-caret-down collapsible-indicator ph-sm m-1"></i>
+            </a>
+        </div>
+        <div class="collapse d-lg-block my-lg-auto ms-lg-auto" id="page_header">
+            <div class="d-sm-flex align-items-center mb-3 mb-lg-0 ms-lg-3">
+                <div class="d-inline-flex mt-3 mt-sm-0">
+                    <!-- <a class="d-flex align-items-center text-body py-2 cursor-pointer">
+                        <i class="ph-arrow-circle-left me-2"></i> Voltar
+                    </a> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div #container class="content pt-0">
+    <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+            <!-- Basic layout-->
+            <div class="card">
+                <div class="card-header header-elements-inline">
+                    <h5 class="mb-0">Encaminhamento de Candidato</h5>
+                </div>
+                <div class="card-body">
+                    <form #cadastroForm="ngForm" (ngSubmit)="salvar(cadastroForm)" novalidate
+                        (keydown.enter)="$event.preventDefault()">
+                        <div class="row">                            
+                            <div class="col-md-5 form-group mb-2">
+                                <label class="form-label">Encaminhar para vaga:*</label>
+                                <input (click)="openModalVaga()" value="{{item.nomeVaga}}"
+                                    placeholder="Clique para selecionar" type="text" class="form-control"
+                                    [readonly]="isNew" [disabled]="!isNew">
+                            </div>
+                            <div class="col-md-5 form-group mb-2">
+                                <label class="form-label">Candidato:*</label>
+                                <input (click)="openModalCandidato()" value="{{item.nomeCandidato}}"
+                                    placeholder="Clique para selecionar" type="text" class="form-control"
+                                    [readonly]="isNew" [disabled]="!isNew">
+                            </div>
+                            <div class="col-md-3 col-xxl-2 form-group mb-2">
+                                <label class="form-label">Status:*</label>
+                                <select [(ngModel)]="item.status" class="form-select" customRequired ngControl="status" disabled>
+                                    <option [ngValue]="'Encaminhado'">Encaminhado</option>
+                                    <option [ngValue]="'Efetivado'">Efetivado</option>
+                                    <option [ngValue]="'Não Compareceu'">Não Compareceu</option>
+                                    <option [ngValue]="'Não Selecionado'">Não Selecionado</option>
+                                </select>
+                            </div>
+                            <div class="col-md-5 form-group mb-2">
+                                <label class="form-label">Observação:</label>
+                                <textarea [(ngModel)]="item.observacao" class="form-control"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-2 mt-3">
+
+                            <button (click)="geraGuiaEncaminhamento()" *ngIf="isNew==false" class="btn btn-primary btn-labeled btn-labeled-start" type="button">
+                                <span class="btn-labeled-icon bg-black bg-opacity-20">
+                                    <i class="ph ph-gear-six"></i>
+                                </span>
+                                Gerar Guia
+                            </button>
+                            <button (click)="imprimirGuiaEncaminhamento()" *ngIf="isNew==false" class="btn btn-primary btn-labeled btn-labeled-start" type="button">
+                                <span class="btn-labeled-icon bg-black bg-opacity-20">
+                                    <i class="ph ph ph-printer"></i>
+                                </span>
+                                Imprimir Guia
+                            </button>
+
+                            <button class="btn btn-primary btn-labeled btn-labeled-start" type="submit">
+                                <span class="btn-labeled-icon bg-black bg-opacity-20">
+                                    <i class="ph ph-floppy-disk"></i>
+                                </span>
+                                Salvar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<custom-modal #modalVaga [start-open]="false" title-text="Selecione Vaga" size="modal-full"
+    [enableModalBodyClass]="false" headerColor="primary">
+    <lista-vaga-page #listaVaga [insideModal]="true" [filtroBloqueioEncaminhamento]="false"
+        (onSelect)="onSelectVaga($event)"></lista-vaga-page>
+</custom-modal>
+
+<custom-modal #modalCandidato [start-open]="false" title-text="Selecione Candidato" size="xtra-large"
+    [enableModalBodyClass]="false" headerColor="primary">
+    <lista-candidato-page #listaCandidato [insideModal]="true" 
+        (onSelect)="onSelectCandidato($event)"></lista-candidato-page>
+</custom-modal>

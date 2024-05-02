@@ -1,0 +1,7 @@
+.dart_tool/
+.packages
+pubspec.lock
+frontend/build/
+build/
+# pasta do puppeteer 
+.local-chromium/

@@ -1,0 +1,327 @@
+<div class="page-header">
+    <div class="page-header-content  d-lg-flex">
+        <div class="d-flex">
+            <div class="page-title ">
+                <div class="d-inline-flex align-items-center">
+                    <i (click)="back()" class="ph-arrow-circle-left me-2 cursor-pointer"></i>
+                    <h5 class="mb-0">Cadastro</h5>
+                </div>
+                <span class="page-subtitle d-inline-block align-text-bottom text-muted">Empregador</span>
+            </div>
+            <!-- <h4 class="page-title mb-0 d-inline-flex align-items-center">
+                <span (click)="back()" class="ph-arrow-circle-left me-2"></span>
+                Cadastro -
+                <span class="fw-normal ms-1">Grupo</span>
+            </h4> -->
+            <a href="#page_header"
+                class="btn btn-light align-self-center collapsed d-lg-none border-transparent rounded-pill p-0 ms-auto"
+                [attr.data-bs-toggle]="'collapse'">
+                <i class="ph-caret-down collapsible-indicator ph-sm m-1"></i>
+            </a>
+        </div>
+        <div class="collapse d-lg-block my-lg-auto ms-lg-auto" id="page_header">
+            <div class="d-sm-flex align-items-center mb-3 mb-lg-0 ms-lg-3">
+                <div class="d-inline-flex mt-3 mt-sm-0">
+                    <!-- <a class="d-flex align-items-center text-body py-2 cursor-pointer">
+                        <i class="ph-arrow-circle-left me-2"></i> Voltar
+                    </a> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div #container class="content pt-0">
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- Basic layout-->
+            <div class="card">
+                <div class="card-header header-elements-inline">
+                    <h5 class="mb-0">Cadastro Empregador</h5>
+                </div>
+                <div class="card-body">
+                    <form #cadastroForm="ngForm" (ngSubmit)="salvar(cadastroForm)" novalidate
+                        (keydown.enter)="$event.preventDefault()">
+                        <div class="row">
+                            <div class="col-md-3 col-xxl-1 form-group mb-2">
+                                <label class="form-label">Tipo:*</label>
+                                <select (change)="onChangeTipoPessoa($event.target.value)" [(ngModel)]="item.tipo"
+                                    ngControl="tipoPessoa" customRequired class="form-select" [disabled]="isNew==false">
+                                    <option value="fisica">Física</option>
+                                    <option value="juridica">Jurídica</option>
+                                </select>
+                            </div>
+                            <div class="col-md-5 col-xxl-4 form-group mb-2">
+                                <label class="form-label">CNAE:*</label>
+                                <input [(ngModel)]="item.nomeCnae" ngControl="nomeCnae" (click)="openModalCnae()"
+                                    type="text" class="form-control" customRequired readonly>
+                            </div>
+                            <div class="col-md-3 col-xxl-1 form-group mb-2">
+                                <label class="form-label">Ativo:*</label>
+                                <select [(ngModel)]="item.ativo" ngControl="ativo" customRequired class="form-select">
+                                    <option [ngValue]="true">Sim</option>
+                                    <option [ngValue]="false">Não</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 col-xxl-3  form-group mb-2"
+                                title="Razão Social da Empresa ou Nome de Pessoa">
+                                <label class="form-label">Nome:* <span
+                                        class="text-muted">(Empresa/Pessoa)</span></label>
+                                <input [(ngModel)]="item.nome" class="form-control" customRequired ngControl="nome"
+                                    type="text">
+                            </div>
+                        </div>
+
+                        <div class="row" *ngIf="item.tipo == 'juridica' && item.pessoaJuridica != null">
+                            <div class="col-md-3 col-xxl-2 form-group mb-2">
+                                <label class="form-label">CNPJ:*</label>
+                                <input [(ngModel)]="item.pessoaJuridica!.cnpj" class="form-control" customRequired
+                                    customRequiredType="cnpj" ngControl="cnpj" type="text">
+                            </div>
+                            <div class="col-md-5 col-xxl-3 form-group mb-2">
+                                <label class="form-label">Nome Fantasia:*</label>
+                                <input [(ngModel)]="item.pessoaJuridica!.nomeFantasia" class="form-control"
+                                    customRequired ngControl="nomeFantasia" type="text">
+                            </div>
+                            <div class="col-md-3 col-xxl-2 form-group mb-2">
+                                <label class="form-label">Inscrição Estadual:</label>
+                                <input [(ngModel)]="item.pessoaJuridica!.inscricaoEstadual" class="form-control"
+                                    ngControl="inscricaoEstadual" type="text">
+                            </div>
+                        </div>
+
+                        <div class="row" *ngIf="item.tipo == 'fisica' && item.pessoaFisica != null">
+                            <div class="col-md-3 col-xxl-2 form-group mb-2">
+                                <label class="form-label">CPF:*</label>
+                                <input [(ngModel)]="item.pessoaFisica!.cpf" class="form-control" customRequired
+                                    ngControl="cpf" type="text">
+                            </div>
+                            <div class="col-md-3 col-xxl-2 form-group mb-2">
+                                <label class="form-label">RG:*</label>
+                                <input [(ngModel)]="item.pessoaFisica!.rg" class="form-control" ngControl="rg"
+                                    type="text" customRequired>
+                            </div>
+                            <div class="col-md-3 col-xxl-2 form-group mb-2">
+                                <label class="form-label">Data de Emissão:</label>
+                                <input [(ngModel)]="item.pessoaFisica!.dataEmissao" class="form-control"
+                                    ngControl="dataEmissao" type="date">
+                            </div>
+                            <div class="col-md-3 col-xxl-2 form-group mb-2">
+                                <label class="form-label">Orgao Emissor:</label>
+                                <input [(ngModel)]="item.pessoaFisica!.orgaoEmissor" class="form-control"
+                                    ngControl="orgaoEmissor" type="text">
+                            </div>
+                            <div class="col-md-3 col-xxl-2 form-group mb-2">
+                                <label class="form-label">UF do Emissor:</label>
+                                <custom-select [(ngModel)]="item.pessoaFisica!.idUfOrgaoEmissor"
+                                    [placeholder]="'Selecione'" [dataSource]="ufs" [labelKey]="'nome'"
+                                    [valueKey]="'id'">
+                                </custom-select>
+                            </div>
+                            <div class="col-md-3 col-xxl-2 form-group mb-2">
+                                <label class="form-label">Sexo:*</label>
+                                <select [(ngModel)]="item.pessoaFisica!.sexo" ngControl="sexo" class="form-select"
+                                    customRequired>
+                                    <option disabled="" value="null">Selecione</option>
+                                    <option value="Masculino">Masculino</option>
+                                    <option value="Feminino">Feminino</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 col-xxl-2 form-group mb-2">
+                                <label class="form-label">Estado Civil:</label>
+                                <select [(ngModel)]="item.pessoaFisica!.estadoCivil" ngControl="estadoCivil"
+                                    class="form-select">
+                                    <option value="null">Selecione</option>
+                                    <option value="Solteiro(a)">Solteiro(a)</option>
+                                    <option value="Casado(a)">Casado(a)</option>
+                                    <option value="Divorciado(a)">Divorciado(a)</option>
+                                    <option value="Viúvo(a)">Viúvo(a)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 col-xxl-2 form-group mb-2">
+                                <label class="form-label">Data de Nascimento:*</label>
+                                <input [(ngModel)]="item.pessoaFisica!.dataNascimento" class="form-control"
+                                    ngControl="dataNascimento" type="date" customRequired>
+                            </div>
+
+                            <div class="col-md-3 col-xxl-2 form-group mb-2">
+                                <label class="form-label">PIS:</label>
+                                <input [(ngModel)]="item.pessoaFisica!.pis" class="form-control" ngControl="pis"
+                                    type="text">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 col-xxl-3 form-group mb-2">
+                                <label class="form-label">Email Principal:</label>
+                                <input [(ngModel)]="item.emailPrincipal" class="form-control" ngControl="emailPrincipal"
+                                    type="email">
+                            </div>
+                            <div class="col-md-4 col-xxl-3 form-group mb-2">
+                                <label class="form-label">Email Adicional:</label>
+                                <input [(ngModel)]="item.emailAdicional" class="form-control" ngControl="emailAdicional"
+                                    type="email">
+                            </div>
+                            <div class="col-md-5 col-xxl-4 form-group mb-2">
+                                <label class="form-label">Contato:*</label>
+                                <input [(ngModel)]="item.contato" ngControl="contato" type="text" class="form-control"
+                                    customRequired>
+                            </div>
+                            <div class="col-md-12 col-xxl-6 form-group mb-2">
+                                <label class="form-label">Observação:</label>
+                                <textarea [(ngModel)]="item.observacao" ngControl="observacao"
+                                    class="form-control"></textarea>
+                            </div>
+                            
+                        </div>
+                        <div *ngIf="item.isFromWeb == true" class="row">
+                            <div class="col-md-12 col-xxl-6 form-group mb-2">
+                                <label class="form-label">Observação validação:</label>
+                                <textarea [(ngModel)]="item.observacaoValidacao" ngControl="observacaoValidacao"
+                                    class="form-control"></textarea>
+                            </div>
+                        </div>
+
+                        <!--telefones-->
+                        <div class="fw-bold border-bottom pb-1 mb-3 d-flex align-items-center">
+                            Telefones
+                            <button (click)="addTelefone()"
+                                class="btn btn-flat-primary border-transparent btn-icon ms-2 p-1" type="button">
+                                <i class="ph ph-phone-plus"></i>
+                            </button>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-xxl-4" *ngFor="let telefone of item.telefones; let i = index">
+                                <div class="row">
+                                    <div class="col-md-5 col-xxl-5 form-group mb-2">
+                                        <!--ngControl="tipoTelefone_{{i+1}}"-->
+                                        <label class="form-label">Tipo de telefone:* </label>
+                                        <select [(ngModel)]="telefone.tipo" class="form-select"
+                                            name="tipoTelefone_{{i+1}}" customRequired>
+                                            <option disabled selected [ngValue]="null">Selecione</option>
+                                            <option [ngValue]="'Comercial'">Comercial</option>
+                                            <option [ngValue]="'Móvel'">Móvel</option>
+                                            <option [ngValue]="'Residencial'">Residencial</option>
+                                            <option [ngValue]="'WhatsApp'">WhatsApp</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-5 col-xxl-5 form-group mb-2">
+                                        <label class="form-label">Telefone:* </label>
+                                        <input [(ngModel)]="telefone.numero" type="text" class="form-control"
+                                            customRequired>
+                                    </div>
+                                    <div class="col-md-2 col-xxl-1 form-group mb-2 d-flex align-items-end">
+                                        <button (click)="rmTelefone(telefone)"
+                                            class="btn btn-flat-primary border-transparent btn-icon" type="button">
+                                            <i class="ph-trash-simple"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--enderecos-->
+                        <div class="fw-bold border-bottom pb-1 mb-3 d-flex align-items-center">
+                            Endereços
+                            <button (click)="addEndereco()"
+                                class="btn btn-flat-primary border-transparent btn-icon ms-2 p-1" type="button">
+                                <i class="ph ph-map-pin-line"></i>
+                            </button>
+                        </div>
+
+                        <div class="row mb-4" *ngFor="let endereco of item.enderecos; let i = index">
+
+                            <div class="col-md-3 col-xxl-2 form-group mb-2">
+                                <label class="form-label">CEP:</label>
+                                <div class="form-control-feedback form-control-feedback-end flex-grow-1">
+                                    <input [(ngModel)]="endereco.cep" type="text" class="form-control">
+                                    <!-- <div class="form-control-feedback-icon cursor-pointer">
+                                        <i class="ph-magnifying-glass text-primary "></i>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-xxl-1 form-group mb-2" title="Tipo de endereço">
+                                <label class="form-label">Tipo:*</label>
+                                <!-- <select [(ngModel)]="endereco.tipo" class="form-select" customRequired>
+                                    <option *ngFor="let tipoEnd of tiposEndereco">{{tipoEnd}}</option>
+                                </select> -->
+                                <custom-select [(ngModel)]="endereco.tipo" [showSearchField]="false"
+                                    [placeholder]="'Selecione'" [dataSource]="tiposEndereco">
+                                </custom-select>
+                            </div>
+                            <div class="col-md-4 col-xxl-2 form-group mb-2">
+                                <label class="form-label">UF:*</label>
+                                <custom-select [(ngModel)]="endereco.idUf" [placeholder]="'Selecione'"
+                                    [dataSource]="ufs" (currentValueChange)="onUfChanged(endereco, $event)"
+                                    [labelKey]="'nome'" [valueKey]="'id'">
+                                </custom-select>
+                            </div>
+                            <div class="col-md-4 col-xxl-2 form-group mb-2">
+                                <label class="form-label">Municipio:*</label>
+                                <custom-select [(ngModel)]="endereco.idMunicipio" [placeholder]="'Selecione'"
+                                    [dataSource]="municipios" [labelKey]="'nome'" [valueKey]="'id'">
+                                </custom-select>
+                            </div>
+                            <div class="col-md-2 col-xxl-1 form-group mb-2">
+                                <label class="form-label">Tipo logradouro:*</label>
+                                <select [(ngModel)]="endereco.tipoLogradouro" name="tipoLogradouro" class="form-select">
+                                    <option *ngFor="let tipoLog of tiposLogradoouro" [ngValue]="tipoLog">{{tipoLog}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 col-xxl-2 form-group mb-2">
+                                <label class="form-label">Logradouro:*</label>
+                                <input [(ngModel)]="endereco.logradouro" name="logradouro" type="text"
+                                    class="form-control" customRequired>
+                            </div>
+                            <div class="col-md-1 col-xxl-1 form-group mb-2">
+                                <label class="form-label">Número:*</label>
+                                <input [(ngModel)]="endereco.numero" [maxlength]="10" name="logradouroNumero"
+                                    type="text" class="form-control" customRequired>
+                            </div>
+                            <div class="col-md-1 col-xxl-2 form-group mb-2">
+                                <label class="form-label">Bairro:*</label>
+                                <input [(ngModel)]="endereco.nomeBairro" [maxlength]="80" name="bairro" type="text"
+                                    class="form-control" customRequired>
+                            </div>
+                            <div class="col-md-1 col-xxl-2 form-group mb-2">
+                                <label class="form-label">Complemento:</label>
+                                <input [(ngModel)]="endereco.complemento" [maxlength]="100" name="complemento"
+                                    type="text" class="form-control">
+                            </div>
+
+                            <div *ngIf="i > 0" class="col-md-2 col-xxl-1 form-group mb-2 d-flex align-items-end">
+                                <button (click)="rmEndereco(endereco)"
+                                    class="btn btn-flat-primary border-transparent btn-icon" type="button">
+                                    <i class="ph-trash-simple"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-start justify-content-end gap-3 ">
+                            <button (click)="cancelar()" class="btn btn-warning btn-labeled btn-labeled-start"
+                                type="button">
+                                <span class="btn-labeled-icon bg-black bg-opacity-20">
+                                    <i class="ph ph-prohibit"></i>
+                                </span>
+                                Cancelar
+                            </button>
+                            <button class="btn btn-primary btn-labeled btn-labeled-start" type="submit">
+                                <span class="btn-labeled-icon bg-black bg-opacity-20">
+                                    <i class="ph ph-floppy-disk"></i>
+                                </span>
+                                Salvar
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<custom-modal #modalCnae [start-open]="false" title-text="Selecione o CNAE" size="large" [enableModalBodyClass]="false"
+    headerColor="primary">
+    <lista-divisao-cnae-page #listaCnae [insideModal]="true"
+        (onSelect)="onSelectCnae($event)"></lista-divisao-cnae-page>
+</custom-modal>

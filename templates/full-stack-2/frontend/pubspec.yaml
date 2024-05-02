@@ -1,0 +1,34 @@
+name: esic_frontend
+description: Frontend (WEB) do Sistema Eletrônico de Informações ao. Cidadão (e-SIC)
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: '>=2.18.0 <3.0.0'
+
+dependencies:
+  ngdart: ^7.1.1
+  ngforms: ^4.1.1
+  ngrouter: ^3.1.1  
+  
+  http: any
+  js: any
+  pdf: 3.10.1 #3.10.1
+  #collection: any
+  
+  ngsecurity:
+   git:
+      ref: main
+      url: https://github.com/angulardart-community/ngsecurity.git
+ 
+  esic_core:
+    path: ../core
+
+dev_dependencies:
+  sass_builder: ^2.1.2
+  #ngtest: ^4.1.1
+  build_runner: any
+  build_test: any
+  build_web_compilers: any
+  pedantic: any
+  test: any

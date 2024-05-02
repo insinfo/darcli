@@ -1,0 +1,41 @@
+<div *ngIf="!isSaved" class="container ">
+    <form (ngSubmit)="save()" novalidate>
+        <h1 class="text-header">Formulário de Solicitação de Informação</h1>
+        <div class="row mt-3">
+            <div class="col-md-7">
+                <div class="form-group">
+                    <label class="form-label-custom">Descreva de forma detalhada sua solicitação:*                       
+                    </label>
+                    <!---->
+                    <textarea [(ngModel)]="solicitacao.textoSolicitacao" rows="10" [maxlength]="4000" name="textoSolicitacao"
+                        class="form-textarea-custom" required>
+                   </textarea>
+                   <p>Limite de caracteres: 4000</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+           
+           <!-- <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-label-custom">Forma de retorno:*</label>
+                    <select [(ngModel)]="solicitacao.formaRetorno"  name="formaretorno" class="form-select-custom">
+                        <option value="E" selected>E-mail</option>
+                        <option value="C">Correio</option>
+                        <option value="F">Fax</option>
+                    </select>
+                </div>
+            </div>-->
+        </div>
+        <div class="d-flex justify-content-between mt-4 mb-4">           
+            <button type="submit" class="btn-custom fit-content-width">Enviar Solicitação</button>
+        </div>
+    </form>
+</div>
+
+<div *ngIf="isSaved" class="container p-3">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+        <h1 class="fit-content-width">Solicitação enviada!</h1>
+        <button (click)="irParaInicio()" type="button" class="btn-custom fit-content-width mt-2">ir para inicio</button>
+    </div>
+</div>

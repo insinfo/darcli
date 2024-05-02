@@ -1,0 +1,221 @@
+<!-- Page header -->
+<div class="page-header page-header-light shadow">
+  <div class="page-header-content d-lg-flex">
+    <div class="d-flex">
+      <h4 class="page-title mb-0">
+        Home - <span class="fw-normal">Dashboard</span>
+      </h4>
+    </div>
+  </div>
+  <div class="page-header-content d-lg-flex border-top">
+    <div class="d-flex">
+      <div class="breadcrumb py-2">
+        <a class="breadcrumb-item"><i class="ph-house"></i></a>
+        <a class="breadcrumb-item">Home</a>
+        <span class="breadcrumb-item active">Dashboard</span>
+      </div>
+      <a href="#breadcrumb_elements"
+        class="btn btn-light align-self-center d-lg-none border-transparent rounded-pill p-0 ms-auto collapsed"
+        [attr.data-bs-toggle]="'collapse'" aria-expanded="false">
+        <i class="ph-caret-down collapsible-indicator ph-sm m-1"></i>
+      </a>
+    </div>
+
+    <div class="collapse d-lg-block ms-lg-auto" id="breadcrumb_elements">
+      <div class="d-lg-flex mb-2 mb-lg-0">
+        <a (click)="goToConsultaProcessoOfLogged()" title="Lista os processos onde o usuário logado é o interessado."
+          class="d-flex align-items-center text-body py-2 cursor-pointer me-2">
+          <i class="ph-file-text me-2"></i>Meus Processos
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- /page header -->
+
+
+<!-- Content area -->
+<div class="content">
+
+
+  <div class="row">
+    <div class="col-md-6 col-lg-6 col-xl-4 col-xxl-4">
+      <div class="card">
+        <div class="card-header d-flex align-items-center" style="height: 65px;">
+          <h5 class="mb-0">Bem-vindo(a)</h5>
+          <div class="ms-auto">
+            <!--<label class="form-check form-switch form-check-reverse">
+                <input type="checkbox" class="form-check-input" checked="">
+                <span class="form-check-label">Live update</span>
+              </label>-->
+          </div>
+        </div>
+        <div class="card-body " style="min-height:316px;">
+          <h6>Teclas de Atalho:</h6>
+          <div class="mb-3">
+
+            <ul class="list-group">
+              <li class="list-group-item">
+                <i class="ph ph-eye me-2"></i>
+                F1 - Consulta de processo
+              </li>
+              <li class="list-group-item">
+                <i class="ph ph-chat-text me-2"></i>
+                F2 - Despacho de processo
+              </li>
+              <li class="list-group-item">
+                <i class="ph ph-download-simple me-2"></i>
+                F3 - Recebimento de processo
+              </li>
+              <li class="list-group-item">
+                <i class="ph ph-archive-box me-2"></i>
+                F4 - Arquivamento de processo
+              </li>
+              <li class="list-group-item">
+                <i class="ph ph-export me-2"></i>
+                F6 - Encaminhamento de processo
+              </li>
+            </ul>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div #containerFavoritos class="col-md-6 col-lg-6 col-xl-4 col-xxl-4" style="position: relative;">
+      <div class="card">
+        <div class="card-header d-flex align-items-center">
+          <h5 class="mb-0">Processos Favoritos
+            <span class="text-muted fs-sm fw-normal">
+              {{procsFavoritos.length}} de {{limitProcessosFavoritos}}
+            </span>
+          </h5>
+          <div class="d-inline-flex ms-auto">
+            <button (click)="reloadFavoritos()" title="Atualizar" type="button"
+              class="btn btn-flat-primary  btn-icon btn-sm rounded-pill border-transparent me-2">
+              <i class="ph ph-arrows-clockwise"></i>
+            </button>
+            <div class="dropdown">
+              <a class="btn btn-flat-primary btn-icon btn-sm rounded-pill border-transparent "
+                [attr.data-bs-toggle]="'dropdown'" aria-expanded="false">
+                <i class="ph-list"></i>
+              </a>
+              <div class="dropdown-menu dropdown-menu-end " [attr.data-popper-placement]="'bottom-end'">
+                <a (click)="ordernarByDataDesc()" class="dropdown-item cursor-pointer ">
+                  <i class="ph ph-sort-descending me-2"></i>
+                  Ordernar por data desc
+                </a>
+                <a (click)="ordernarByDataAsc()" class="dropdown-item cursor-pointer">
+                  <i class="ph ph-sort-ascending me-2"></i>
+                  Ordernar por data asc
+                </a>
+                <a (click)="ordernarByDescricaoAsc()" class="dropdown-item cursor-pointer">
+                  <i class="ph ph-sort-ascending me-2"></i>
+                  Ordernar por descrição asc
+                </a>
+                <a (click)="ordernarByProcessoAsc()" class="dropdown-item cursor-pointer">
+                  <i class="ph ph-sort-ascending me-2"></i>
+                  Ordernar por processo asc
+                </a>
+                <a (click)="ordernarByProcessoDesc()" class="dropdown-item cursor-pointer">
+                  <i class="ph ph-sort-ascending me-2"></i>
+                  Ordernar por processo desc
+                </a>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- class="card-body " -->
+        <div style="min-height:316px; max-height: 316px;overflow-y: auto;">
+          <!-- <p>Este é o novo Sali em construção... pb-0 style="min-height:440px;" </p> -->
+
+          <!-- <ul class="list-group">
+            <li *ngFor="let fav of favoritos" class="list-group-item">             
+             <span>Processo:</span> {{fav.codProcesso}}/{{fav.anoExercicio}}
+            </li>          
+          </ul> -->
+
+          <!-- <div *ngFor="let fav of favoritos" class="d-flex mb-3">
+            <div class="me-3">
+              <div class="bg-success bg-opacity-10 text-success lh-1 rounded-pill p-2">
+                <i class="ph-star"></i>
+              </div>
+            </div>
+            <div class="flex-fill">
+              Processo:
+              <a href="#/restrito/visualiza-processo/{{fav.anoExercicio}}/{{fav.codProcesso}}?a=67&f=19&m=5&g=1">
+                <span class="fw-semibold">#{{fav.codProcesso}}/{{fav.anoExercicio}} </span>
+              </a>
+              <div class="text-muted fs-sm"> {{ $pipe.date(fav.dataCadastro, 'medium') }}</div>
+            </div>
+          </div> -->
+
+          <div class="list-group list-group-borderless py-2">
+            <!-- <div class="list-group-item fw-semibold">Team leaders</div> -->
+            <div *ngFor="let fav of procsFavoritos" class="list-group-item hstack gap-3">
+              <div class="bg-primary bg-opacity-10 text-primary lh-1 rounded-pill p-2">
+                <i class="ph-star"></i>
+              </div>
+              <div class="flex-fill">
+                <a (click)="irParaProcFavorito(fav)" class="cursor-pointer ">
+                  <div class="fw-semibold">{{fav.codProcesso}}/{{fav.anoExercicio}}
+                    <span> {{fav.nomAssunto}}</span>
+                  </div>
+                </a>
+                <span #fieldDescricao class="text-muted d-inline-block" [(contenteditableModel)]="fav.descricao"
+                  (contenteditableModelSubmit)="atualizaFavorito(fav)" [startEditable]="false">
+                </span>
+                <!-- <span class="text-muted d-inline-block">{{$pipe.date(fav.dataCadastro, 'dd/MM/yyyy')}}</span> -->
+              </div>
+              <div class="align-self-center ms-3">
+                <div class="d-inline-flex">
+                  <a (click)="abilitarEdicaoFavorito(fav, fieldDescricao)" class="text-body cursor-pointer me-3">
+                    <i class="ph ph-pencil-line"></i>
+                  </a>
+                  <a (click)="removeFavorito(fav)" class="text-body cursor-pointer">
+                    <i class="ph ph-trash"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <no-data-component *ngIf="procsFavoritos.isEmpty == true" message="Nenhum processo favorito!">
+          </no-data-component>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-6 col-xl-4 col-xxl-4">
+      <acao-favorita-comp #acaoFavoritaComp [homeLayout]="true"></acao-favorita-comp>
+    </div>
+
+    <div class="col-md-6 col-lg-6 col-xl-4 col-xxl-4">
+      <processos-situacao-comp #processosSituacaoComp></processos-situacao-comp>
+    </div>
+
+    <div class="col-md-6 col-lg-6 col-xl-8 col-xxl-8">
+      <processos-ano-comp #processosAnoComp></processos-ano-comp>
+    </div>
+
+    <!-- <div class="col-md-6 col-lg-6 col-xl-8 col-xxl-8">
+      <processos-classificacao-comp #processosClassificacaoComp></processos-classificacao-comp>
+    </div> -->
+    <div class="col-md-12">
+      <process-setor-primero-tramite-comp #processSetorPrimeroTramiteComp></process-setor-primero-tramite-comp>
+    </div>
+    <div class="col-md-12">
+      <processos-assunto-comp #processosAssuntoComp></processos-assunto-comp>
+    </div>
+
+
+  </div>
+
+  <div class="row">
+  </div>
+
+</div>
+<!-- /content area -->
+<footer-comp></footer-comp>

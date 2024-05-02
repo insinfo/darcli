@@ -1,0 +1,41 @@
+<div class="card">
+    <div class="card-header d-sm-flex align-items-sm-center py-sm-0">
+        <h5 class="py-sm-2 my-sm-1">Encaminhamentos por status <span class="text-muted fs-sm fw-normal">ano atual</span></h5>
+        <div class="d-flex align-items-center gap-2 ms-sm-auto my-sm-auto">
+            <button (click)="reload()" title="Atualizar" type="button"
+                class="btn btn-flat-primary btn-icon btn-sm rounded-pill border-transparent ">
+                <!-- <i class="ph-arrows-left-right"></i> -->
+                <i class="ph ph-arrows-clockwise"></i>
+            </button>          
+            <div class="dropdown">
+                <a class="btn btn-flat-primary btn-icon btn-sm rounded-pill border-transparent "
+                    [attr.data-bs-toggle]="'dropdown'" aria-expanded="false">
+                    <i class="ph-list"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end " [attr.data-popper-placement]="'bottom-end'">                    
+                    <a (click)="downloadAsPng()" class="dropdown-item cursor-pointer">
+                        <i class="ph ph-file-png me-2"></i>
+                        Baixar PNG
+                    </a>      
+                </div>
+            </div>
+            <select [(ngModel)]="mes" class="form-select" >
+                <option [ngValue]="1">Jan</option>    
+                <option [ngValue]="2">Fev</option>  
+                <option [ngValue]="3">Mar</option>  
+                <option [ngValue]="4">Abr</option>  
+                <option [ngValue]="5">Mai</option>  
+                <option [ngValue]="6">Jun</option>   
+                <option [ngValue]="7">Jul</option>  
+                <option [ngValue]="8">Ago</option>  
+                <option [ngValue]="9">Set</option>  
+                <option [ngValue]="10">Out</option>  
+                <option [ngValue]="11">Nov</option>     
+                <option [ngValue]="12">Dez</option>       
+            </select>
+        </div>
+    </div>
+    <div #canvasContainer class="card-body ">
+        <canvas #canvas height="400" width="500"></canvas>
+    </div>
+</div>

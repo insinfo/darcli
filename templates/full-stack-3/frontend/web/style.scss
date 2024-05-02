@@ -1,0 +1,27 @@
+// @import 'blu_theme.scss', 'pink_theme.scss';
+
+@import 'utils.scss';
+@import 'fancytree.scss';
+//@import 'custom_popover.scss';
+
+/// corrige o icone do Limiteles para funcionar com o phosphor 2.0.3
+/// \f31a to .ph-caret-down => \e9fe
+.dropdown-toggle::after {
+  // display: inline-block;
+  // margin-left: .25em;
+  // vertical-align: -.125em;
+  // font-family: var(--icon-font-family);
+  // font-size: 1em;
+  // line-height: 1;
+  content: "\e9fe";
+}
+
+// --body-line-height-computed: calc(1375rem / 1000);
+//    --navbar-brand-image-size: var(--body-line-height-computed);
+.navbar-brand img {
+  //height: calc(1375rem / 1000);
+  height: 1.875rem;
+}
+
+
+

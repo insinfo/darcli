@@ -1,0 +1,99 @@
+<div #card id="DataTables_Table_0_wrapper" class="dataTables_wrapper no-footer">
+    <div class="datatable-header">
+        <div id="DataTables_Table_0_filter" class="dataTables_filter">
+            <div class="form-inline" *ngIf="searchInFields != null && searchInFields.isNotEmpty">
+                <label class="mr-2">{{searchLabel}}:</label>
+
+                <input class="mr-2" type="search" #inputSearchElement
+                    (keypress)="handleSearchInputKeypress($event, inputSearchElement.value)"
+                    placeholder="{{searchPlaceholder}}">
+                <!--[value]="field" [ngValue]="field" width: 12.5rem width: fit-content; padding-right: 1.2rem;  [selected]="field.selected"-->
+                <select #selectSearchField (change)="handleSearchFieldSelectChange($event,selectSearchField.value)"
+                    class="custom-select mr-2" style="width: fit-content; padding-right: 1.7rem;max-width: 12.5rem;">
+                    <option *ngFor="let field of searchInFields; let i = index" value="{{i}}"
+                        [selected]="field.selected">{{field.label}}</option>
+                </select>
+
+                <button type="button" class="btn btn-primary btn-sm "
+                    (click)="onSearch(inputSearchElement.value)">Ok</button>
+            </div>
+        </div>
+        <div class="dataTables_length">
+            <div class="list-icons">
+                <div dropdownmenu="bottom-end" class="dropdown ">
+                    <a class="list-icons-item" [attr.data-toggle]="'dropdown'">
+                        <i class="icon-menu9"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right " style="position: absolute; will-change: transform; top: 0px; left: 0px;
+                     transform: translate3d(0px, 0px, 0px);">
+
+                        <div *ngFor="let col of settings.colsDefinitions" class="dropdown-item form-check ">
+                            <label class="form-check-label">
+                                <div class="uniform-checker">
+                                    <span class="" [class.checked]="col.visibility">
+                                        <input (click)="changeVisibilityOfCol(col)" type="checkbox"
+                                            class="form-input-styled" checked="">
+                                    </span>
+                                </div>
+                                {{col.title}}
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <label><span></span>
+                <select #selectItemsPerPage (change)="changeItemsPerPageHandler(selectItemsPerPage)">
+                    <option *ngFor="let ipp of limitPerPageOptions" value="{{ipp}}"
+                        [selected]="ipp==defaultItemsPerPage">{{ipp}}</option>
+                </select>
+            </label>
+        </div>
+    </div>
+    <div class="datatable-scroll">
+        <div class="dataTables_scroll" style="position: relative; overflow: auto;  width: 100%;">
+            <!-- table-striped-->
+            <table #table class="table table-hover no-footer" role="grid">
+                <thead>
+                    <tr role="row">
+                        <th *ngIf="showCheckboxToSelectRow" class="datatable-first-col">
+                            <input (click)="onSelectAll($event)" type="checkbox" autocomplete="off" tabindex="-1">
+                        </th>
+                        <th #th1 *ngFor="let colDef of settings.colsDefinitions" [class.sorting]="colDef.enableSorting" 
+                            [class.hide]="!colDef.visibility" (click)="onOrder(colDef,th1)" [attr.data-key]="colDef.key"
+                            tabindex="0">{{colDef.title}}
+                           <!-- <a [class.cursor-pointer]="colDef.enableSorting">{{colDef.title}}</a>-->
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- [class.odd]="i % 2 == 0" [class.even]="i % 2 != 0" -->
+                    <tr role="button" class="cursor-pointer" *ngFor="let row of rows; let i = index"
+                        (click)="rowClickHandler(row)" [attr.data-index]="row.index.toString()">
+                        <td *ngIf="showCheckboxToSelectRow" class="datatable-first-col"
+                            (click)="$event.stopPropagation()">
+                            <input #selectcheckbox (click)="onSelect($event, row)" type="checkbox"
+                                [checked]="row.selected" autocomplete="off" tabindex="-1">
+                        </td>
+
+                        <td *ngFor="let column of row.columns" class="sorting_1" [class.hide]="!column.visibility"
+                            [safeInnerHtml]="column.value">
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="datatable-footer">
+        <div class="dataTables_info" role="status" aria-live="polite">
+            Mostrando de {{dataTableFilter.offset}} a {{getCurrentTotalItems}} de
+            {{totalRecords}} entradas
+        </div>
+        <div class="dataTables_paginate paging_simple_numbers">
+            <a *ngFor="let pagPrevBtn of paginationItems" [class]="pagPrevBtn.cssClass" (click)="pagPrevBtn.action()"
+                tabindex="0">{{pagPrevBtn.label}}
+            </a>
+        </div>
+    </div>
+</div>

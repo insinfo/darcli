@@ -1,0 +1,72 @@
+<div class="page-header" >
+  <div class="page-header-content d-lg-flex">
+      <div class="d-flex">
+          <h4 class="page-title mb-0">
+            Alterar - <span class="fw-normal">Senha</span>
+          </h4>
+          <a href="#page_header"
+              class="btn btn-light align-self-center collapsed d-lg-none border-transparent rounded-pill p-0 ms-auto"
+              [attr.data-bs-toggle]="'collapse'">
+              <i class="ph-caret-down collapsible-indicator ph-sm m-1"></i>
+          </a>
+      </div>
+      <div class="collapse d-lg-block my-lg-auto ms-lg-auto" id="page_header">
+          <div class="d-sm-flex align-items-center mb-3 mb-lg-0 ms-lg-3 gap-3">
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="content d-flex justify-content-center align-items-center">
+
+  <form (ngSubmit)="trocaSenha()" autocomplete="off" class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-8 col-xxl-6">
+    <div class="card mb-0">
+      <div class="card-body">
+        <div class="text-center mb-3">
+          <div class="d-inline-flex bg-primary bg-opacity-10 text-primary lh-1 rounded-pill p-3 mb-3 mt-1">
+            <i class="ph-key ph-2x"></i>
+          </div>
+          <h5 class="mb-0">Alterar Senha</h5>
+          <span class="d-block text-muted"></span>
+        </div>
+        <div class="row">        
+          <div class="col-md-6 mb-3" >
+            <label class="form-label">Senha Atual:*</label>
+            <div class="form-control-feedback form-control-feedback-start">
+              <input [(ngModel)]="senhaAtual" autoComplete="new-password" type="password" class="form-control">
+              <div class="form-control-feedback-icon">
+                <i class="ph-key text-muted"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Nova Senha:*</label>
+            <div class="form-control-feedback form-control-feedback-start">
+              <input [(ngModel)]="novaSenha" autoComplete="new-password" type="password" class="form-control">
+              <div class="form-control-feedback-icon">
+                <i class="ph-key text-muted"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Confirmação Nova Senha:*</label>
+            <div class="form-control-feedback form-control-feedback-start">
+              <input [(ngModel)]="confirmacaoSenha" autoComplete="new-password" type="password" class="form-control">
+              <div class="form-control-feedback-icon">
+                <i class="ph-key text-muted"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">
+          <i class="ph-arrow-counter-clockwise me-2"></i>
+          Alterar
+        </button>
+      </div>
+    </div>
+  </form>
+
+
+
+
+</div>

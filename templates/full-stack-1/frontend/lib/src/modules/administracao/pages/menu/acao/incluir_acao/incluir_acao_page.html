@@ -1,0 +1,95 @@
+<!-- Page header -->
+<div class="page-header page-header-light shadow">
+    <div class="page-header-content d-lg-flex">
+        <div class="d-flex">
+            <h4 class="page-title mb-0">
+                Administração - <span class="fw-normal">Incluir Ação</span>
+            </h4>            
+        </div>
+    </div>
+    <div class="page-header-content d-lg-flex border-top">
+        <div class="d-flex">
+            <div class="breadcrumb py-2">
+                <a href="#/restrito" class="breadcrumb-item"><i class="ph-house"></i></a>
+                <a class="breadcrumb-item">Gestão Administrativa</a>
+                <a class="breadcrumb-item">Administração</a>
+                <a class="breadcrumb-item">Ação</a>
+                <span class="breadcrumb-item active">Incluir Ação</span>
+            </div>
+        </div>
+        <div class="collapse d-lg-block ms-lg-auto">
+            <div class="d-lg-flex mb-2 mb-lg-0">
+                <acao-favorita-comp></acao-favorita-comp>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /page header -->
+
+<div #container class="content">
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- Basic layout-->
+            <div class="card">
+                <div class="card-header header-elements-inline">
+                    <h5 class="mb-0">Incluir Ação</h5>
+                    <p>
+                        Ação é um item que aparece no menu, a Ação é filho de Funcionalidade que é filho de Modulo que é filho de Gestão.
+                    </p>
+                </div>
+                <div class="card-body">
+                    <form (ngSubmit)="salvar()" novalidate>
+                        <div class="row">
+                            <div class="col-md-3 form-group mb-2">
+                                <label class="form-label">Modulo:</label>
+                                <select  [(ngModel)]="moduloSel" class="form-select">
+                                    <option *ngFor="let modulo of modulos" [ngValue]="modulo">{{modulo.nomModulo}}</option>                                    
+                                </select>
+                            </div>
+                            <div class="col-md-3 form-group mb-2">
+                                <label class="form-label">Funcionalidade:</label>
+                                <select  [(ngModel)]="funcionalidadeSel" class="form-select">
+                                    <option *ngFor="let funcionalid of funcionalidades" [ngValue]="funcionalid">{{funcionalid.nomFuncionalidade}}</option>                                    
+                                </select>
+                            </div>
+                            <div class="col-md-6 form-group mb-2">
+                                <label class="form-label">Nome:*</label>
+                                <input [(ngModel)]="acao.nomAcao" type="text" class="form-control " required>
+                            </div>
+                            <div class="col-md-6 form-group mb-2">
+                                <label class="form-label">Parametro:</label>
+                                <input [(ngModel)]="acao.parametro" type="text" class="form-control " required>
+                            </div>
+                            <div class="col-md-6 form-group mb-2">
+                                <label class="form-label">Complemento:</label>
+                                <input [(ngModel)]="acao.complementoAcao" type="text" class="form-control "
+                                    >
+                            </div>
+                            <div class="col-md-6 form-group mb-2">
+                                <label class="form-label">Ordem:*</label>
+                                <input [(ngModel)]="acao.ordem" type="number" class="form-control " required>
+                            </div>
+                            <div class="col-md-3 form-group mb-2">
+                                <label class="form-label">Habilitada:</label>
+                                <select [(ngModel)]="acao.habilitada" class="form-select">
+                                    <option [ngValue]="null">Selecione</option>
+                                    <option [ngValue]="'Sim'">Sim</option>
+                                    <option [ngValue]="'Não'">Não</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="text-end">
+                            <button class="btn btn-primary btn-labeled btn-labeled-start" type="submit">
+                                <span class="btn-labeled-icon bg-black bg-opacity-20">
+                                    <i class="ph ph-floppy-disk"></i>
+                                </span>
+                                Salvar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

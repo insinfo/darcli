@@ -1,0 +1,166 @@
+<div class="content d-flex justify-content-center align-items-center">
+
+    <div *ngIf="step == 0" class="d-flex flex-row flex-wrap justify-content-center gap-3">
+        <div (click)="irParaCadastro('Candidato')"
+            class="btn card d-flex flex-column justify-content-center align-items-center p-4 cursor-pointer">
+            <i class="ph ph-users ph-4x "></i>
+            <h3 class="text-uppercase">Para o Candidato</h3>
+            <p>Se candidatar às vagas disponíveis</p>
+        </div>
+        <div (click)="irParaCadastro('Empregador')"
+            class="btn card d-flex flex-column justify-content-center align-items-center p-4 ">
+            <i class="ph ph-buildings ph-4x "></i>
+            <h3 class="text-uppercase">Para o Empregador</h3>
+            <p>Solicitação de mão de obra</p>
+        </div>
+
+    </div>
+
+    <form *ngIf="step == 1" class="flex-fill" novalidate #cadastroForm="ngForm" (ngSubmit)="salvar(cadastroForm)"
+        (keydown.enter)="$event.preventDefault()">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <div class="card mb-0">
+                    <div class="card-body">
+                        <div class="text-center mb-3">
+                            <h5 class="mb-0">Criar conta</h5>
+                            <span class="d-block text-muted">Todos os campos são necessários</span>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 col-xxl-2 mb-3">
+                                <label class="form-label">Tipo</label>
+                                <select [(ngModel)]="usuario.tipo" name="new-tipo" class="form-select" disabled>
+                                    <option [ngValue]="'Candidato'">Candidato</option>
+                                    <option [ngValue]="'Empregador'">Empregador</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 col-xxl-2 mb-3">
+                                <label class="form-label">Tipo Pessoa</label>
+                                <select [(ngModel)]="usuario.tipoPessoa" name="new-tipo" class="form-select"  
+                                ngControl="tipoPessoa" customRequired [disabled]="usuario.isCandidato">
+                                    <option [ngValue]="'fisica'">fisica</option>
+                                    <option [ngValue]="'juridica'">juridica</option>
+                                </select>
+                            </div>
+                            
+                            <div class="col-md-4 col-xxl-3 mb-3">
+                                <label class="form-label" [innerText]="usuario.isCandidato ? 'CPF' : 'CNPJ'">CPF</label>
+                                <div class="form-control-feedback form-control-feedback-start">
+                                    <input [(ngModel)]="usuario.login" name="new-login"
+                                        [mask]="usuario.isCandidato ? 'xxx.xxx.xxx-xx' : 'xx.xxx.xxx/xxxx-xx' "
+                                        type="text" class="form-control" ngControl="login"
+                                        [customRequired]="usuario.isCandidato ? 'CPF inválido!' : 'CNPJ inválido!' "
+                                        [customRequiredType]="usuario.isCandidato ? 'cpf' : 'cnpj' ">
+                                    <div class="form-control-feedback-icon">
+                                        <i class="ph-identification-card text-muted"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5 col-xxl-5 mb-3">
+                                <label class="form-label">Nome</label>
+                                <div class="form-control-feedback form-control-feedback-start">
+                                    <input [(ngModel)]="usuario.nome" name="new-nome" type="text" class="form-control"
+                                        ngControl="nome" customRequired>
+                                    <div class="form-control-feedback-icon">
+                                        <i class="ph-user-circle-plus text-muted"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Senha</label>
+                                    <div class="form-control-feedback form-control-feedback-start">
+                                        <!--•••••••••••-->
+                                        <input [(ngModel)]="usuario.chave" name="new-senha" ngControl="senha"
+                                            customRequired type="password" class="form-control">
+                                        <div class="form-control-feedback-icon">
+                                            <i class="ph-lock text-muted"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Repetir Senha</label>
+                                    <div class="form-control-feedback form-control-feedback-start">
+                                        <input [(ngModel)]="usuario.repeteChave" type="password" class="form-control"
+                                            name="new-repetir-senha" ngControl="repetirSenha" customRequired>
+                                        <div class="form-control-feedback-icon">
+                                            <i class="ph-lock text-muted"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Seu email</label>
+                                    <div class="form-control-feedback form-control-feedback-start">
+                                        <input [(ngModel)]="usuario.email" type="email" class="form-control"
+                                            name="new-email" ngControl="email" customRequired>
+                                        <div class="form-control-feedback-icon">
+                                            <i class="ph-at text-muted"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Repita o email</label>
+                                    <div class="form-control-feedback form-control-feedback-start">
+                                        <input [(ngModel)]="usuario.repeteEmail" type="email" class="form-control"
+                                            name="new-repetir-email" ngControl="repitaEmail" customRequired>
+                                        <div class="form-control-feedback-icon">
+                                            <i class="ph-at text-muted"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 mb-3">
+                                <label class="form-label">Telefone</label>
+                                <div class="form-control-feedback form-control-feedback-start">
+                                    <input  [(ngModel)]="usuario.telefone" type="tel" class="form-control" placeholder="(XX) XXXXX-XXXX"
+                                        name="new-telefone" ngControl="telefone" customRequired>
+                                    <div class="form-control-feedback-icon">
+                                        <i class="ph-phone text-muted"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div>
+                                        <label class="form-check">
+                                            <input type="checkbox" name="remember" class="form-check-input">
+                                            <span class="form-check-label">Aceitar os termos</span>
+                                        </label>
+                                    </div> -->
+                    </div>
+
+                    <div class="card-body text-end border-top">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="ph-plus me-2"></i>
+                            Cadastrar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div *ngIf="step == 2" class="container p-3">
+        <div class="d-flex flex-column justify-content-center align-items-center">
+            <h1 class="fit-content-width" [innerText]="'Cadastro realizado com sucesso!'"></h1>
+            <p>Um email de confirmação foi enviado para {{usuario.email}},
+                entre na sua caixa de e-mail e clique no link de confirmação para ativar seu cadastro.</p>
+            <button (click)="irParaLogin()" type="button" class="btn btn-flat-primary border-transparent  mt-2">
+                Fazer login
+            </button>
+        </div>
+    </div>
+</div>

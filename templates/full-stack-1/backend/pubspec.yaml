@@ -1,0 +1,55 @@
+name: new_sali_backend
+description: Backend 
+
+environment:  
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies: 
+  angel3_framework: ^7.0.0    
+  angel3_configuration: any  
+  angel3_production: any
+  angel3_static: any 
+  belatuk_pretty_logging: any
+  uuid: any
+  dotenv: any
+  intl: any
+  http:  any
+  path: any
+  jaguar_jwt: any
+  crypto: any
+  xml: any
+  csslib: any
+  
+  dart_pdf:
+   git:
+    url: https://github.com/insinfo/insinfo_dart_pdf
+    ref: main    #branch name  
+  asn1lib: any
+  pointycastle: any
+  basic_utils: any
+  image: any  
+  convert: any
+  
+  shared_map: ^1.1.6
+  native_synchronization: ^0.2.0
+
+     
+  eloquent: ^2.1.2
+
+  new_sali_core:
+    path: ../core
+  
+  shelf: any 
+  shelf_router: any 
+  prometheus_client_shelf: any
+  
+  shelf_swagger_ui: any
+  ffi: any
+
+dev_dependencies: 
+  angel3_hot: any
+  angel3_test: any
+  test: any  
+  puppeteer: 2.23.0
+ 
+

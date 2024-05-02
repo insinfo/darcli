@@ -1,0 +1,39 @@
+<!-- Content area -->
+<div class="content d-flex justify-content-center align-items-center">
+    <div class="login-form">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Andamento dos Processos</h5>
+            </div>
+            <div class="card-body border-top">
+                <div class="mb-3">
+                    <label class="form-label">Processo:</label>
+                    <input type="text" value="{{processo.numeroProcessoFormatado}}" class="form-control" disabled>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Último trâmite:</label>
+                    <div class="form-control" >
+                       {{processo.nomUnidade}} <br>
+                       {{processo.nomSetor}} 
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Data último trâmite:</label>
+                    <input type="text" value="{{processo.dataUltimoAndamentoFormatada}}" class="form-control" disabled>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Situação:</label>
+                    <input type="text" value="{{processo.nomSituacao}}" class="form-control" disabled>
+                </div>
+                <div class="text-end mb-3">
+                    <button (click)="irParaNovaConsulta()" type="button" class="btn btn-primary">
+                        Nova Consulta <!-- <i class="ph-paper-plane-tilt ms-2"></i> -->
+                    </button>
+                </div>
+                <div class="text-center mb-3">
+                    <span class="text-muted">As informações sobre processos são providas pelo Protocolo Geral</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

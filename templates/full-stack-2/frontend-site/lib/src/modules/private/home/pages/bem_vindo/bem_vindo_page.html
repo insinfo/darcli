@@ -1,0 +1,24 @@
+<div class="container ">
+    <!--mt-4-->
+    <h1 class="text-header">Bem-vindo à plataforma de acesso à informação</h1>
+    <ul class="mt-3">
+        <li>
+            <a [routerLink]="RoutePaths.criaSolicitacao.toUrl()" [routerLinkActive]="'link-active'">
+                <img src="imagens/nova-manifestacao.png">
+                <p>Registre a sua solicitação.</p>
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="RoutePaths.listaSolicitacao.toUrl()" [routerLinkActive]="'link-active'">
+                <img src="imagens/minhas-manifestacoes.png">
+                <p>Consulte o andamento de suas manifestações.</p>
+            </a>
+        </li>
+        <li>
+            <a (click)="irParaCadastro()">
+                <img src="imagens/meu-usuario.png">
+                <p>Visualize e altere seus dados cadastrais no sistema.</p>
+            </a>
+        </li>
+    </ul>
+</div>

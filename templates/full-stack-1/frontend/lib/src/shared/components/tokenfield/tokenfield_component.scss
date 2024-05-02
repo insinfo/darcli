@@ -1,0 +1,18 @@
+.tokenfield-input {
+    width: 100%;
+    max-width: 100%;
+    min-width: 60px;
+    //padding: 0;
+    //position: relative;
+
+}
+
+.tokenfield {
+    z-index: 1;
+}
+
+//.tokenfield-set-item
+.selected {
+    color: var(--tf-tag-hover-color);
+    background-color: var(--tf-tag-hover-bg);
+}

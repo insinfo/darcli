@@ -1,0 +1,128 @@
+<div class="page-header" *ngIf="insideModal == false">
+    <div class="page-header-content d-lg-flex">
+        <div class="d-flex">
+            <h4 class="page-title mb-0">
+                Consultar - <span class="fw-normal">Candidato</span>
+            </h4>
+            <a href="#page_header"
+                class="btn btn-light align-self-center collapsed d-lg-none border-transparent rounded-pill p-0 ms-auto"
+                [attr.data-bs-toggle]="'collapse'">
+                <i class="ph-caret-down collapsible-indicator ph-sm m-1"></i>
+            </a>
+        </div>
+
+        <div class="collapse d-lg-block my-lg-auto ms-lg-auto" id="page_header">
+            <div class="d-flex flex-wrap align-items-center mb-3 mb-lg-0 ms-lg-3 gap-2 ">
+                <a href="#/candidatos/new" class="btn btn-primary cursor-pointer ">
+                    <i class="ph-file-plus me-2"></i>
+                    Cadastrar
+                </a>
+                <button #btnExcluir (click)="excluir()" type="button" class="btn btn-outline-primary">
+                    <i class="ph-trash me-2"></i>
+                    Excluir
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div #container class="content  pt-0" [class.content]="insideModal == false">
+    <div class="card" [class.card]="insideModal == false">
+        <div class="pt-3 pe-3 ps-3">
+            <form novalidate (keydown.enter)="$event.preventDefault()">
+                <div class="row">
+                    <div class="col-md-12 d-flex align-items-end flex-wrap gap-2"
+                        title="Combinar a vaga selecionada com">
+                        <div *ngIf="insideModal == false" class="form-group" title="filtrar por vaga">
+                            <!-- <label class="form-label">Filtro vaga:</label> -->
+                            <div class="form-control-feedback form-control-feedback-end flex-grow-1">
+                                <input (click)="openModalVaga()" value="{{filtro.nomeVaga}}"
+                                    placeholder="Clique para filtrar por vaga" type="text" class="form-control"
+                                    readonly>
+                                <div class="form-control-feedback-icon">
+                                    <i (click)="clearFiltros()" title="Limpar filtro de vaga"
+                                        class="ph ph-broom cursor-pointer"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <!--form-check-inline-->
+                        <div class="form-check  form-switch">
+                            <input [(ngModel)]="filtro.matchCargo" (change)="onChangeMatchFiltro()"
+                                ngControl="matchCargo" name="matchCargo" type="checkbox" class="form-check-input">
+                            <label class="form-check-label">Cargo</label>
+                        </div>
+                        <div class="form-check  form-switch">
+                            <input [(ngModel)]="filtro.matchExperiencia" (change)="onChangeMatchFiltro()"
+                                ngControl="matchExperiencia" name="matchExperiencia" type="checkbox"
+                                class="form-check-input"
+                                [disabled]="filtro.matchCargo == null || filtro.matchCargo == false">
+                            <label class="form-check-label">Experiência</label>
+                        </div>
+                        <div class="form-check  form-switch">
+                            <input [(ngModel)]="filtro.matchEscolaridade" (change)="onChangeMatchFiltro()"
+                                ngControl="matchEscolaridade" name="matchEscolaridade" type="checkbox"
+                                class="form-check-input">
+                            <label class="form-check-label">Escolaridade</label>
+                        </div>
+                        <div class="form-check  form-switch">
+                            <input [(ngModel)]="filtro.matchFumante" (change)="onChangeMatchFiltro()"
+                                ngControl="matchFumante" name="matchFumante" type="checkbox" class="form-check-input">
+                            <label class="form-check-label">Fumante</label>
+                        </div>
+                        <div class="form-check  form-switch">
+                            <input [(ngModel)]="filtro.matchIdade" (change)="onChangeMatchFiltro()"
+                                ngControl="matchIdade" name="matchIdade" type="checkbox" class="form-check-input">
+                            <label class="form-check-label">Idade</label>
+                        </div>
+                        <div class="form-check  form-switch"
+                            title="Filtrar candidato que coincida com a exigência de Pessoa com Deficiência se houver">
+                            <input [(ngModel)]="filtro.matchPcd" (change)="onChangeMatchFiltro()" ngControl="matchPcd"
+                                name="matchPcd" type="checkbox" class="form-check-input">
+                            <label class="form-check-label">PCD</label>
+                        </div>
+                        <div class="form-check  form-switch"
+                            title="Filtrar candidato que coincida com a exigência Específica de Homem ou Mulher se houver">
+                            <input [(ngModel)]="filtro.matchSexo" (change)="onChangeMatchFiltro()" ngControl="matchSexo"
+                                name="matchSexo" type="checkbox" class="form-check-input">
+                            <label class="form-check-label">Sexo</label>
+                        </div>
+                        <div class="form-check  form-switch"
+                            title="Filtrar candidato que coincida com a exigência Específica de Identidade de Genero se houver">
+                            <input [(ngModel)]="filtro.matchGenero" (change)="onChangeMatchFiltro()"
+                                ngControl="matchGenero" name="matchGenero" type="checkbox" class="form-check-input">
+                            <label class="form-check-label">Genero</label>
+                        </div>
+                        <div class="form-check  form-switch"
+                            title="Filtrar candidato que coincida com a exigência de Conhecimentos Extras se houver">
+                            <input [(ngModel)]="filtro.matchConhecimentosExtras" (change)="onChangeMatchFiltro()"
+                                ngControl="matchConhecimentosExtras" name="matchConhecimentosExtras" type="checkbox"
+                                class="form-check-input">
+                            <label class="form-check-label">Conhecimentos Extras</label>
+                        </div>
+                        <div class="form-check  form-switch">
+                            <input [(ngModel)]="filtro.matchCurso" (change)="onChangeMatchFiltro()"
+                                ngControl="matchCurso" name="matchCurso" type="checkbox" class="form-check-input">
+                            <label class="form-check-label">Curso</label>
+                        </div>
+                        <!-- <div class="form-check  form-switch" title="Filtrar candidatos que estão com cadastro atualizado (Em dia menos de 1 ano)">
+                            <input [(ngModel)]="filtro.matchValidadeCadastro" (change)="onChangeMatchFiltro()"
+                                ngControl="matchValidadeCadastro" name="matchValidadeCadastro" type="checkbox" class="form-check-input">
+                            <label class="form-check-label">Status</label>
+                        </div> -->
+
+                    </div>
+                </div>
+            </form>
+        </div>
+        <datatable-component #datatable [dataTableFilter]="filtro" [data]="items" [settings]="dtSettings"
+            [searchInFields]="sInFields" (dataRequest)="onDtRequestData($event)" (onRowClick)="onSelectItem($event)"
+            [showCheckboxToSelectRow]="insideModal == false"></datatable-component>
+    </div>
+</div>
+
+
+<custom-modal #modalVaga [start-open]="false" title-text="Selecione Vaga" size="modal-full"
+    [enableModalBodyClass]="false" headerColor="primary">
+    <lista-vaga-page #listaVaga [insideModal]="true" [filtroBloqueioEncaminhamento]="false"
+        (onSelect)="onSelectVaga($event)"></lista-vaga-page>
+</custom-modal>

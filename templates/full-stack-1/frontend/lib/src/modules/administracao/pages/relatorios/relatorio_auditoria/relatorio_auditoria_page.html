@@ -1,0 +1,96 @@
+<div class="page-header page-header-light shadow">
+    <div class="page-header-content d-lg-flex">
+        <div class="d-flex">
+            <h4 class="page-title mb-0">
+                Administração - <span class="fw-normal">Relatório de Auditoria</span>
+            </h4>
+        </div>
+
+    </div>
+    <div class="page-header-content d-lg-flex border-top">
+        <div class="d-flex">
+            <div class="breadcrumb py-2">
+                <a class="breadcrumb-item"><i class="ph-house"></i></a>
+                <a class="breadcrumb-item">Administração </a>
+                <span class="breadcrumb-item active">Relatório de Auditoria</span>
+            </div>
+        </div>
+        <div class="collapse d-lg-block ms-lg-auto">
+            <div class="d-lg-flex mb-2 mb-lg-0">
+                <acao-favorita-comp></acao-favorita-comp>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div #container class="content">
+    <!-- Filtros -->
+    <div class="card">
+        <div class="pt-3 ps-3 pe-3 ">
+            <form>
+                <div class="row">
+                    <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-3 form-group mb-2">
+                        <label class="form-label">Módulo:</label>
+                        <!-- [(ngModel)]="filtrosAuditoria.codModulo"-->
+                        <custom-select (currentValueChange)="onSelectModulo($event)" [title]="'Modulos'"
+                            [dataSource]="modulos" labelKey="nom_modulo">
+                        </custom-select>
+                    </div>
+                    <div class="col-md-4 col-lg-4 col-xl-4 col-xxl-3 form-group mb-2">
+                        <label class="form-label">Usuário:</label>
+                        <input #inputUsuario (click)="openModalUsuario()" readonly type="text"
+                            placeholder="Clique para buscar..." class="form-control ">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3  form-group mb-2">
+                        <label class="form-label">Período inicio:</label>
+                        <input [(ngModel)]="filtrosAuditoria.inicio" type="date" class="form-control">
+                    </div>
+                    <div class="col-md-3  form-group mb-2">
+                        <label class="form-label">Período fim:</label>
+                        <input [(ngModel)]="filtrosAuditoria.fim" type="date" class="form-control">
+                    </div>
+
+                    <div class="col-md-3 col-xxl-2 form-group mb-2">
+                        <label class="form-label">Ordenar:</label>
+                        <select [(ngModel)]="filtrosAuditoria.orderBy" name="orderby" class="form-select">
+                            <option value="acao.nom_acao" selected="">Ação</option>
+                            <option value="auditoria.timestamp">Data</option>
+                            <option value="funcionalidade.nom_funcionalidade">Funcionalidade</option>
+                            <option value="modulo.nom_modulo">Módulo</option>
+                            <option value="usuario.username">Usuário</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 col-xxl-4 d-flex align-items-end justify-content-end mb-2 gap-2">
+                        <button (click)="imprimirRelatorioAuditoria()" class="btn btn-primary btn-labeled btn-labeled-start" type="button"
+                            title="Imprimir Relatório">
+                            <span class="btn-labeled-icon bg-black bg-opacity-20">
+                                <i class="ph ph-printer"></i>
+                            </span>
+                            Imprimir
+                        </button>
+                        <button (click)="salvarRelatorioAuditoria()" class="btn btn-primary btn-labeled btn-labeled-start" type="button"
+                            title="Salvar Relatório">
+                            <span class="btn-labeled-icon bg-black bg-opacity-20">
+                                <i class="ph ph-floppy-disk"></i>
+                            </span>
+                            Salvar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <datatable-component [dataTableFilter]="filtrosAuditoria" [data]="auditorias" [settings]="dtsAuditoria"
+            [searchInFields]="dtAuditoriaSearchIn" [limitPerPageOptions]="limitPerPageOptions"
+            (dataRequest)="onDtAuditoriaRequestData($event)"  [showCheckboxToSelectRow]="false"></datatable-component>
+    </div>
+
+</div>
+
+<custom-modal #modalUsuario [start-open]="false" title-text="Usuário" size="large" headerColor="primary">
+    <datatable-component #datatableUsuario [dataTableFilter]="filtrosUsuarios" [data]="usuarios" [settings]="dtsUsuario"
+        [searchInFields]="dtUsuarioSearchIn" (dataRequest)="onDtUsuarioRequestData($event)"
+        (onRowClick)="onSelectUsuario($event)" [showCheckboxToSelectRow]="false"></datatable-component>
+</custom-modal>

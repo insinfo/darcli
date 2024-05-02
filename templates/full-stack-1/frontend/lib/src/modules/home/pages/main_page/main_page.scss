@@ -1,0 +1,33 @@
+:host {
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+.main-footer-height-default{
+  height: 59px;
+}
+
+.main-footer-height-expanded{
+  height: 18.75rem;
+}
+// .dual-listbox {
+//   --dlb-height: 18.75rem;
+// }
+
+.dual-listbox-height-auto {
+  --dlb-height: auto;
+}
+
+// .dual-listbox .dual-listbox__available, .dual-listbox .dual-listbox__selected {
+//   border: var(--border-width) solid var(--border-color);
+//   height: var(--dlb-height);
+//   overflow-y: auto;
+//   padding: var(--spacer-2) 0;
+//   margin-top: 0;
+//   margin-bottom: 0;
+//   -webkit-margin-before: 0;
+//   border-bottom-right-radius: var(--border-radius);
+//   border-bottom-left-radius: var(--border-radius);
+// }

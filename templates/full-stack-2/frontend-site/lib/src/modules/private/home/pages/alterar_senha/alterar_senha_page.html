@@ -1,0 +1,36 @@
+<div #page *ngIf="!isResetPass" class="container ">
+    <form (ngSubmit)="trocaSenha()" novalidate>
+        <h1 class="text-header">Formulário de troca de senha</h1>
+        <div class="row mt-3">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-label-custom">Informe seu CPF ou CNPJ:*</label>
+                    <input [(ngModel)]="cpfOrCnpj" type="text" name="cpfOrCnpj" class="form-textarea-custom" required>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-label-custom">Senha Atual:*</label>
+                    <input [(ngModel)]="senhaAtual" type="password" name="cpfOrCnpj" class="form-textarea-custom" required>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-label-custom">Nova senha:*</label>
+                    <input [(ngModel)]="novaAtual" type="password" name="cpfOrCnpj" class="form-textarea-custom" required>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between mt-4 mb-4">
+            <button type="submit" class="btn-custom fit-content-width">Salvar</button>
+        </div>
+    </form>
+</div>
+
+<div *ngIf="isResetPass" class="container p-3">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+        <h1 class="fit-content-width text-center">Sua senha foi trocada com sucesso. </h1>
+          <!-- A nova senha foi enviada para o seu e-mail:<br> email</h1>--> 
+        <button (click)="irParaInicio()" type="button" class="btn-custom fit-content-width mt-2">ir para inicio</button>
+    </div>
+</div>

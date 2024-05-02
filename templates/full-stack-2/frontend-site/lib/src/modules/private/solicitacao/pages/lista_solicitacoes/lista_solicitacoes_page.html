@@ -1,0 +1,24 @@
+<div #page class="container">
+    <h1 class="text-header">Minhas Manifestações</h1>
+    <div class="card-body">
+        <div class="d-flex flex-row justify-content-between align-items-center flex-nowrap">
+
+            <span style="font-size: 1.1875rem;"></span>
+            <select (change)="selectFiltroSituacaoChange($event)" class="form-control fit-content-width"
+                style="cursor: pointer;" title="Filtrar por situação">
+                <option value="Todos" selected>Todos</option>
+                <option value="A+T" >Aberto/Tramitação</option>
+                <option value="A">Aberto</option>
+                <option value="T">Tramitação</option>
+                <option value="N">Negado</option>
+                <option value="R">Respondido</option>
+            </select>
+
+
+        </div>
+    </div>
+    <div class="card card-shadow">
+        <datatable-component [data]="solicitacoes" [settings]="datatableSettings" [searchInFields]="searchInFields"
+            (dataRequest)="onRequestData($event)" (onRowClick)="onRowClick($event)" [showCheckboxToSelectRow]="false"></datatable-component>
+    </div>
+</div>

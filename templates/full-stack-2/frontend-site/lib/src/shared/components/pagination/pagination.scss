@@ -1,0 +1,15 @@
+.page-item.active .page-link {
+    background-color: #4286f4c5;
+    &:hover {
+       background-color: #4285f4;
+       color: #eee;
+    }
+}
+
+.item {
+    width: 50px;
+}
+
+ul {
+    margin: 20px;
+}

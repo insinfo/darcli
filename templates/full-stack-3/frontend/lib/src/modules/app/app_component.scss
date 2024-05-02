@@ -1,0 +1,8 @@
+//tem colocar este CSS para funcionar a rolagem nas paginas internas
+:host {
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }

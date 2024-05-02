@@ -1,0 +1,22 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: "app-producao"
+    scheme: https
+    authorization:
+        type: Bearer
+        credentials: testetoken
+    tls_config:
+      insecure_skip_verify: true
+    # Esse valor irá sobreescrever o valor padrão global para esse alvo
+    #scrape_interval: 5s    
+    metrics_path: /salibackend/metrics
+    static_configs:    
+      - targets: ["app.site.com"]
+
+  - job_name: "app-local"      
+    #metrics_path: /metrics    
+    static_configs:
+      - targets: ["192.168.66.123:3350"]
+     

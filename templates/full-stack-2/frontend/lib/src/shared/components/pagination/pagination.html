@@ -1,0 +1,29 @@
+<ul class="pagination-flat justify-content-center twbs-prev-next pagination">
+    <li class="page-item first" *ngIf="totalRecords > filters.limit" >
+        <a class="page-link" #firstButton (click)="firstPage($event)">
+            <i class="icon-arrow-left16"></i>
+        </a>
+    </li>
+
+    <li class="page-item prev">
+        <a class="page-link" #prevButton (click)="prevPage($event)">
+            <i class="icon-arrow-left12"></i>
+        </a>
+    </li>
+
+    <li class="page-item item" *ngFor="let item of paginationItems" [class.active]="item.isActive">
+        <a class="page-link" (click)="item.action()">{{item.label}}</a>
+    </li>
+
+    <li class="page-item next">
+        <a class="page-link" #nextButton (click)="nextPage($event)">
+            <i class="icon-arrow-right13"></i>
+        </a>
+    </li>
+
+    <li class="page-item last" *ngIf="totalRecords > filters.limit" >
+        <a class="page-link" #lastButton (click)="lastPage($event)">
+            <i class="icon-arrow-right16"></i>
+        </a>
+    </li>
+</ul>

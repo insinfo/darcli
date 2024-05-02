@@ -1,0 +1,1 @@
+const String BANCO_EMPREGO = 'BANCO DE EMPREGO';

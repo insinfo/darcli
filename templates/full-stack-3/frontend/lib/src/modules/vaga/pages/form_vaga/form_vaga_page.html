@@ -1,0 +1,404 @@
+<div class="page-header">
+    <div class="page-header-content  d-lg-flex">
+        <div class="d-flex">
+            <div class="page-title ">
+                <div class="d-inline-flex align-items-center">
+                    <i (click)="back()" class="ph-arrow-circle-left me-2 cursor-pointer"></i>
+                    <h5 class="mb-0">Cadastro</h5>
+                </div>
+                <span class="page-subtitle d-inline-block align-text-bottom text-muted">Vaga</span>
+            </div>
+            <!-- <h4 class="page-title mb-0 d-inline-flex align-items-center">
+                <span (click)="back()" class="ph-arrow-circle-left me-2"></span>
+                Cadastro -
+                <span class="fw-normal ms-1">Grupo</span>
+            </h4> -->
+            <a href="#page_header"
+                class="btn btn-light align-self-center collapsed d-lg-none border-transparent rounded-pill p-0 ms-auto"
+                [attr.data-bs-toggle]="'collapse'">
+                <i class="ph-caret-down collapsible-indicator ph-sm m-1"></i>
+            </a>
+        </div>
+        <div class="collapse d-lg-block my-lg-auto ms-lg-auto" id="page_header">
+            <div class="d-sm-flex align-items-center mb-3 mb-lg-0 ms-lg-3">
+                <div class="d-inline-flex mt-3 mt-sm-0">
+                    <!-- <a class="d-flex align-items-center text-body py-2 cursor-pointer">
+                        <i class="ph-arrow-circle-left me-2"></i> Voltar
+                    </a> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div #container class="content pt-0">
+    <div class="card">
+        <div class="card-header header-elements-inline">
+            <h5 class="mb-0">Cadastro Vaga</h5>
+        </div>
+        <div class="card-body">
+            <form #cadastroForm="ngForm" (ngSubmit)="salvar(cadastroForm)" novalidate
+                (keydown.enter)="$event.preventDefault()">
+                <div class="row">
+                    <div class="col-md-4 col-xxl-4 form-group mb-2">
+                        <label class="form-label">Empregador:*</label>
+                        <input [(ngModel)]="item.empregadorNome" ngControl="empregadorNome" type="text"
+                            (click)="openModalEmpregador()" class="form-control" customRequired readonly>
+                    </div>
+                    <div class="col-md-4 col-xxl-3 form-group mb-2">
+                        <label class="form-label">Cargo da vaga:*</label>
+                        <input [(ngModel)]="item.cargoNome" ngControl="cargoNome" type="text" (click)="openModalCargo()"
+                            class="form-control" customRequired readonly>
+                    </div>
+                    <div class="col-md-3 col-xxl-2 form-group mb-2">
+                        <label class="form-label">Exige experiência:*</label>
+                        <select [(ngModel)]="item.exigeExperiencia" ngControl="exigeExperiencia" class="form-select"
+                            customRequired>
+                            <option [ngValue]="true">Sim</option>
+                            <option [ngValue]="false">Não</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 col-xxl-2 form-group mb-2">
+                        <label class="form-label">Aceita Experiência Informal:</label>
+                        <select [(ngModel)]="item.experienciaInformal" ngControl="experienciaInformal"
+                            class="form-select">
+                            <option [ngValue]="true">Sim</option>
+                            <option [ngValue]="false">Não</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 col-xxl-2 form-group mb-2" title="Aceita Experiência MEI">
+                        <label class="form-label">Aceita Experiência MEI:</label>
+                        <select [(ngModel)]="item.aceitaExperienciaMei" ngControl="aceitaExperienciaMei"
+                            class="form-select">
+                            <option [ngValue]="true">Sim</option>
+                            <option [ngValue]="false">Não</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 col-xxl-2 form-group mb-2">
+                        <label class="form-label">Tempo Minimo Experiência:<span class="text-muted">meses</span></label>
+                        <input [(ngModel)]="item.tempoMinimoExperiencia" ngControl="tempoMinimoExperiencia"
+                            type="number" class="form-control">
+                    </div>
+                    <div class="col-md-3 col-xxl-2 form-group mb-2">
+                        <label class="form-label">Tempo Maximo Experiência:<span class="text-muted">meses</span></label>
+                        <input [(ngModel)]="item.tempoMaximoExperiencia" ngControl="tempoMaximoExperiencia"
+                            type="number" class="form-control">
+                    </div>
+                   
+                    <div class="col-md-3 col-xxl-2 form-group mb-2">
+                        <label class="form-label">Data abertura:*</label>
+                        <input [(ngModel)]="item.dataAbertura" ngControl="dataAbertura" type="date" customRequired
+                            class="form-control">
+                    </div>
+                    <div class="col-md-3 col-xxl-2 form-group mb-2">
+                        <label class="form-label">Data Encerramento:</label>
+                        <input [(ngModel)]="item.dataEncerramento" ngControl="dataEncerramento" type="date"
+                            class="form-control">
+                    </div>
+                    <!-- <div class="col-md-3 col-xxl-2 form-group mb-2">
+                        <label class="form-label">Encaminhamento bloqueado:</label>
+                        <select [(ngModel)]="item.bloqueioEncaminhamento" ngControl="bloqueioEncaminhamento"
+                            class="form-select">
+                            <option [ngValue]="true">Sim</option>
+                            <option [ngValue]="false">Não</option>
+                        </select>
+                    </div> -->
+                    <div class="col-md-2 col-xxl-2 form-group mb-2">
+                        <label class="form-label">Número de Vagas:*</label>
+                        <input [(ngModel)]="item.numeroVagas" ngControl="numeroVagas" type="number" customRequired
+                            class="form-control">
+                    </div>
+                    <div class="col-md-2 col-xxl-2 form-group mb-2">
+                        <label class="form-label">Nº Maximo de Encaminhamentos:</label>
+                        <input [(ngModel)]="item.numeroEncaminhamentos" ngControl="numeroEncaminhamentos" type="number"
+                            class="form-control">
+                    </div>
+                    <!-- <div class="col-md-2 col-xxl-2 form-group mb-2">
+                        <label class="form-label">Total encaminhados:</label>
+                        <input [(ngModel)]="item.quantidadeEncaminhada" ngControl="quantidadeEncaminhada" type="number"
+                            class="form-control" disabled>
+                    </div> -->
+                    <div class="col-md-3 col-xxl-2 form-group mb-2">
+                        <label class="form-label">Sexo Biologico:</label>
+                        <select [(ngModel)]="item.sexoBiologico" ngControl="sexoBiologico" class="form-select">
+                            <option [ngValue]="'Ambos'">Ambos os sexos</option>
+                            <option [ngValue]="'Feminino'">Feminino</option>
+                            <option [ngValue]="'Masculino'">Masculino</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 col-xxl-2 form-group mb-2">
+                        <label class="form-label">Identidade de gênero:</label>
+                        <select [(ngModel)]="item.identidadeGenero" ngControl="identidadeGenero" class="form-select">
+                            <option  selected [ngValue]="">Selecionar</option>
+                            <option [ngValue]="'Heteroafetivo'">Heteroafetivo</option>
+                            <option [ngValue]="'Homoafetivo'">Homoafetivo</option>
+                            <option [ngValue]="'Bissexual'">Bissexual</option>
+                            <option [ngValue]="'Transgenero'">Transgenero</option>
+                            <option [ngValue]="'Travesti'">Travesti</option>
+                            <option [ngValue]="'Outros'">Outros</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 col-xxl-2 form-group mb-2">
+                        <label class="form-label">Idade Minima:*</label>
+                        <input [(ngModel)]="item.idadeMinima" ngControl="idadeMinima" type="number" customRequired
+                            class="form-control">
+                    </div>
+                    <div class="col-md-2 col-xxl-2 form-group mb-2">
+                        <label class="form-label">Idade Maxima:</label>
+                        <input [(ngModel)]="item.idadeMaxima" ngControl="idadeMaxima" type="number"
+                            class="form-control">
+                    </div>
+                    <div class="col-md-3 col-xxl-2 form-group mb-2">
+                        <label class="form-label">Vaga PCD:*</label>
+                        <select [(ngModel)]="item.vagaPcd" ngControl="vagaPcd" customRequired class="form-select">
+                            <option [ngValue]="true">Sim</option>
+                            <option [ngValue]="false">Não</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 col-xxl-2 form-group mb-2">
+                        <label class="form-label">Aceita Fumante:</label>
+                        <select [(ngModel)]="item.aceitaFumante" ngControl="naoFumante" class="form-select">
+                            <option [ngValue]="true">Sim</option>
+                            <option [ngValue]="false">Não</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 col-xxl-2 form-group mb-2">
+                        <label class="form-label">Escolaridade exigida:*</label>
+                        <select [(ngModel)]="item.idEscolaridade" ngControl="idEscolaridade" customRequired
+                            class="form-select">
+                            <option [ngValue]="-1" disabled selected>Selecione</option>
+                            <option *ngFor="let escolaridade of escolaridades" [ngValue]="escolaridade.id">
+                                {{escolaridade.nome}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 col-xxl-2 form-group mb-2">
+                        <label class="form-label">Tipo da Vaga:*</label>
+                        <select [(ngModel)]="item.tipoVaga" ngControl="tipoVaga" customRequired class="form-select">
+                            <option *ngFor="let tipoVaga of listaTipoVaga" [ngValue]="tipoVaga">
+                                {{tipoVaga}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 col-xxl-2 form-group mb-2">
+                        <label class="form-label">Salario:*</label>
+                        <input [(ngModel)]="item.salario" ngControl="salario" customRequired type="text"
+                            class="form-control">
+                    </div>
+                    <div class="col-md-2 col-xxl-2 form-group mb-2">
+                        <label class="form-label">Escala:*</label>
+                        <select (change)="onChangeSelectEscala(inputCargaHorariaSemanal)" [(ngModel)]="item.escala"
+                            ngControl="escala" class="form-select" customRequired>
+                            <option [ngValue]="true">Sim</option>
+                            <option [ngValue]="false">Não</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 col-xxl-2 form-group mb-2">
+                        <label class="form-label">Carga Horaria Semanal:</label>
+                        <input #inputCargaHorariaSemanal [(ngModel)]="item.cargaHorariaSemanal"
+                            ngControl="cargaHorariaSemanal" type="number" class="form-control">
+                    </div>
+                    <div class="col-md-2 col-xxl-2 form-group mb-2">
+                        <label class="form-label">Descrição carga horária:</label>
+                        <input [(ngModel)]="item.descricaoCargaHoraria" ngControl="descricaoCargaHoraria"
+                            [maxlength]="30" type="text" class="form-control">
+                    </div>
+
+                    <div class="col-md-3 col-xxl-2 form-group mb-2">
+                        <label class="form-label">Turno:*</label>
+                        <select [(ngModel)]="item.turno" ngControl="turno" class="form-select" customRequired>
+                            <option *ngFor="let turno of listaTurno" [ngValue]="turno">
+                                {{turno}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-3 col-xxl-2 form-group mb-2">
+                        <label class="form-label">Área Petróleo e Gás:*</label>
+                        <select [(ngModel)]="item.areaPetroleoGas" ngControl="areaPetroleoGas" class="form-select"
+                            customRequired>
+                            <option [ngValue]="true">Sim</option>
+                            <option [ngValue]="false">Não</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 col-xxl-2 form-group mb-2">
+                        <label class="form-label">OffShore:*</label>
+                        <select [(ngModel)]="item.offShore" ngControl="offShore" class="form-select" customRequired>
+                            <option [ngValue]="true">Sim</option>
+                            <option [ngValue]="false">Não</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 col-xxl-2 form-group mb-2">
+                        <label class="form-label">Confidencialidade Empresa:*</label>
+                        <select [(ngModel)]="item.confidencialidadeEmpresa" ngControl="confidencialidadeEmpresa"
+                            class="form-select" customRequired>
+                            <option [ngValue]="true">Sim</option>
+                            <option [ngValue]="false">Não</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 col-xxl-3 form-group mb-2">
+                        <label class="form-label">Contato de Encaminhamento:</label>
+                        <input [(ngModel)]="item.contatoEncaminhamento" ngControl="contatoEncaminhamento" type="text"
+                            [maxlength]="80" class="form-control">
+                    </div>
+                    <div class="col-md-3 col-xxl-2 form-group mb-2">
+                        <label class="form-label">Forma Encaminhamento:*</label>
+                        <select [(ngModel)]="item.formaEncaminhamento" ngControl="formaEncaminhamento"
+                            class="form-select" customRequired>
+                            <option *ngFor="let formaEncaminhamento of listaFormaEncaminhamento"
+                                [ngValue]="formaEncaminhamento">
+                                {{formaEncaminhamento}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 col-xxl-4 form-group mb-2">
+                        <label class="form-label">Complemento Forma de Encaminhamento:*</label>
+                        <input [(ngModel)]="item.complementoFormaEncaminhamento"
+                            ngControl="complementoFormaEncaminhamento" class="form-control" customRequired type="text">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-xxl-6 form-group mb-2">
+                        <label class="form-label">Observação:</label>
+                        <textarea [(ngModel)]="item.observacao" ngControl="observacao" class="form-control"></textarea>
+                    </div>
+                    <!-- <div class="col-md-4 col-xxl-4 form-group mb-2">
+                        <label class="form-label">Usuário responsável pela alteração:</label>
+                        <input [(ngModel)]="item.usuarioResponsavelNome" class="form-control" disabled>
+                    </div> -->
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="fw-bold border-bottom pb-1 mb-3 d-flex align-items-center">
+                            Beneficios Oferecidos:
+                            <button (click)="openModalBeneficio()"
+                                class="btn btn-flat-primary border-transparent btn-icon ms-2 p-1" type="button">
+                                Adicionar<i class="ph ph-trophy ms-2"></i>
+                            </button>
+                        </div>
+                        <div *ngFor="let beneficio of item.beneficios; let i = index" class="row">
+                            <div class="col-md-4 col-xxl-4 form-group mb-2">
+                                <label *ngIf="i == 0" class="form-label">Nome</label>
+                                <input [(ngModel)]="beneficio.nome" class="form-control" type="text" disabled>
+                            </div>
+                            <div class="col-md-2 col-xxl-2 form-group mb-2">
+                                <label *ngIf="i == 0" class="form-label">Valor</label>
+                                <input [(ngModel)]="beneficio.valor" class="form-control" type="text">
+                            </div>
+                            <div class="col-md-5 col-xxl-5 form-group mb-2">
+                                <label *ngIf="i == 0" class="form-label">Observação</label>
+                                <input [(ngModel)]="beneficio.observacao" class="form-control" type="text">
+                            </div>
+                            <div class="col-md-1 col-xxl-1 form-group mb-2 d-flex align-items-end">
+                                <button (click)="rmBeneficio(beneficio)"
+                                    class="btn btn-flat-primary border-transparent btn-icon" type="button">
+                                    <i class="ph-trash-simple"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <div class="fw-bold border-bottom pb-1 mb-3 d-flex align-items-center">
+                            Cursos:
+                            <button (click)="openModalCurso()"
+                                class="btn btn-flat-primary border-transparent btn-icon ms-2 p-1" type="button">
+                                Adicionar<i class="ph ph-graduation-cap ms-2"></i>
+                            </button>
+                        </div>
+                        <div *ngFor="let curso of item.cursos; let i = index" class="row">
+                            <div class="col-md-3 col-xxl-2 form-group mb-2">
+                                <label *ngIf="i == 0" class="form-label">Obrigatório?:</label>
+                                <select [(ngModel)]="curso.obrigatorio" class="form-select">
+                                    <option [ngValue]="true">Obrigatório</option>
+                                    <option [ngValue]="false">Desejável</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 col-xxl-4 form-group mb-2">
+                                <label *ngIf="i == 0" class="form-label">Nome</label>
+                                <input [(ngModel)]="curso.nome" class="form-control" type="text" disabled>
+                            </div>
+                            <div class="col-md-1 col-xxl-1 form-group mb-2 d-flex align-items-end">
+                                <button (click)="rmCurso(curso)"
+                                    class="btn btn-flat-primary border-transparent btn-icon" type="button">
+                                    <i class="ph-trash-simple"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="fw-bold border-bottom pb-1 mb-3 d-flex align-items-center">
+                            Conhecimentos Extras:
+                            <button (click)="openModalConhecimentoExtra()"
+                                class="btn btn-flat-primary border-transparent btn-icon ms-2 p-1" type="button">
+                                Adicionar<i class="ph ph-student ms-2"></i>
+                            </button>
+                        </div>
+                        <div *ngFor="let conhecimentoExtra of item.conhecimentosExtras; let i = index" class="row">
+                            <div class="col-md-3 col-xxl-2 form-group mb-2">
+                                <label *ngIf="i == 0" class="form-label">Obrigatório?:</label>
+                                <select [(ngModel)]="conhecimentoExtra.obrigatorio" class="form-select">
+                                    <option [ngValue]="true">Obrigatório</option>
+                                    <option [ngValue]="false">Desejável</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 col-xxl-4 form-group mb-2">
+                                <label *ngIf="i == 0" class="form-label">Nome</label>
+                                <input [(ngModel)]="conhecimentoExtra.nome" class="form-control" type="text" disabled>
+                            </div>
+                            <div class="col-md-1 col-xxl-1 form-group mb-2 d-flex align-items-end">
+                                <button (click)="rmConhecimentoExtra(conhecimentoExtra)"
+                                    class="btn btn-flat-primary border-transparent btn-icon" type="button">
+                                    <i class="ph-trash-simple"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-end">
+                    <button class="btn btn-primary btn-labeled btn-labeled-start" type="submit">
+                        <span class="btn-labeled-icon bg-black bg-opacity-20">
+                            <i class="ph ph-floppy-disk"></i>
+                        </span>
+                        Salvar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<custom-modal #modalEmpregador [start-open]="false" title-text="Selecione Empregador" size="large"
+    [enableModalBodyClass]="false" headerColor="primary">
+    <lista-empregador-page #listaEmpregador [insideModal]="true"
+        (onSelect)="onSelectEmpregador($event)"></lista-empregador-page>
+</custom-modal>
+
+<custom-modal #modalCargo [start-open]="false" title-text="Selecione Cargo" size="large" [enableModalBodyClass]="false"
+    headerColor="primary">
+    <lista-cargo-page #listaCargo [insideModal]="true" (onSelect)="onSelectCargo($event)"></lista-cargo-page>
+</custom-modal>
+
+<custom-modal #modalBeneficio [start-open]="false" title-text="Selecione Beneficio" size="modal-sm"
+    [enableModalBodyClass]="false" headerColor="primary">
+    <datatable-component [disableHeader]="true" [disableFooter]="true" [data]="listaBeneficio"
+        [settings]="dtBeneficioSettings" (onRowClick)="onSelectBeneficio($event)"
+        [showCheckboxToSelectRow]="false"></datatable-component>
+</custom-modal>
+
+
+<custom-modal #modalCurso [start-open]="false" title-text="Selecione Curso" size="large" [enableModalBodyClass]="false"
+    headerColor="primary">
+    <lista-curso-page #listaCurso [insideModal]="true" (onSelect)="onSelectCurso($event)"></lista-curso-page>
+</custom-modal>
+
+<custom-modal #modalConhecimentoExtra [start-open]="false" title-text="Selecione Conhecimento Extra" size="large"
+    [enableModalBodyClass]="false" headerColor="primary">
+    <lista-conhecimento-extra-page #listaConhecimentoExtra [insideModal]="true"
+        (onSelect)="onSelectConhecimentoExtra($event)"></lista-conhecimento-extra-page>
+</custom-modal>

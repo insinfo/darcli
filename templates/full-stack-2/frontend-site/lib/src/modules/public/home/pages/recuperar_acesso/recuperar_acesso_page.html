@@ -1,0 +1,24 @@
+<div #page *ngIf="!isResetPass" class="container ">
+    <form (ngSubmit)="enviarNovaSenha()" novalidate>
+        <h1 class="text-header">Formulário de recuperação de conta</h1>
+        <div class="row mt-3">
+            <div class="col-md-7">
+                <div class="form-group">
+                    <label class="form-label-custom">Informe seu CPF ou CNPJ para enviarmos nova senha:*</label>
+                    <input [(ngModel)]="cpfOrCnpj" type="text" name="cpfOrCnpj" class="form-textarea-custom" required>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between mt-4 mb-4">
+            <button type="submit" class="btn-custom fit-content-width">Enviar</button>
+        </div>
+    </form>
+</div>
+
+<div *ngIf="isResetPass" class="container p-3">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+        <h1 class="fit-content-width text-center">Sua senha foi redefinida com sucesso. <br>
+            A nova senha foi enviada para o seu e-mail:<br> {{email}}</h1>
+        <button (click)="irParaInicio()" type="button" class="btn-custom fit-content-width mt-2">ir para inicio</button>
+    </div>
+</div>

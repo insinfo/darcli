@@ -1,0 +1,47 @@
+<main-nav
+    class="navbar navbar-dark navbar-expand-lg navbar-static border-bottom border-bottom-white border-opacity-10"></main-nav>
+
+<div class="page-content">
+
+    <!-- Main sidebar -->
+    <main-menu #mainMenu></main-menu>
+
+    <!-- /main sidebar -->
+    <!-- Main content -->
+    <div class="content-wrapper">
+        <!-- Inner content -->
+        <div class="content-inner">
+            <router-outlet [routes]="MyRoutes.allPrivate"></router-outlet>
+        </div>
+        <!-- /inner content -->
+        <div *ngIf="statusBarService.isVisible" class="navbar navbar-sm navbar-footer border-top  "
+        style="display: flex;overflow-y: auto;align-items: flex-start;"
+         [class.main-footer-height-expanded]="statusBarService.isExpanded == true"
+            [class.main-footer-height-default]="statusBarService.isExpanded == false">
+           
+            <ul class="nav">
+                <li class="nav-item ms-md-1">
+                    <a (click)="toogleExpStatusBar()"
+                        class="navbar-nav-link navbar-nav-link-icon rounded p-0 cursor-pointer">
+                        <div class="d-flex align-items-center mx-md-1">
+                            <i class="ph-caret-up"></i>
+                            <!-- <span class="d-none d-md-inline-block ms-2">Purchase</span> -->
+                        </div>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="list-group" >
+                <li *ngFor="let toast of toasts; let toastIndex=index" class="list-group-item border-0">
+                    <!--fw-bold style="position: absolute;z-index: 3;top: 10px;right: 10px;" -->
+                    <span class="">{{toast.message}}</span>
+                    <span class="text-muted fs-sm ">{{ $pipe.date( toast.created, 'dd/MM/yyyy HH:mm')}}</span>
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+    <!-- /main content -->
+</div>
+
+<notification-outlet [service]="notificationComponentService"></notification-outlet>

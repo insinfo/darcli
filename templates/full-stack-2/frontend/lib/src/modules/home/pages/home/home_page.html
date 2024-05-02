@@ -1,0 +1,37 @@
+<div class="page-content">
+    <div class="content-wrapper">
+        <div class="page-header page-header-light">
+            <div class="page-header-content header-elements-md-inline">
+                <div class="page-title d-flex">
+                    <h4>
+                        <span class="font-weight-semibold">E-ESIC </span> - 2.0
+                        <span class="text-muted" title="Versão ainda não finalizada"> alpha</span>
+                    </h4>
+                    <a class="header-elements-toggle text-default d-md-none">
+                        <i class="icon-more"></i>
+                    </a>
+                </div>
+                <div class="header-elements d-none">
+                    <div class="d-flex justify-content-center">
+                        <a [routerLink]="RoutePaths.solicitacoes.toUrl()" [routerLinkActive]="'alpha-primary2'"
+                            class="btn btn-bar btn-float font-weight-semibold text-default">
+                            <i class="icon-bubble-notification text-teal-400 "></i>
+                            <span>Solicitações</span>
+                        </a>
+
+                        <a [routerLink]="RoutePaths.solicitante.toUrl()" [routerLinkActive]="'alpha-primary2'"
+                            class="btn btn-bar btn-float font-weight-semibold text-default">
+                            <i class="icon-users text-grey-700 "></i>
+                            <span>Solicitantes</span>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <router-outlet [routes]="Routes.all"></router-outlet>
+        </div>
+    </div>
+
+</div>

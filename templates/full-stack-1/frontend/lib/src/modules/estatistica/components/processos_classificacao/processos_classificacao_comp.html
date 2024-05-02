@@ -1,0 +1,35 @@
+<div class="card">
+    <div class="card-header d-sm-flex align-items-sm-center py-sm-0">
+        <h5 class="py-sm-2 my-sm-1">Processos por Classificação</h5>
+        <div class="d-inline-flex ms-auto">
+            <button (click)="reload()" title="Atualizar" type="button"
+                class="btn btn-flat-primary  btn-icon btn-sm rounded-pill border-transparent me-2">
+                <!-- <i class="ph-arrows-left-right"></i> -->
+                <i class="ph ph-arrows-clockwise"></i>
+            </button>
+            <div class="dropdown">
+                <a class="btn btn-flat-primary btn-icon btn-sm rounded-pill border-transparent "
+                    [attr.data-bs-toggle]="'dropdown'" aria-expanded="false">
+                    <i class="ph-list"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end " [attr.data-popper-placement]="'bottom-end'">
+                    <a (click)="onlyCurrentSetor()" class="dropdown-item cursor-pointer">
+                        <i class="ph-chart-line me-2"></i>
+                        Apenas seu setor
+                    </a>
+                    <a (click)="allSetor()" class="dropdown-item cursor-pointer">
+                        <i class="ph-chart-line me-2"></i>
+                        Todos setores
+                    </a>
+                    <a (click)="downloadAsPng()" class="dropdown-item cursor-pointer">
+                        <i class="ph ph-file-png me-2"></i>
+                        Baixar PNG
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div #canvasContainer class="card-body ">
+        <canvas #canvas height="400" width="500"></canvas>
+    </div>
+</div>

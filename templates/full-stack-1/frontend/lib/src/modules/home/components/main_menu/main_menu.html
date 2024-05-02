@@ -1,0 +1,70 @@
+<!-- Sidebar content -->
+<div #container class="sidebar-content">
+
+    <!-- Sidebar header -->
+    <div class="sidebar-section">
+        <div class="sidebar-section-body d-flex justify-content-center">
+            <h5 class="sidebar-resize-hide flex-grow-1 my-auto">Navegação</h5>
+
+            <div>
+                <button (click)="sidebarMainResize($event)" type="button"
+                    class="btn btn-flat-white btn-icon btn-sm rounded-pill border-transparent sidebar-control sidebar-main-resize d-none d-lg-inline-flex">
+                    <i class="ph-arrows-left-right"></i>
+                </button>
+
+                <button type="button"
+                    class="btn btn-flat-white btn-icon btn-sm rounded-pill border-transparent sidebar-mobile-main-toggle d-lg-none">
+                    <i class="ph-x"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- /sidebar header -->
+    <!-- Main navigation -->
+    <div class="sidebar-section">
+
+        <ul [attr.data-label]="'main_menu'" #ulroot class="nav nav-sidebar" [attr.data-nav-type]="'accordion'">
+            <template #recursiveList let-list>
+                <li class="nav-item" *ngFor="let item of list; let idx = index"
+                    [class.nav-item-submenu]="item.children.length > 0"
+                    [class.nav-item-open]="item.isCollapse == false" 
+                    [attr.data-label]="item.label">
+                    <!-- [attr.data-index]="'menu-item-' + idx.toString()" -->
+                    <a class="nav-link" #anchorElement (click)="toggleMenu($event, anchorElement, item)"
+                        [class.active]="item.active ==true" 
+                         [attr.data-cod-acao]="item.codAcao.toString()" 
+                        >
+                        <i class="{{item.icone}}" *ngIf="item.icone != null"></i>
+                        <span [innerHtml]="item.label"></span>
+                    </a>
+                    <ul class="nav-group-sub collapse" *ngIf="item.children.length > 0"
+                        [class.show]="item.isCollapse == false">
+                        <template [ngTemplateOutlet]="recursiveList" [ngTemplateOutletValue]="item.children">
+                        </template>
+                    </ul>
+                </li>
+            </template>
+            <template [ngTemplateOutlet]="recursiveList" [ngTemplateOutletValue]="list"></template>
+        </ul>
+
+    </div>
+    <!-- /main navigation -->
+
+    <!-- Error -->
+    <div *ngIf="showError" #errorView class="flex-fill">
+        <div class="text-center mb-4">
+            <img src="assets/images/error_bg.svg" class="img-fluid mb-3" height="230" alt="">
+            <h1 class="display-3 fw-semibold lh-1 mb-3">404</h1>
+            <h6 class="w-md-25 mx-md-auto">Ops, ocorreu um erro. <br> </h6>
+        </div>
+        <div class="text-center">
+            <!--<a (click)="load()" class="btn btn-primary">
+                <i class="ph-arrows-counter-clockwise me-2"></i>
+                Tentar denovo
+            </a>-->
+        </div>
+    </div>
+    <!-- /Error -->
+
+</div>
+<!-- /sidebar content -->

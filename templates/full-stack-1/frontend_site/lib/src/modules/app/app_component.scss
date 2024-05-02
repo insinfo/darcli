@@ -1,0 +1,19 @@
+:host {
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.navbar-brand {
+    width: 5.2rem; //83px;
+}
+
+.navbar-brand img {
+    height: 1.8rem;
+}
+
+.end--22 {
+    right: -22px;
+}

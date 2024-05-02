@@ -1,0 +1,38 @@
+<!-- Main sidebar -->
+<div class="navbar navbar-dark navbar-expand-lg navbar-static border-bottom border-bottom-white border-opacity-10">
+    <div class="container-fluid">
+        <div class="navbar-brand flex-1 flex-lg-0 ">
+            <a class="d-inline-flex align-items-center ">
+                <img src="/logo_icon-sali.png"
+                    title="Sistema Administrativo Livre Integrado">
+                   
+            </a>
+        </div>
+        <div class="navbar-collapse justify-content-start flex-lg-1 order-2 order-lg-1 collapse">
+            <h4 class="page-title mb-0">
+                Andamento dos Processos 
+                <span class="badge bg-yellow text-black position-absolute top-0 end--22 translate-middle-top zindex-1 rounded-pill mt-1 ">beta</span>
+                
+            </h4>
+        </div>
+        <!-- <div class="nav flex-row justify-content-end order-1 order-lg-2 ">
+            TRANSPARÊNCIA 
+        </div> -->
+
+
+    </div>
+</div>
+
+<div class="page-content">
+
+
+
+    <!-- /main sidebar -->
+    <!-- Main content -->
+    <div class="content-wrapper">
+        <!-- Inner content -->
+        <div class="content-inner">
+            <router-outlet [routes]="MyRoutes.allPublic"></router-outlet>
+        </div>
+    </div>
+</div>

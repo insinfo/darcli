@@ -1,0 +1,54 @@
+<div #page class="container">
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <form (ngSubmit)="doLogin()">
+                <fieldset>
+                    <legend class="form-legend-custom">Login E-SIC</legend>
+                    <p class="">
+                        Identificação com restrição de acesso. <br>
+                        Insira seus dados de login e senha para continuar.
+                    </p>
+                    <div class="form-group">
+                        <label class="form-label-custom">Login</label>
+                        <input [(ngModel)]="loginPayload.login" type="text" name="login" [maxlength]="100"
+                            class="form-input-custom" placeholder="Seu CPF" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label-custom">Senha</label>
+                        <input [(ngModel)]="loginPayload.password" type="password" name="password" [maxlength]="20"
+                            class="form-input-custom" required>
+
+                    </div>
+                    <div class="text-center mb-3">
+                        <button type="submit" class="btn-custom full-width">Entrar</button>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12 text-center">
+                            <p class="">
+                                Não possui usuário?
+                                <a (click)="irParaCadastro()" class="link-no-href" title="Criar Conta">Criar Conta</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12 text-center">
+                            <a (click)="irParaRecuperarAcesso()" class="link-no-href" title="Esqueci a senha">Esqueceu a senha
+                                clique aqui</a>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+        </div>
+        <div class="col-md-8 ">
+            <div class="banner-left">
+                <img  src="imagens/ouvidoria.png">
+            </div>
+           
+        </div>
+    </div>
+    <!--alert alert-info-->
+    <div class=" mt-4">
+        <p>Seus dados pessoais estarão protegidos, nos termos da Lei 13.460/2017.</p>
+    </div>
+</div>

@@ -1,0 +1,158 @@
+.header-principal {
+    //width: 90%;
+    padding-left: 5%;
+    padding-right: 5%;
+    background-color: #2969bd;
+    color: #fff;
+
+    .header-top-subtitle {
+        //padding-left: 1.5rem;
+        padding-top: 13px;
+    }
+
+    .header-top {
+        // padding-left: 1.5rem;
+        padding-top: 5px;
+        padding-bottom: 3px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .logo {
+            font-weight: bold;
+            font-size: 1.5rem;
+            min-width: 60px;
+        }
+
+        p {
+            font-size: 1.3rem;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: baseline;
+        }
+
+        .btn-sair {
+            appearance: none;
+            background: none;
+            color: white;
+            border: none;
+            outline: 0;
+            cursor: pointer;
+        }
+    }
+
+}
+
+.divider {
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid hsla(0, 0%, 100%, .2);
+}
+
+.navbar-toggle {
+    border: none;
+    appearance: none;
+    background: none;
+    cursor: pointer;
+    padding: 20px 8px;
+    outline: none;
+
+    span {
+        display: block;
+        width: 20px;
+        height: 2px;
+        margin-bottom: 3px;
+        background: #ffF;
+    }
+}
+
+.link-active{
+    background: rgba(15, 8, 116, 0.252);
+    &::after{
+        content: ' ';
+        width: 100% ;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        z-index: 2;
+        height: 1px;
+        display: block;
+        background: #fff;
+    }
+}
+
+.navigation {
+   
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+
+        a {
+            font-size: 15px;
+            color: white;
+            font-weight: 300;
+           // font-weight: 500;
+            // letter-spacing: 2px;
+            text-decoration: none;
+            cursor: pointer;
+            //top/bot left/right              
+            padding: 16px 20px;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            position: relative;
+        }
+
+        a:hover {
+            background: rgba(15, 8, 116, 0.252);
+        }
+    }
+}
+
+
+
+// .navigation li {
+//     flex: 3;
+// }
+
+@media all and (max-width: 1000px) {
+    .navigation ul {
+        flex-wrap: wrap;
+    }
+
+    .navigation li {
+        flex: 1 1 50%;
+    }
+}
+
+@media all and (min-width: 480px) {
+    .display-mobile {
+        display: none;
+    }
+
+    .display-desktop {
+        display: block;
+    }
+}
+
+//mobile
+@media all and (max-width: 480px) {
+    .navigation li {
+        flex-basis: 100%;
+    }
+
+    .display-mobile {
+        display: block;
+    }
+
+    .display-desktop {
+        display: none;
+    }
+
+    .hide-mobile {
+        display: none;
+    }
+}

@@ -1,0 +1,45 @@
+<div #container (click)="containerClickHandle()" class="tokenfield tokenfield-mode-tokens">
+    <!-- <input type="text" class="form-control tokenfield-basic"
+        placeholder="Select car brand" style="display: none;">
+    <input class="tokenfield-copy-helper" style="display:none;position:fixed;top:-1000px;right:1000px;" tabindex="-1"
+        type="text"> -->
+    <div class="tokenfield-set">
+        <ul #tokensUl style="width: fit-content;">
+            <li class="tokenfield-set-item" *ngFor="let item of items" [class.selected]="item.selected == true">
+                <span class="item-label">{{item.value}}</span>
+                <a (click)="removeToken(item)" class="item-remove" tabindex="-1">×</a>
+                <!-- <input class="item-input" type="hidden" name="items_new[2]" value="sdfsdfs"> -->
+            </li>
+        </ul>
+    </div>
+    <input #inputToken (keydown)="inputKeydownHandle($event)" (keyup)="inputKeyupHandle($event)" (keypress)="inputKeypressHandle($event)"
+         (paste)="onPasteHandle($event)" (focus)="container.classes.add('focused')"
+        (blur)="container.classes.remove('focused')" class="tokenfield-input" type="text" placeholder="{{placeholder}}">
+    <!--(click)="$event.stopPropagation()"-->
+    <div class="dropdown position-absolute end-0 top-50 translate-middle-y me-1" >
+        <button type="button" class="btn btn-light btn-sm btn-icon rounded-pill" [attr.data-bs-toggle]="'dropdown'"
+            aria-expanded="false">
+            <i class="ph-caret-down ph-sm"></i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-end" [attr.data-popper-placement]="'bottom-end'">
+            <a (click)="copiar()" class="dropdown-item cursor-pointer">
+                <i class="ph ph-copy me-2"></i>
+                Copiar
+            </a>
+            <a (click)="colar()" class="dropdown-item cursor-pointer">
+                <i class="ph-clipboard-text me-2"></i>
+                Colar
+            </a>
+
+            <a (click)="clear()" class="dropdown-item cursor-pointer">               
+                <i class="ph ph-broom me-2"></i>
+                Limpar
+            </a>
+        </div>
+    </div>
+
+    <div class="tokenfield-suggest" style="display: none;">
+        <ul class="tokenfield-suggest-list"></ul>
+    </div>
+
+</div>

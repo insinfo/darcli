@@ -1,0 +1,46 @@
+<div class="content d-flex justify-content-center align-items-center">
+    <form class="login-form" (ngSubmit)="doLogin()">
+        <div class="card mb-0">
+            <div class="card-body">
+                <div class="text-center mb-3">
+                    <div class="d-inline-flex align-items-center justify-content-center mb-4 mt-2">
+                        <img src="assets/images/logo_icon.svg" class="h-48px">
+                        <img src="assets/images/logo_text_dark.svg" class="h-48px" alt="">
+                    </div>
+                    <h5 class="mb-0">
+                        Banco de Empregos</h5>
+                    <span class="d-block text-muted">Faça login na sua conta</span>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Login</label>
+                    <div class="form-control-feedback form-control-feedback-start">
+                        <input [(ngModel)]="loginPayload.login" id="login" type="text" class="form-control"
+                            placeholder="Seu CPF/CNPJ somente número">
+                        <div class="form-control-feedback-icon">
+                            <i class="ph-user-circle text-muted"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Senha</label>
+                    <div class="form-control-feedback form-control-feedback-start">
+                        <input [(ngModel)]="loginPayload.password" id="password" type="password" class="form-control">
+                        <div class="form-control-feedback-icon">
+                            <i class="ph-lock text-muted"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" id="submit" class="btn btn-primary w-100">Entrar</button>
+                </div>
+                <div class="mb-3">
+                    <a [routerLink]="RoutePaths.cadastrarUsuario.toUrl()" class="btn btn-teal w-100">Criar
+                        Conta</a>
+                </div>
+                <div class="text-center">
+                    <a [routerLink]="RoutePaths.recuperarAcesso.toUrl()">Esqueceu a senha?</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

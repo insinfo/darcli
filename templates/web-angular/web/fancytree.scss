@@ -1,0 +1,65 @@
+
+.fancytree-exp-e .fancytree-expander:after,
+.fancytree-exp-ed .fancytree-expander:after {
+  content: "\e9fe"
+}
+
+.fancytree-has-children.fancytree-ico-ef .fancytree-icon:after {
+  content: "\eb24"
+}
+
+// 1.0 ph-folder-minus:before{content:"\f40f"}
+// 2.0 ph-folder-minus:before {content:"\eb24";}
+
+// 1.0 ph-file-minus:before{content:"\f3e4"}
+// 2.0 .ph-file-minus:before {content:"\eaf4";
+
+.fancytree-has-children.fancytree-ico-e .fancytree-icon:after {
+  content: "\eaf4";
+}
+
+//1.0 ph-caret-right:before{content:"\f31c"}
+// 2.0 ph-caret-right:before {content:"\ea00";
+.fancytree-exp-cl .fancytree-expander:after {
+  content: "\ea00";
+}
+
+// 1.0 ph-file-text:before{content:"\f3eb"}
+// 2.0 ph-file-text:before {content:"\eafd";}
+.fancytree-ico-c .fancytree-icon:after,
+.fancytree-ico-e .fancytree-icon:after {
+  content: "\eafd";
+}
+
+//1.0 ph-caret-down:before{content:"\f31a"}
+// 2.0 ph-caret-down:before {content:"\e9fe";}.
+.fancytree-exp-edl .fancytree-expander:after,
+.fancytree-exp-el .fancytree-expander:after {
+  content: "\e9fe";
+}
+
+.fancytree-exp-c .fancytree-expander:after {
+  content: "\ea00";
+}
+
+// 1.0 ph-folder-plus:before{content:"\f415"}
+// 2.0 ph-folder-plus:before {content:"\eb2a";}
+.fancytree-has-children.fancytree-ico-cf .fancytree-icon:after {
+  content: "\eb2a";
+}
+
+// 1.0 ph-folder:before{content:"\f40c"}
+// 2.0 ph-folder:before {content:"\eb21";}
+.fancytree-ico-cf .fancytree-icon:after,
+.fancytree-ico-ef .fancytree-icon:after {
+  content: "\eb21";
+}
+
+.tree-checkbox {
+  min-height: 250px;
+}
+
+.fancytree-active .fancytree-title, .fancytree-selected .fancytree-title {
+  background-color: unset;
+  //color: var(--ft-node-selected-color);
+}

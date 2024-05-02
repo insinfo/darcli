@@ -1,0 +1,21 @@
+<div #pageContainer>
+    <div class="card card-shadow">
+        <div class="card-body">
+            <div class="d-flex flex-row justify-content-start align-items-center flex-nowrap gap-40">
+                <h1 style="margin-bottom: 0;">Solicitações</h1>
+                <select (change)="selectFiltroSituacaoChange($event)" class="form-control fit-content-width" style="cursor: pointer;">
+                    <option value="Todos">Todos</option>
+                    <option value="A+T" selected>Aberto/Tramitação</option>
+                    <option value="A">Aberto</option>
+                    <option value="T">Tramitação</option>
+                    <option value="N">Negado</option>
+                    <option value="R">Respondido</option>
+                </select>
+            </div>
+
+            <datatable-component [data]="solicitacoes" [settings]="datatableSettings" [searchInFields]="searchInFields"
+                (dataRequest)="onRequestData($event)" (onRowClick)="onRowClick($event)"></datatable-component>
+        </div>
+
+    </div>
+</div>

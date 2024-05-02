@@ -1,0 +1,67 @@
+<header class="header-principal">
+    <!--<div class="header-top-subtitle">office Municipal de city</div>-->
+    <div class="header-top">
+        <p>
+            <button (click)="navbarToggle()" type="button" class="navbar-toggle display-mobile mr-2">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <span class="logo mr-2">e-SIC</span> 
+            <span class="display-desktop"> - Sistema Eletrônico de Informações ao Cidadão</span>
+        </p>
+        <button *ngIf="authService.loginStatus == LoginStatus.logged" class="btn-sair" (click)="doLogout()"
+            type="button"><i class="icon-switch2 mr-2"></i>
+            Sair</button>
+    </div>
+    
+
+    <hr class="divider">
+    <nav class="navigation">
+        <div class="navbar-wrap" [class.hide-mobile]="showMenu">
+            <ul class="menu" >
+                <li (click)="navbarToggle()" *ngIf="authService.loginStatus != LoginStatus.logged">
+                    <a [routerLink]="RoutePaths.login.toUrl()" [routerLinkActive]="'link-active'">Inicio</a>
+                </li>
+                <li (click)="navbarToggle()" *ngIf="authService.loginStatus != LoginStatus.logged">
+                    <!--(click)="irParaCadastro()"-->
+                    <a [routerLink]="RoutePaths.cadastroSolicitanteUrl" [routerLinkActive]="'link-active'">Cadastro</a>
+                </li>
+                <li (click)="navbarToggle()" *ngIf="authService.loginStatus == LoginStatus.logged">
+                    <a [routerLink]="RoutePaths.bemVindo.toUrl()" [routerLinkActive]="'link-active'">Inicio</a>
+                </li>
+                <li (click)="navbarToggle()" *ngIf="authService.loginStatus == LoginStatus.logged">
+                    <a [routerLink]="RoutePaths.criaSolicitacao.toUrl()" [routerLinkActive]="'link-active'">Nova
+                        Manifestação</a>
+                </li>
+                <li (click)="navbarToggle()" *ngIf="authService.loginStatus == LoginStatus.logged">
+                    <a [routerLink]="RoutePaths.listaSolicitacao.toUrl()"
+                        [routerLinkActive]="'link-active'">Manifestações</a>
+                </li>
+                <li (click)="navbarToggle()" *ngIf="authService.loginStatus == LoginStatus.logged">
+                    <a [routerLink]="RoutePaths.alterarSenha.toUrl()" [routerLinkActive]="'link-active'">Alterar
+                        Senha</a>
+                </li>
+                <li (click)="navbarToggle()">
+                    <a [routerLink]="RoutePaths.estatisticaSolicitacao.toUrl()" [routerLinkActive]="'link-active'">
+                        Estatística</a>
+                </li>
+                <li (click)="navbarToggle()">
+                    <a [routerLink]="RoutePaths.legislacao.toUrl()" [routerLinkActive]="'link-active'">
+                        Legislação relacionada</a>
+                </li>
+               
+
+                
+                <li (click)="navbarToggle()">
+                    <a href="http://www.planalto.gov.br/ccivil_03/_ato2015-2018/2017/lei/l13460.htm" target="_blank">Lei
+                        13.460/2017</a>
+                </li>
+                <li (click)="navbarToggle()">
+                    <a href="http://www.planalto.gov.br/CCIVIL_03/_Ato2011-2014/2012/Decreto/D7724.htm" target="_blank">
+                        Lei de Acesso à Informação</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>

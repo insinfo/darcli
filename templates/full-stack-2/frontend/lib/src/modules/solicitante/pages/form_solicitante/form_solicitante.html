@@ -1,0 +1,159 @@
+<div #page>
+
+    <div class="card">
+        <div class="card-body">
+            <form (ngSubmit)="save()">
+                <h1 class="text-header">Cadastro do Solicitante</h1>
+                <legend>Dados Pessoais</legend>
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label class="form-label-custom">Nome:*</label>
+                            <input [(ngModel)]="solicitante.nome" type="text" name="nome" class="form-control" required>
+                            <small class="form-text text-danger" [hidden]="!solicitante.nome.isEmpty">O nome não pode ser vazia!</small>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="d-flex flex-column ">
+                            <span class="form-label-custom">Tipo de Pessoa:*</span>
+                            <div class="d-flex flex-row gap-40 mt-1">
+                                <label >
+                                    <input [(ngModel)]="pessoaFisica" type="radio" name="tipopessoa" value="F"
+                                        class="form-control ">
+                                    Física
+                                </label>
+                                <label>
+                                    <input [(ngModel)]="pessoaJuridica" type="radio" name="tipopessoa" value="J"
+                                        class="form-control ">
+                                    Jurídica
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div *ngIf="solicitante.tipoPessoa == 'F'" class="form-group">
+                            <label class="form-label-custom">CPF:*</label>
+                            <input [(ngModel)]="solicitante.cpfCnpj" cpfMask type="text" name="cpf" class="form-control"
+                                required>
+                        </div>
+                        <div *ngIf="solicitante.tipoPessoa == 'J'" class="form-group">
+                            <label class="form-label-custom">CNPJ:*</label>
+                            <input [(ngModel)]="solicitante.cpfCnpj" cnpjMask type="text" name="cnpj" class="form-control"
+                                required>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-label-custom">Faixa Etária:</label>
+                            <select [(ngModel)]="solicitante.faixaEtaria" name="faixaetaria" class="form-control">
+                                <option *ngFor="let faixaEtaria of faixaEtarias" [ngValue]="faixaEtaria">{{faixaEtaria.nome}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-label-custom">Escolaridade:</label>
+                            <select [(ngModel)]="solicitante.escolaridade" name="escolaridade" class="form-control">
+                                <option *ngFor="let escolaridade of escolaridades" [ngValue]="escolaridade">
+                                    {{escolaridade.nome}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="form-label-custom">Tipo Telefone:</label>
+                            <select [(ngModel)]="solicitante.tipoTelefone" name="tipotelefone" class="form-control">
+                                <option *ngFor="let tipTelefone of tipoTelefones" [ngValue]="tipTelefone">{{tipTelefone.nome}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label class="form-label-custom">DDD:</label>
+                            <input [(ngModel)]="solicitante.dddTelefone" type="text" name="dddtelefone"
+                                class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-label-custom">Telefone:</label>
+                            <input [(ngModel)]="solicitante.telefone" type="text" name="telefone" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label-custom">Profissão:</label>
+                            <input [(ngModel)]="solicitante.profissao" type="text" name="profissao" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label-custom">E-mail:*</label>
+                            <input [(ngModel)]="solicitante.email" type="text" name="email" class="form-control ">
+                        </div>
+                    </div>                    
+                </div>
+                <legend>Endereço</legend>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-label-custom">CEP:</label>
+                            <input [(ngModel)]="solicitante.cep" type="text" name="cep" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label-custom">Logradouro:</label>
+                            <input [(ngModel)]="solicitante.logradouro" type="text" name="logradouro" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="form-label-custom">Número:</label>
+                            <input [(ngModel)]="solicitante.numero" type="text" name="numero" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label-custom">Complemento:</label>
+                            <input [(ngModel)]="solicitante.complemento" type="text" name="complemento"
+                                class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label-custom">Bairro:</label>
+                            <input [(ngModel)]="solicitante.bairro" type="text" name="bairro" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label-custom">Cidade:</label>
+                            <input [(ngModel)]="solicitante.cidade" type="text" name="cidade" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-label-custom">UF:</label>
+                            <select [(ngModel)]="solicitante.estado" name="estado" class="form-control">
+                                <option *ngFor="let uf of estados" [ngValue]="uf">{{uf.nome}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>

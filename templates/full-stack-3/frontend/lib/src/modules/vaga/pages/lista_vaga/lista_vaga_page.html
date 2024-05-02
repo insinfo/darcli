@@ -1,0 +1,106 @@
+<div class="page-header" *ngIf="insideModal == false">
+    <div class="page-header-content d-lg-flex">
+        <div class="d-flex">
+            <h4 class="page-title mb-0">
+                Consultar - <span class="fw-normal">Vagas</span>
+            </h4>
+            <a href="#page_header"
+                class="btn btn-light align-self-center collapsed d-lg-none border-transparent rounded-pill p-0 ms-auto"
+                [attr.data-bs-toggle]="'collapse'">
+                <i class="ph-caret-down collapsible-indicator ph-sm m-1"></i>
+            </a>
+        </div>
+
+        <div class="collapse d-lg-block my-lg-auto ms-lg-auto" id="page_header">
+            <div class="d-flex flex-wrap align-items-center mb-3 mb-lg-0 ms-lg-3 gap-2 ">
+                <!--<div class="hstack gap-3 mb-3 mb-lg-0">-->
+                <button #btnDesbloquearVaga (click)="openDesbloquearVaga()" class="btn btn-purple cursor-pointer "
+                    title="Desbloquear vaga">
+                    <i class="ph-lock-open me-2"></i>
+                    Desbloquear
+                </button>
+                <button #btnBloquearVaga (click)="openBloquearVaga()" class="btn btn-warning  cursor-pointer "
+                    title="Bloquear vaga">
+                    <i class="ph ph-lock me-2"></i>
+                    Bloquear
+                </button>
+                <button (click)="irParaNewVaga()" class="btn btn-primary cursor-pointer " title="Cadastrar vaga">
+                    <i class="ph-file-plus me-2"></i>
+                    Cadastrar
+                </button>
+                <button #btnExcluir (click)="excluir()" type="button" class="btn btn-outline-primary"
+                    title="Excluir vaga">
+                    <i class="ph-trash me-2"></i>
+                    Excluir
+                </button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div #container class="content  pt-0" [class.content]="insideModal == false">
+    <div class="card" [class.card]="insideModal == false">
+        <div class="pt-3 pe-3 ps-3">
+            <form (keydown.enter)="$event.preventDefault()">
+                <div class="row">
+                    <div class="col-md-3 col-xxl-1 form-group">
+                        <label class="form-label">Validado</label>
+                        <select [(ngModel)]="filtro.isValidado" class="form-select">
+                            <option [ngValue]="true">Sim</option>
+                            <option [ngValue]="false">Não</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <datatable-component #datatable [dataTableFilter]="filtro" [data]="items" [settings]="dtSettings"
+            [searchInFields]="sInFields" (dataRequest)="onDtRequestData($event)" (onRowClick)="onSelectItem($event)"
+            [showCheckboxToSelectRow]="insideModal == false"></datatable-component>
+    </div>
+</div>
+
+
+<custom-modal #modalBloquearVaga [start-open]="false" title-text="Bloquear vaga" size="default"
+    [enableModalBodyClass]="true" headerColor="primary">
+    <form #bloquearVagaForm="ngForm" (ngSubmit)="bloquearVaga()" novalidate (keydown.enter)="$event.preventDefault()">
+        <div class="row">
+            <div class="col-md-12 form-group mb-2">
+                <label class="form-label">Justificativa:</label>
+                <textarea [(ngModel)]="bloqueioEncaminhamento.justificativa" name="justificativa"
+                    class="form-control"></textarea>
+            </div>
+            <div class="col-md-12 text-end">
+                <button type="submit" class="btn btn-primary">
+                    <i class="ph-floppy-disk me-2"></i>
+                    Salvar
+                </button>
+            </div>
+        </div>
+    </form>
+</custom-modal>
+
+<custom-modal #modalDesbloquearVaga [start-open]="false" title-text="Desbloquear vaga" size="default"
+    [enableModalBodyClass]="true" headerColor="primary">
+    <form (ngSubmit)="desbloquearVaga()" novalidate (keydown.enter)="$event.preventDefault()">
+        <div class="row">
+            <div class="col-md-12 form-group mb-2">
+                <label class="form-label">Justificativa:</label>
+                <textarea [(ngModel)]="bloqueioEncaminhamento.justificativa" name="justificativa"
+                    class="form-control"></textarea>
+            </div>
+            <div class="col-md-12 text-end">
+                <button type="submit" class="btn btn-primary">
+                    <i class="ph-floppy-disk me-2"></i>
+                    Salvar
+                </button>
+            </div>
+        </div>
+    </form>
+</custom-modal>
+
+<custom-modal #modalListaBloqueios [start-open]="false" title-text="Historico de Bloqueios" size="large"
+    [enableModalBodyClass]="false" headerColor="primary">
+    <datatable-component #dtBloqueios [data]="bloqueiosEncaminhamento" [settings]="dtSettingsBloqueios"
+        (dataRequest)="onDtBloqueiosRequestData($event)" [showCheckboxToSelectRow]="false"></datatable-component>
+</custom-modal>

@@ -1,0 +1,195 @@
+<div #page *ngIf="!isSaved" class="container">
+    <form (ngSubmit)="save()" novalidate>
+        <h1 class="text-header">Cadastro do Solicitante</h1>
+        <legend>Dados Pessoais</legend>
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label class="form-label-custom">Nome:*</label>
+                    <input [(ngModel)]="solicitante.nome" type="text" name="nome" class="form-input-custom" [maxlength]="100" required>
+                    <small class="form-text text-danger" [hidden]="!solicitante.nome.isEmpty">O nome não pode ser vazia!</small>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="d-flex flex-column ">
+                    <span class="form-label-custom">Tipo de Pessoa:*</span>
+                    <div class="d-flex flex-row gap-40 mt-1">
+                        <label>
+                            <input [(ngModel)]="pessoaFisica" type="radio" name="tipopessoa" value="F"
+                                class="form-radio-custom mr-2">
+                            Física
+                        </label>
+                        <label>
+                            <input [(ngModel)]="pessoaJuridica" type="radio" name="tipopessoa" value="J"
+                                class="form-radio-custom mr-2">
+                            Jurídica
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div *ngIf="solicitante.tipoPessoa == 'F'" class="form-group">
+                    <label class="form-label-custom">CPF:*</label>
+                    <input [(ngModel)]="solicitante.cpfCnpj" cpfMask type="text" name="cpf" class="form-input-custom"
+                        required>
+                </div>
+                <div *ngIf="solicitante.tipoPessoa == 'J'" class="form-group">
+                    <label class="form-label-custom">CNPJ:*</label>
+                    <input [(ngModel)]="solicitante.cpfCnpj" cnpjMask type="text" name="cnpj" class="form-input-custom"
+                        required>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-label-custom">Faixa Etária:*</label>
+                    <select [(ngModel)]="solicitante.faixaEtaria" name="faixaetaria" class="form-select-custom" required>
+                        <option *ngFor="let faixaEtaria of faixaEtarias" [ngValue]="faixaEtaria">{{faixaEtaria.nome}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-label-custom">Escolaridade:*</label>
+                    <select [(ngModel)]="solicitante.escolaridade" name="escolaridade" class="form-select-custom" required>
+                        <option *ngFor="let escolaridade of escolaridades" [ngValue]="escolaridade">
+                            {{escolaridade.nome}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label class="form-label-custom">Tipo Telefone:</label>
+                    <select [(ngModel)]="solicitante.tipoTelefone" name="tipotelefone" class="form-select-custom">
+                        <option *ngFor="let tipTelefone of tipoTelefones" [ngValue]="tipTelefone">{{tipTelefone.nome}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label class="form-label-custom">DDD:</label>
+                    <input [(ngModel)]="solicitante.dddTelefone" type="text" [maxlength]="2" name="dddtelefone"
+                        class="form-input-custom">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-label-custom">Telefone:</label>
+                    <input [(ngModel)]="solicitante.telefone" type="text" [maxlength]="15" name="telefone" class="form-input-custom">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-label-custom">Profissão:</label>
+                    <input [(ngModel)]="solicitante.profissao" type="text" [maxlength]="50"  name="profissao" class="form-input-custom">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-label-custom">E-mail:*</label>
+                    <input [(ngModel)]="solicitante.email" type="text" [maxlength]="150" name="email" class="form-input-custom ">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-label-custom">Confirme E-mail:*</label>
+                    <input [(ngModel)]="confirmEmail" type="text" [maxlength]="150" name="confirmeemail" class="form-input-custom">
+                    <!---->
+                    <div class="invalid-feedback" [style.display]="emailIsEquals">E-mail tem que ser igual</div>
+                </div>
+            </div>
+        </div>
+        <legend>Endereço</legend>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-label-custom">CEP:</label>
+                    <input [(ngModel)]="solicitante.cep" [mask]="'xxxxx-xxx'" type="text" name="cep" class="form-input-custom">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-label-custom">Logradouro:</label>
+                    <input [(ngModel)]="solicitante.logradouro" [maxlength]="200" type="text" name="logradouro" class="form-input-custom">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label class="form-label-custom">Número:</label>
+                    <input [(ngModel)]="solicitante.numero" [maxlength]="20" type="text" name="numero" class="form-input-custom">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-label-custom">Complemento:</label>
+                    <input [(ngModel)]="solicitante.complemento"  [maxlength]="30" type="text" name="complemento"
+                        class="form-input-custom">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-label-custom">Bairro:</label>
+                    <input [(ngModel)]="solicitante.bairro" [maxlength]="60" type="text" name="bairro" class="form-input-custom">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-label-custom">Cidade:</label>
+                    <input [(ngModel)]="solicitante.cidade" [maxlength]="100" type="text" name="cidade" class="form-input-custom">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-label-custom">UF:</label>
+                    <select [(ngModel)]="solicitante.estado" name="estado" class="form-select-custom">
+                        <option *ngFor="let uf of estados" [ngValue]="uf">{{uf.nome}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <legend *ngIf="isNew">Acesso ao e-SIC</legend>
+        <div *ngIf="isNew" class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-label-custom">Senha:*</label>
+                    <input [(ngModel)]="solicitante.chave" [maxlength]="50" type="password" name="senha" class="form-input-custom" >
+                    <small class="form-text text-danger" [hidden]="solicitante.chave.length < 6">A senha não pode estar vazia e deve ter pelo menos 6 caracteres!</small>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-label-custom">Confirme Senha:*</label>
+                    <input [(ngModel)]="confirmeSenha" type="password" name="confirmesenha" class="form-input-custom">
+                    <!--[style.display]="senhaIsEquals"
+                    <div class="invalid-feedback" >A senha tem que ser igual</div>-->
+                    <small class="form-text  text-danger" [hidden]="confirmeSenha == solicitante.chave">A senha tem que ser igual!</small>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between mt-4 mb-4">
+            <button type="button" class="btn-custom fit-content-width mr-3" (click)="voltar()" 
+                style="background-color: #999">Voltar</button>
+            <button type="submit" class="btn-custom fit-content-width" [innerText]="isNew ? 'Cadastrar' : 'Salvar'"></button>
+        </div>
+    </form>    
+    <div class="mt-4 mb-4"></div>
+</div>
+
+<div *ngIf="isSaved" class="container p-3">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+        <h1 class="fit-content-width" [innerText]="isNew ? 'Cadastro realizado com sucesso!' : 'Atualizado com sucesso!'"></h1>
+        <button  *ngIf="isNew" (click)="irParaLogin()" type="button" class="btn-custom fit-content-width mt-2">Fazer login</button>
+        <button  *ngIf="!isNew" (click)="irParaInicio()" type="button" class="btn-custom fit-content-width mt-2">Ir para inicio</button>
+    </div>
+</div>
